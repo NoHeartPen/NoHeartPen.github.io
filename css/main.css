@@ -1300,6 +1300,7 @@ header.header {
   border: 1px solid #eee;
   max-width: 120px;
   padding: 2px;
+  border-radius: 50%;
 }
 .site-author-name {
   color: var(--text-color);
@@ -1313,12 +1314,6 @@ header.header {
 }
 .links-of-author a {
   font-size: 0.8125em;
-}
-.links-of-author .fa,
-.links-of-author .fab,
-.links-of-author .far,
-.links-of-author .fas {
-  margin-right: 2px;
 }
 .sidebar .sidebar-button:not(:first-child) {
   margin-top: 15px;
@@ -2105,6 +2100,13 @@ header.header {
 .post-block:last-of-type .post-eof {
   display: none;
 }
+.post-copyright ul {
+  list-style: none;
+  padding: 0.5em 1em;
+  background: var(--card-bg-color);
+  border-left: 3px solid #ff2a2a;
+  margin: 1em 0 0;
+}
 .post-tags {
   margin-top: 40px;
   text-align: center;
@@ -2205,6 +2207,39 @@ header.header {
   to {
     transform: rotateZ(-30deg);
   }
+}
+.followme {
+  color: #bbb;
+  padding: 1em 1.5em;
+  text-align: center;
+  background: var(--card-bg-color);
+  border-left: 3px solid #ff2a2a;
+  margin: 1em 0 0;
+}
+.followme .social-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.followme .social-list .social-item {
+  margin: 0.5em 2em;
+}
+@media (max-width: 991px) {
+  .followme .social-list .social-item {
+    margin: 0.5em 0.75em;
+  }
+}
+.followme .social-list .social-link {
+  border: 0;
+  display: inline-block;
+  text-align: center;
+}
+.followme .social-list .social-link .icon {
+  font-size: 1.75em;
+}
+.followme .social-list .social-link .label {
+  display: block;
+  font-size: 14px;
 }
 .category-all-page .category-all-title {
   text-align: center;
@@ -2466,6 +2501,119 @@ ul.breadcrumb li:last-child {
     color: #eee;
   }
 }
+.search-active {
+  overflow: hidden;
+}
+.search-pop-overlay {
+  background: rgba(0,0,0,0);
+  display: flex;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transition: visibility 0.4s, background 0.4s;
+  visibility: hidden;
+  width: 100%;
+  z-index: 40;
+}
+.search-active .search-pop-overlay {
+  background: rgba(0,0,0,0.3);
+  visibility: visible;
+}
+.search-popup {
+  background: var(--card-bg-color);
+  border-radius: 5px;
+  height: 80%;
+  margin: auto;
+  transform: scale(0);
+  transition: transform 0.4s;
+  width: 700px;
+}
+.search-active .search-popup {
+  transform: scale(1);
+}
+@media (max-width: 767px) {
+  .search-popup {
+    border-radius: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+.search-popup .search-icon,
+.search-popup .popup-btn-close {
+  color: #999;
+  font-size: 18px;
+  padding: 0 10px;
+}
+.search-popup .popup-btn-close {
+  cursor: pointer;
+}
+.search-popup .popup-btn-close:hover .fa {
+  color: #222;
+}
+.search-popup .search-header {
+  background: #eee;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  padding: 5px;
+}
+@media (prefers-color-scheme: dark) {
+  .search-popup .search-header {
+    background: #666;
+  }
+}
+.search-popup input.search-input {
+  background: transparent;
+  border: 0;
+  outline: 0;
+  width: 100%;
+}
+.search-popup input.search-input::-webkit-search-cancel-button {
+  display: none;
+}
+.search-popup .search-result-container {
+  height: calc(100% - 55px);
+  overflow: auto;
+  padding: 5px 25px;
+}
+.search-popup .search-result-container hr {
+  margin: 5px 0 10px;
+}
+.search-popup .search-result-container hr:first-child {
+  display: none;
+}
+.search-popup .search-result-list {
+  margin: 0 5px;
+  padding: 0;
+}
+.search-popup a.search-result-title {
+  font-weight: bold;
+}
+.search-popup p.search-result {
+  border-bottom: 1px dashed #ccc;
+  padding: 5px 0;
+}
+.search-popup .search-input-container {
+  flex-grow: 1;
+  padding: 2px;
+}
+.search-popup .no-result {
+  display: flex;
+}
+.search-popup .search-result-list {
+  width: 100%;
+}
+.search-popup .search-result-icon {
+  color: #ccc;
+  margin: auto;
+}
+mark.search-keyword {
+  background: transparent;
+  border-bottom: 1px dashed #ff2a2a;
+  color: #ff2a2a;
+  font-weight: bold;
+}
 .use-motion .animated {
   animation-fill-mode: none;
   visibility: inherit;
@@ -2681,7 +2829,6 @@ ul.breadcrumb li:last-child {
 }
 .links-of-author-item {
   margin: 5px 0 0;
-  width: 50%;
 }
 .links-of-author-item a {
   box-sizing: border-box;
