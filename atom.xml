@@ -1,0 +1,2093 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://noheartpen.github.io</id>
+    <title>NoHeartPen</title>
+    <updated>2024-03-16T01:46:44.643Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://noheartpen.github.io"/>
+    <link rel="self" href="https://noheartpen.github.io/atom.xml"/>
+    <subtitle>遠慮無ければ近憂有り</subtitle>
+    <logo>https://noheartpen.github.io/images/avatar.png</logo>
+    <icon>https://noheartpen.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2024, NoHeartPen</rights>
+    <entry>
+        <title type="html"><![CDATA[Mecab 安装指北]]></title>
+        <id>https://noheartpen.github.io/post/mecab-an-zhuang-zhi-bei/</id>
+        <link href="https://noheartpen.github.io/post/mecab-an-zhuang-zhi-bei/">
+        </link>
+        <updated>2024-02-23T07:27:09.000Z</updated>
+        <summary type="html"><![CDATA[<p>稍微详细地介绍下入门日语自然语言处理会用到的工具 Mecab 的安装方法</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>稍微详细地介绍下入门日语自然语言处理会用到的工具 Mecab 的安装方法</p>
+<!-- more -->
+<h1 id="mecab-安装指北">Mecab 安装指北</h1>
+<h2 id="前言">前言</h2>
+<p>如果只是少量分析的话，网上有现成的工具比如 <a href="https://chamame.ninjal.ac.jp/">Web ちゃまめ</a>，在线即可解析。</p>
+<p>网上关于 Meacb 的安装教程不少，但仔细一看往往觉得写得过于随意，只有<a href="https://www.52nlp.cn/%E6%97%A5%E6%96%87%E5%88%86%E8%AF%8D%E5%99%A8-mecab-%E6%96%87%E6%A1%A3#install">日文分词器 Mecab 文档 我爱自然语言处理</a>这篇翻译官方文档的文章有细细研读的价值。此外 ，<a href="https://forum.freemdict.com/t/topic/11762/8">Mecab 日语分词工具的简单使用 - FreeMdict Forum</a> 里的相关讨论也是值得一读。（如果有不错的教程欢迎补充出来。</p>
+<p>在进入正题前，简单提一下影响「形态素解析」的 2 个关键要素：基于不同算法开发的形态素解析器和形态素解析辞典。</p>
+<p>解析器能看到不少，比如 <a href="https://github.com/taishi-i/awesome-japanese-nlp-resources">awesome-japanese-nlp-resources</a>就能找到一大堆用各种语言开发、针对各种使用场景优化的解析器，但形态素解析辞典就比较单一了，目前一般以 <a href="https://ja.osdn.net/projects/chasen-legacy/">ChaSen</a>、<a href="https://github.com/ku-nlp/jumanpp">JUMAN</a>、<a href="https://clrd.ninjal.ac.jp/unidic/">Unidic 辞書</a> 三家为主，其中 ChaSen 最新版 2.4.5 更新时间 2012 年 6 月 25 日 ，JUMAN 最新版 1.02 更新时间 2017 年 1 月 12 日，只有 Unidic 辞書 还能在最近 5 年内保持一年一更的频率。</p>
+<p>目前来说，运用最广的开源形态素解析器就是 Meacb 了，下面就讲解下如何在 Windows 下安装使用，只要记住「形态素解析= 形态素解析器+形态素解析辞典」，安装其他形态素解析器也不会有太大的问题。</p>
+<p>先提供一个备份的安装文件：<br>
+<a href="https://www.123pan.com/s/iGz0Vv-svEVh.html">https://www.123pan.com/s/iGz0Vv-svEVh.html</a></p>
+<h2 id="安装教程">安装教程</h2>
+<p>首先到官网首页 <a href="https://taku910.github.io/mecab/#download">MeCab: Yet Another Part-of-Speech and Morphological Analyzer</a>下载官方提供的安装包：<a href="https://drive.google.com/uc?export=download&amp;id=0B4y35FiV1wh7WElGUGt6ejlpVXc">https://drive.google.com/uc?export=download&amp;id=0B4y35FiV1wh7WElGUGt6ejlpVXc</a>。（备份安装包的对应路径： 形态素解析&gt;形态素解析器&gt;mecab）</p>
+<p>（网上能看到各种第三方库，其中一些第三方库自带了 Mecab 安装包，所以不用安装，但版本可能不是最新版的 0.996，所以更推荐像本篇文章一样，自己动手从头开始安装。）</p>
+<p>安装时注意勾选<code>utf-8</code>编码，其他地方一直下一步即可。</p>
+<figure data-type="image" tabindex="1"><img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2024-02-23_10-23-43.png" alt="" loading="lazy"></figure>
+<p>注：可以更改程序路径，但更改后可能要手动添加到环境变量。其实 Meacb 的本体程序占用空间不大，个人觉得没有必要改路径。（主要是如果出了问题，可能得老老实实重装一遍 2333）</p>
+<p>确认安装好 Mecab 后，使用<code>pip install mecab-python3</code>安装第三方库，安装完成后运行如下代码进行下测试，没有问题就算是安装完成了。</p>
+<pre><code class="language-python">import MeCab
+tagger = MeCab.Tagger(&quot;-Owakati&quot;)
+print(tagger.parse(&quot;天気が良いから、散歩しましょう。&quot;).split())
+
+tagger = MeCab.Tagger()
+print(tagger.parse(&quot;天気が良いから、散歩しましょう。&quot;))
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2024-02-23_11-08-46.png" alt="" loading="lazy"></figure>
+<h2 id="自定义词库">自定义词库</h2>
+<p>通过上述方法安装的 Meacb 自带的的词库是 ipadic，这个词库的最后一次更新是在 2003 年 5 月了，所以更推荐安装下日本国立国语研究所维护的 <a href="https://clrd.ninjal.ac.jp/unidic/">Unidic 辞書</a>。如果没有特殊需求，下载「現代書き言葉 UniDic」的最新版即可<a href="https://clrd.ninjal.ac.jp/unidic_archive/2302/unidic-cwj-202302.zip">https://clrd.ninjal.ac.jp/unidic_archive/2302/unidic-cwj-202302.zip</a>（注： 2023 年 3 月 24 号更新，于 2024 年 2 月 23 日确认为最新版）（备份路径： 形态素解析&gt; 形态素解析辞典&gt; UniDic）</p>
+<p>解压文件时注意文件夹名，最好是<code>unidic-cwj-3.1.1</code>（如果不是这么命名，请修改后续代码的<code>dic_path</code>）。</p>
+<figure data-type="image" tabindex="3"><img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20221107190047.png" alt="" loading="lazy"></figure>
+<p>然后到 Mecab 的安装路径（如果安装时没有更改，那么应该是在<code>C:\Program Files (x86)\MeCab\dic\ipadic</code>），在<code>dic</code>文件夹下找到<code>ipadic</code>文件夹里面的<code>dicrc</code><br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2024-02-23_10-30-10.png" alt="" loading="lazy"></p>
+<p>复制到<code>unidic-cwj-3.1.1</code>文件夹即可，复制时应该会有下面的提示，选择「替换目标中的文件即可」，如果没有，请注意检查路径。<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2024-02-23_10-59-00.png" alt="" loading="lazy"></p>
+<p>然后测试如下代码进行测试即可。</p>
+<pre><code class="language-python">import os
+import MeCab
+
+# 下面路径请和实际的安装路径保持一致，为了和截图保持统一，修改了文件夹的名字
+dic_path = &quot;D:\00temp\unidic-cwj-3.1.1&quot;
+tagger = MeCab.Tagger(
+    '-r nul -d {} -Ochasen'.format(dic_path).replace('\\', '/'))
+
+text = &quot;天気が良いから、散歩しましょう。&quot;
+print(type(tagger.parse(text)))
+print(tagger.parse(text).split(&quot;\n&quot;))
+print(tagger.parse(text))
+</code></pre>
+<h3 id="mecab-ipadic-neologd">mecab-ipadic-NEologd</h3>
+<p>mecab-ipadic-NEologd : Neologism dictionary for MeCab<br>
+项目地址： <a href="https://github.com/neologd/mecab-ipadic-neologd/blob/master/README.ja.md">https://github.com/neologd/mecab-ipadic-neologd/blob/master/README.ja.md</a><br>
+许可证：<a href="https://github.com/neologd/mecab-ipadic-neologd/blob/master/COPYING">Apache License, Version 2.0</a></p>
+<p>如项目名中的「Neologism」一样，这个形态素解析辞典对于新词有较好的解析效果，不过需要自己编译源码，我没有折腾过，等大佬们出一个教程啦。</p>
+<h2 id="参考">参考</h2>
+<p><a href="https://forum.freemdict.com/t/topic/11762/8">Mecab 日语分词工具的简单使用 - FreeMdict Forum</a> ：提供了非常详细的说明和示例代码。</p>
+<h2 id="其他形态素解析器">其他形态素解析器</h2>
+<p>前面提到了 <a href="https://github.com/taishi-i/awesome-japanese-nlp-resources">awesome-japanese-nlp-resources</a>可以找到非常多的形态素解析器，除了根据具体的使用场景外，不妨看看<a href="https://taku910.github.io/mecab/feature.html">MeCab の開発経緯</a>里对当时其他形态素解析器的评价：</p>
+<blockquote>
+<p>Juman 以前の商用的に配布されていた形態素解析器は, 辞書や品詞体系 連接規則はほぼ固定されており, ユーザ自身自由に定義できなかった. Juman は これらの定義すべて外部に出し自由な定義が可能になった.<br>
+辞書は比較的入手しやすいが, 連接コストや単語生起コストの定義は 人手によって行わざるをえなかった. 解析ミスを発見するたびに副作用が無い範 囲で連接コストを修正する必要があり, 開発コストが大きい.<br>
+また, Juman は日本語の形態素解析として開発されていたので, 未知語処理が日本語に特化されており, 未知語処理の定義を 自分で与えることはできない. また, 品詞は 2 階層までに固定されており, 品詞体系には一種の制限がある.</p>
+</blockquote>
+<blockquote>
+<p>ChaSen の貢献の 1 つは, 統計処理 (HMM) によって連接コストや単語生起コストを 推定するようになった点にある. この処理のおかげで, 解析ミスを 蓄積するだけで自動的にコスト値を推定できるようになった. さらに, 品詞階層も無制限になり, 品詞体系を含めて(本当の意味で) 自由に定義できるようになった.<br>
+しかし, 複雑な品詞体系にすればするほど, データスパースネスの問題が 発生する. HMM を使う場合, HMM の内部状態(Hidden Class)を 1 つに固定する 必要があるため, 各品詞から内部状態への「変換」が必要となる. 単純には 各品詞を 1 つの内部状態に割りあてればよいが, 活用まで含めて品詞を すべて展開すると, その数は 500 にも及び, 低頻度の品詞について 信頼度の高い推定量を得ることができない. 逆に, 頻度の高い「助詞」等の品詞は 語彙も含めて内部状態にしないと高い精度が得られない. 複雑な品詞体系にすればするほど, 内部状態の定義が困難になる. つまり, 現状の(複雑な)品詞体系を扱うには, HMM では力不足であり, それを補助するための人手コストが大きくなっている.<br>
+また, ChaSen にはコスト値推定モジュールが付与されていない. NAIST の内部では利用できるらしいが, 上記の理由から設定すべき パラメータが多く, 使いこなすのが困難である.<br>
+さらに, ChaSen も未知語処理もハードコーディングされており 自由に定義することはできない.</p>
+</blockquote>
+<p>上面评价的关注点和形态素解析器的发展趋势基本一致：</p>
+<ol>
+<li>形态素解析器都在抛弃基于语法规则的思路，完全转向基于统计学的纯数学算法；</li>
+<li>放弃自定义的形态素解析辞典</li>
+<li>开始尝试同时支持多种语言的解析</li>
+</ol>
+<p>下面列几个我个人稍微研究过的形态素解析器，：</p>
+<p><a href="https://megagonlabs.github.io/ginza/">GiNZA - Japanese NLP Library</a>：<br>
+开发语言：Python<br>
+许可证：MIT license<br>
+最后更新时间：2023-09-25</p>
+<p>备注：由日本公司 recruit （日：リクルート）下属 AI 研究机构 Megagon Labs 于 2019 年开源的形态素解析工具。</p>
+<p><a href="https://github.com/atilika/kuromoji">Kuromoji</a><br>
+开发语言：Java<br>
+许可证：Apache-2.0 license<br>
+最后更新时间：5 年前</p>
+<p>备注：从 MOJi Android 端 APK 解压后的结果来看，应该就是用的这个解析工具。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[字幕翻译の初デビュー]]></title>
+        <id>https://noheartpen.github.io/post/zi-mu-fan-yi-nochu-debiyu/</id>
+        <link href="https://noheartpen.github.io/post/zi-mu-fan-yi-nochu-debiyu/">
+        </link>
+        <updated>2023-09-11T13:58:46.000Z</updated>
+        <summary type="html"><![CDATA[<p>第一次参加字幕组（笑</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>第一次参加字幕组（笑</p>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://noheartpen.github.io/post-images/1694440818367.png" alt="" loading="lazy"></figure>
+<p>猜猜我是哪个岗:)</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[浅入深出ABBYY]]></title>
+        <id>https://noheartpen.github.io/post/qian-ru-shen-chu-abbyy/</id>
+        <link href="https://noheartpen.github.io/post/qian-ru-shen-chu-abbyy/">
+        </link>
+        <updated>2023-07-31T23:22:47.000Z</updated>
+        <summary type="html"><![CDATA[<p>摘要：ABBYY上手指南</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>摘要：ABBYY上手指南</p>
+<!-- more -->
+<hr>
+<p>创建日期: 2022-03-19<br>
+修改日期: 2023-8-1<br>
+标签: 日语，blog</p>
+<hr>
+<h1 id="日语ocr软件推荐">日语OCR软件推荐</h1>
+<p>如果只是偶尔用用的话，更推荐<a href="https://baimiao.uzero.cn/">白描</a>，支持 Android、iOS、Web 端。每天都有几次免费使用次数，用得少的话基本可以白嫖，而且也不贵，<a href="https://apsgo.cn/qRqgZr">30 的永久会员</a>，比起某扫描王一年将近 100 简直是白菜价（何况某扫描王识别效果也不是很好）。</p>
+<p>至于那些套个 API 接口就敢上架的各种垃圾 APP，我建议各位不要浪费时间去下载尝试了，还不如看看<a href="https://www.yuque.com/docs/share/177c6f55-dfff-4fd5-8d71-7374c7128a5e">OCR 文字识别软件</a>和<br>
+<a href="https://mp.weixin.qq.com/s?__biz=MzA5NjEwNjE0OQ==&amp;mid=2247504889&amp;idx=1&amp;sn=eac708f80285cf7eb630fb9c9b1c4fa2&amp;chksm=90b7b033a7c03925574cd74b646e0e30a2787abe72928919a55577b1676ee586ca4504a823a0&amp;scene=4">秒杀年费 258 的同款 APP，微软、联想、Adobe、腾讯的良心产品太香了！ </a>)。</p>
+<p>如果是想啃日语漫画的生肉，更推荐 <a href="https://github.com/kha-white/mokuro">mokuro</a>：将漫画转换一键转为适配了 Yomichan 的HTML，快速查词、添加到Anki</p>
+<p>如果是有大量且高精度的使用需求，或者换个专业点的说法「译前处理」，更推荐 ABBYY——这个软件的对于日文竖排的识别效果可以说是真·降维打击一样的存在。</p>
+<p>不过 ABBYY 使用起来确实比较难，网上针对日语的讲解更是少之又少，所以专门写了这篇文章，记录一个日语专业的学生使用 ABBYY 处理日语 PDF 技巧，希望对提问者有所帮助。</p>
+<h1 id="更改设置">更改设置</h1>
+<p>安装好之后先找到 ABBYY FineReader PDF 15 这个软件，双击打开<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319154208.png" alt="" loading="lazy"></p>
+<p>在下面的界面下，找到<code>选项</code>，双击打开<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319154346.png" alt="" loading="lazy"></p>
+<p>找到<code>图像处理</code>，点击一下<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319154452.png" alt="" loading="lazy"></p>
+<p>在下面这个界面，把红框框起来的地方都勾上吧（这样识别效果会好很多）<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319154559.png" alt="" loading="lazy"></p>
+<p>到此，已经完成了设置，接下来开始正式转换</p>
+<h1 id="转换为-word">转换为 Word</h1>
+<p>在电脑上装好 ABBYY 之后，右键点击一个 PDF 文件，是可以观察到下面这样的选项的，所以右键点击<code>转换为 Word 文档</code><br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220315213232.png" alt="" loading="lazy"></p>
+<p>会弹出这么一个界面，注意一定要选择正确的语言，并且最好把<code>日语</code>放在第一个位置<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319155317.png" alt="" loading="lazy"></p>
+<h3 id="选择语言">选择语言</h3>
+<p>如果上一步找不到<code>日语</code>，那么选择<code>更多语言</code><br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319155501.png" alt="" loading="lazy"><br>
+拉动滚动条，找到<code>日语</code>勾上就可以了<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319155721.png" alt="" loading="lazy"></p>
+<h2 id="识别模式">识别模式</h2>
+<p>设置好语言后，点击<code>选项</code><br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319155914.png" alt="" loading="lazy"></p>
+<p>在<code>格式设置</code>里的<code>文档布局</code>里选择<code>精确副本</code>——这就意味着得到一个与 PDF 完全一样的竖排文档<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319160041.png" alt="" loading="lazy"></p>
+<p>也可以选择<code>格式化文本</code>——这样就可以得到一个符合中文排版习惯的文档<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319160247.png" alt="" loading="lazy"></p>
+<p>选择完后，点击确定，然后就会回到下面这个弹窗，点击<code>保存</code>即可<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319160423.png" alt="" loading="lazy"></p>
+<p>转换过程可能会花一点时间，耐心等待即可。</p>
+<p>最后，给一个生成的最终效果：</p>
+<p><code>精确副本</code><br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319162214.png" alt="" loading="lazy"></p>
+<p><code>格式化文本</code><br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319162335.png" alt="" loading="lazy"></p>
+<p>当然生成的 Word 为了保持和 PDF 一样的页面排版，会夹杂着各种分页符、换行符，而且很多同学最终是要用下面这样排版交作业的，这个时候还得一页一页地手动粘贴过去……<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220312122444.png" alt="" loading="lazy"></p>
+<p>这个时候，就推荐本人开发的一个小工具<a href="https://gitee.com/NoHeartPen/yipai">译排</a>啦（<s>好像暴露了我写这篇文章的目的</s>），感兴趣的话，可以戳<a href="https://www.yuque.com/noheartpen/tnxvz0/rdi750">「YiPai」·「译排」 · 语雀 (yuque.com)</a>了解更多</p>
+<h1 id="转换为-pdf">转换为 PDF</h1>
+<p>可能有人会注意到，ABBYY 有一个可以转成<code>可搜索的 PDF</code>的选项<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319160943.png" alt="" loading="lazy"></p>
+<p>估计很多用 iPad 的同学会有点兴趣，所以就简单介绍一下——操作上和上面转成 Word 是一样的。</p>
+<p>这个选项生成的 PDF 就是把识别出的文字嵌到了 PDF 的对应位置——但不会影响原来的图像<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220313162725.png" alt="可搜索的 PDF" loading="lazy"></p>
+<p>而 WPS、浏览器等都是支持搜索功能的，这不就相当于一本电子词典么？</p>
+<p>强烈，建议在淘宝付费购买的 PDF 都这样处理一下，就可以像下面一样快速查词：<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Video_20220806165756.gif" alt="" loading="lazy"></p>
+<h1 id="在-ocr-编辑器中打开">在 OCR 编辑器中打开</h1>
+<p>很多同学其实一般是不会把 PDF 转成 Word 的，因为或多或少都有错别字，排版也不是很好，需要花时间校对。估计也就在要交给老师的时候，才会用这个。</p>
+<p>这种情况下，要确认 Word 中可能识别错了的地方，就得浪费不少时间找 PDF 中的相应位置。</p>
+<p>所以，如果对识别的准确度有较高要求的话，在右键选择转换方式的时候，最好选择「在 OCR 编辑器打开」的选项<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220315213208.png" alt="" loading="lazy"></p>
+<p>点击上面的提到的<code>在 OCR 编辑器打开</code>，就会进到下面这个界面<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220315213052.png" alt="" loading="lazy"></p>
+<p>看着挺复杂的，但其实大多数人只会用到我箭头指的四个地方——前三个和前面介绍的一样，第四个<code>验证</code>（也就是箭头最细的那个）没有介绍过，但用起来也很简单。</p>
+<p>点击<code>验证</code>，就可以得到下面的界面<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220315212959.png" alt="" loading="lazy"></p>
+<p>ABBYY 会在这里提示它有可能识别错了的地方，并且会同时高亮 2 个地方，把光标移到上面就直接打字修改就可以了。<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319164503.png" alt="" loading="lazy"></p>
+<p>修改完一个之后点击<code>跳过</code>，就会移动到下一个有可能存在错误的地方。当然如果是 ABBYY 误报的话，直接点击<code>跳过</code>就可以了。</p>
+<p>全部修改完后，点击<code>关闭</code>，<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319164652.png" alt="" loading="lazy"></p>
+<p>然后点击<code>精确文本</code>（其他也行）选择导出的文档布局，最后选择<code>发送</code>就可以了。<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220315213052.png" alt="" loading="lazy"></p>
+<h1 id="对比文档">对比文档</h1>
+<p>有人可能好奇，红框框起的的软件功能是什么（<s>好吧……其实是我懒得写其他几个了</s>）<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319165028.png" alt="" loading="lazy"></p>
+<p>这个功能也可以用来校对，把 PDF 放左边，把 ABBYY 导出的 Word 放右边，然后选择<code>文档语言</code>——尴尬的是没有日语……<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319165228.png" alt="" loading="lazy"></p>
+<p>如果用<code>简体中文</code>来对比，那么对比之后，点击<code>保存</code><img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319170034.png" alt="" loading="lazy"></p>
+<p>选择第一个就好<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319170126.png" alt="" loading="lazy"></p>
+<p>然后就选择保存位置（这里也可以改上一步的设置）<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319170213.png" alt="" loading="lazy"></p>
+<p>然后比对 PDF 中高亮部分就可以了<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319170339.png" alt="" loading="lazy"></p>
+<p>但由于这个功能本身不支持日语，所以左边的 PDF 的文本都被高亮——这还不如不高亮呢……</p>
+<p>所以这个功能只能用来快速校对中文的 PDF 和 Word</p>
+<p>至于日语，还是用<code>在 OCR 编辑器中打开</code>的<code>验证</code>一个一个地校对吧。</p>
+<h1 id="补充">补充</h1>
+<ul>
+<li>转换模式的区别：随便找个文件挨个试试就明白了……</li>
+</ul>
+<h2 id="如何转成-kindle-等墨水屏也能看的-pdf如何处理拍得稀烂的-pdf">如何转成 Kindle 等墨水屏也能看的 PDF/如何处理拍得稀烂的 PDF</h2>
+<p>在选项的<code>图像处理</code>的<code>显示自定义设置</code>里面改吧<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319172517.png" alt="" loading="lazy"></p>
+<p>如果只是为了让墨水屏显示得更清晰，勾选<code>转换为黑白色</code>就可以了，其他的选项我也没折腾过<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319172522.png" alt="" loading="lazy"></p>
+<h2 id="如何解决对开页的问题">如何解决对开页的问题</h2>
+<p>像这种双页的 PDF 不仅在小屏幕上看着不方便（有 iPad 的请随意……），还（可能）会导致识别效果下降<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319173732.png" alt="" loading="lazy"></p>
+<p>所以如何切成下面这种单页的 PDF 就是个技术活了——非常麻烦，我一般只在有必要时才搞<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319172849.png" alt="" loading="lazy"></p>
+<p>个人推荐用<a href="https://www.foxitsoftware.cn/downloads/">福昕高级 PDF 编辑器</a>，它们的<code>裁剪页面</code>和<code>提取</code>很好用<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319173008.png" alt="" loading="lazy"></p>
+<p>用其他的也行，我用福昕高级 PDF 编辑器只是因为随时预览效果，避免漏裁（但福昕 PDF 阅读器好像没有这个功能）<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319173425.png" alt="" loading="lazy"></p>
+<p>把所有单数页都转成 PNG 到一个文件夹，再把所有偶数页转到一个文件夹</p>
+<p>之后，再用 2345 好压的批量文件改名，修改成<code>55-源文件名</code>这样的风格（这样在合成时页码才不会乱）<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319174401.png" alt="" loading="lazy"></p>
+<p>注意批量修改时可以注意下这三个地方<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319174226.png" alt="" loading="lazy"></p>
+<h1 id="参考">参考</h1>
+<p><a href="https://www.zhihu.com/question/320456344/answer/2613044602">有没有可以识别日文的 OCR 软件？ - 知乎 (zhihu.com)</a>：基于本文的一个备份</p>
+<p><a href="https://forum.freemdict.com/t/topic/21752">SourceBook——使用GAN提高扫描书籍分辨率</a>：对设备的性能要求比较高。</p>
+<p><a href="https://www.bilibili.com/video/BV1ga4y1s73w?p=2&amp;share_source=copy_web&amp;vd_source=c968117e55645b439b5c5d2865ff0caa">【OCR 进阶系列教程分享】 </a>：一个很详细的视频教程，但不是针对日语进行讲解</p>
+<p><a href="https://www.yuque.com/docs/share/177c6f55-dfff-4fd5-8d71-7374c7128a5e">OCR 文字识别软件 · 语雀 (yuque.com)</a>：推荐了其他大量的 OCR 软件，并且附带软件下载资源</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzA5NjEwNjE0OQ==&amp;mid=2247504889&amp;idx=1&amp;sn=eac708f80285cf7eb630fb9c9b1c4fa2&amp;chksm=90b7b033a7c03925574cd74b646e0e30a2787abe72928919a55577b1676ee586ca4504a823a0&amp;scene=4">秒杀年费 258 的同款 APP，微软、联想、Adobe、腾讯的良心产品太香了！ (qq.com)</a>：手机端的 OCR 软件测评</p>
+<p>有能力的的话可以支持下官方正版：<a href="https://www.abbyychina.com/buy.html">购买 OCR 文字识别软件，ABBYY FineReader PDF</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[浅入深出日语假名转换]]></title>
+        <id>https://noheartpen.github.io/post/qian-ru-shen-chu-ri-yu-jia-ming-zhuan-huan/</id>
+        <link href="https://noheartpen.github.io/post/qian-ru-shen-chu-ri-yu-jia-ming-zhuan-huan/">
+        </link>
+        <updated>2023-07-09T13:55:11.000Z</updated>
+        <summary type="html"><![CDATA[<p>摘要：知其然更要知其所以然。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>摘要：知其然更要知其所以然。</p>
+<!-- more -->
+<hr>
+<h2 id="创建日期-2022-08-18修改日期-2023-07-05标签-python非辞書日语blog">创建日期: 2022-08-18<br>
+修改日期: 2023-07-05<br>
+标签: python,非辞書,日语,blog</h2>
+<h1 id="平片假名转换">平片假名转换</h1>
+<h2 id="结论">结论</h2>
+<p>片假名转平假名</p>
+<pre><code class="language-python">def convert_kata_to_hira(input_text):
+    process_texts = []
+    for gana in input_text:
+        if 12448 &lt; ord(gana) &lt; 12543:  # Match katakana characters
+            hira = chr(ord(gana) - 96)  # Convert to hiragana
+            process_texts.append(hira)
+    output_text = &quot;&quot;.join(process_texts)
+    return output_text
+</code></pre>
+<p>平假名转片假名</p>
+<pre><code class="language-python">def convert_hira_to_kata(input_text):
+    process_texts = []
+    for gana in input_text:
+        if 12353 &lt; ord(gana) &lt; 12447:  # Match hiragana characters
+            hira = chr(ord(gana) + 96)  # Convert to katakana
+            process_texts.append(hira)
+    output_text = &quot;&quot;.join(process_texts)
+    return output_text
+</code></pre>
+<h2 id="平假名-unicode">平假名 Unicode</h2>
+<p>按 Unicode 组织提供的 Unicode 标准文件 <a href="https://www.unicode.org/charts/PDF/U3040.pdf">U3040.pdf</a> ，平假名的十进制范围是 12353-12447，十六进制范围是<code>[\u3041-\u309f]</code>（正则表达式的字符转义使用的是十六进制）。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Character</th>
+<th style="text-align:center">Decimal</th>
+<th style="text-align:center">Hexadecimal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ぁ</td>
+<td style="text-align:center">12353</td>
+<td style="text-align:center">3041</td>
+</tr>
+<tr>
+<td style="text-align:center">あ</td>
+<td style="text-align:center">12354</td>
+<td style="text-align:center">3042</td>
+</tr>
+<tr>
+<td style="text-align:center">ぃ</td>
+<td style="text-align:center">12355</td>
+<td style="text-align:center">3043</td>
+</tr>
+<tr>
+<td style="text-align:center">い</td>
+<td style="text-align:center">12356</td>
+<td style="text-align:center">3044</td>
+</tr>
+<tr>
+<td style="text-align:center">ぅ</td>
+<td style="text-align:center">12357</td>
+<td style="text-align:center">3045</td>
+</tr>
+<tr>
+<td style="text-align:center">う</td>
+<td style="text-align:center">12358</td>
+<td style="text-align:center">3046</td>
+</tr>
+<tr>
+<td style="text-align:center">ぇ</td>
+<td style="text-align:center">12359</td>
+<td style="text-align:center">3047</td>
+</tr>
+<tr>
+<td style="text-align:center">え</td>
+<td style="text-align:center">12360</td>
+<td style="text-align:center">3048</td>
+</tr>
+<tr>
+<td style="text-align:center">ぉ</td>
+<td style="text-align:center">12361</td>
+<td style="text-align:center">3049</td>
+</tr>
+<tr>
+<td style="text-align:center">お</td>
+<td style="text-align:center">12362</td>
+<td style="text-align:center">304A</td>
+</tr>
+<tr>
+<td style="text-align:center">か</td>
+<td style="text-align:center">12363</td>
+<td style="text-align:center">304B</td>
+</tr>
+<tr>
+<td style="text-align:center">が</td>
+<td style="text-align:center">12364</td>
+<td style="text-align:center">304C</td>
+</tr>
+<tr>
+<td style="text-align:center">き</td>
+<td style="text-align:center">12365</td>
+<td style="text-align:center">304D</td>
+</tr>
+<tr>
+<td style="text-align:center">ぎ</td>
+<td style="text-align:center">12366</td>
+<td style="text-align:center">304E</td>
+</tr>
+<tr>
+<td style="text-align:center">く</td>
+<td style="text-align:center">12367</td>
+<td style="text-align:center">304F</td>
+</tr>
+<tr>
+<td style="text-align:center">ぐ</td>
+<td style="text-align:center">12368</td>
+<td style="text-align:center">3050</td>
+</tr>
+<tr>
+<td style="text-align:center">け</td>
+<td style="text-align:center">12369</td>
+<td style="text-align:center">3051</td>
+</tr>
+<tr>
+<td style="text-align:center">げ</td>
+<td style="text-align:center">12370</td>
+<td style="text-align:center">3052</td>
+</tr>
+<tr>
+<td style="text-align:center">こ</td>
+<td style="text-align:center">12371</td>
+<td style="text-align:center">3053</td>
+</tr>
+<tr>
+<td style="text-align:center">ご</td>
+<td style="text-align:center">12372</td>
+<td style="text-align:center">3054</td>
+</tr>
+<tr>
+<td style="text-align:center">さ</td>
+<td style="text-align:center">12373</td>
+<td style="text-align:center">3055</td>
+</tr>
+<tr>
+<td style="text-align:center">ざ</td>
+<td style="text-align:center">12374</td>
+<td style="text-align:center">3056</td>
+</tr>
+<tr>
+<td style="text-align:center">し</td>
+<td style="text-align:center">12375</td>
+<td style="text-align:center">3057</td>
+</tr>
+<tr>
+<td style="text-align:center">じ</td>
+<td style="text-align:center">12376</td>
+<td style="text-align:center">3058</td>
+</tr>
+<tr>
+<td style="text-align:center">す</td>
+<td style="text-align:center">12377</td>
+<td style="text-align:center">3059</td>
+</tr>
+<tr>
+<td style="text-align:center">ず</td>
+<td style="text-align:center">12378</td>
+<td style="text-align:center">305A</td>
+</tr>
+<tr>
+<td style="text-align:center">せ</td>
+<td style="text-align:center">12379</td>
+<td style="text-align:center">305B</td>
+</tr>
+<tr>
+<td style="text-align:center">ぜ</td>
+<td style="text-align:center">12380</td>
+<td style="text-align:center">305C</td>
+</tr>
+<tr>
+<td style="text-align:center">そ</td>
+<td style="text-align:center">12381</td>
+<td style="text-align:center">305D</td>
+</tr>
+<tr>
+<td style="text-align:center">ぞ</td>
+<td style="text-align:center">12382</td>
+<td style="text-align:center">305E</td>
+</tr>
+<tr>
+<td style="text-align:center">た</td>
+<td style="text-align:center">12383</td>
+<td style="text-align:center">305F</td>
+</tr>
+<tr>
+<td style="text-align:center">だ</td>
+<td style="text-align:center">12384</td>
+<td style="text-align:center">3060</td>
+</tr>
+<tr>
+<td style="text-align:center">ち</td>
+<td style="text-align:center">12385</td>
+<td style="text-align:center">3061</td>
+</tr>
+<tr>
+<td style="text-align:center">ぢ</td>
+<td style="text-align:center">12386</td>
+<td style="text-align:center">3062</td>
+</tr>
+<tr>
+<td style="text-align:center">っ</td>
+<td style="text-align:center">12387</td>
+<td style="text-align:center">3063</td>
+</tr>
+<tr>
+<td style="text-align:center">つ</td>
+<td style="text-align:center">12388</td>
+<td style="text-align:center">3064</td>
+</tr>
+<tr>
+<td style="text-align:center">づ</td>
+<td style="text-align:center">12389</td>
+<td style="text-align:center">3065</td>
+</tr>
+<tr>
+<td style="text-align:center">て</td>
+<td style="text-align:center">12390</td>
+<td style="text-align:center">3066</td>
+</tr>
+<tr>
+<td style="text-align:center">で</td>
+<td style="text-align:center">12391</td>
+<td style="text-align:center">3067</td>
+</tr>
+<tr>
+<td style="text-align:center">と</td>
+<td style="text-align:center">12392</td>
+<td style="text-align:center">3068</td>
+</tr>
+<tr>
+<td style="text-align:center">ど</td>
+<td style="text-align:center">12393</td>
+<td style="text-align:center">3069</td>
+</tr>
+<tr>
+<td style="text-align:center">な</td>
+<td style="text-align:center">12394</td>
+<td style="text-align:center">306A</td>
+</tr>
+<tr>
+<td style="text-align:center">に</td>
+<td style="text-align:center">12395</td>
+<td style="text-align:center">306B</td>
+</tr>
+<tr>
+<td style="text-align:center">ぬ</td>
+<td style="text-align:center">12396</td>
+<td style="text-align:center">306C</td>
+</tr>
+<tr>
+<td style="text-align:center">ね</td>
+<td style="text-align:center">12397</td>
+<td style="text-align:center">306D</td>
+</tr>
+<tr>
+<td style="text-align:center">の</td>
+<td style="text-align:center">12398</td>
+<td style="text-align:center">306E</td>
+</tr>
+<tr>
+<td style="text-align:center">は</td>
+<td style="text-align:center">12399</td>
+<td style="text-align:center">306F</td>
+</tr>
+<tr>
+<td style="text-align:center">ば</td>
+<td style="text-align:center">12400</td>
+<td style="text-align:center">3070</td>
+</tr>
+<tr>
+<td style="text-align:center">ぱ</td>
+<td style="text-align:center">12401</td>
+<td style="text-align:center">3071</td>
+</tr>
+<tr>
+<td style="text-align:center">ひ</td>
+<td style="text-align:center">12402</td>
+<td style="text-align:center">3072</td>
+</tr>
+<tr>
+<td style="text-align:center">び</td>
+<td style="text-align:center">12403</td>
+<td style="text-align:center">3073</td>
+</tr>
+<tr>
+<td style="text-align:center">ぴ</td>
+<td style="text-align:center">12404</td>
+<td style="text-align:center">3074</td>
+</tr>
+<tr>
+<td style="text-align:center">ふ</td>
+<td style="text-align:center">12405</td>
+<td style="text-align:center">3075</td>
+</tr>
+<tr>
+<td style="text-align:center">ぶ</td>
+<td style="text-align:center">12406</td>
+<td style="text-align:center">3076</td>
+</tr>
+<tr>
+<td style="text-align:center">ぷ</td>
+<td style="text-align:center">12407</td>
+<td style="text-align:center">3077</td>
+</tr>
+<tr>
+<td style="text-align:center">へ</td>
+<td style="text-align:center">12408</td>
+<td style="text-align:center">3078</td>
+</tr>
+<tr>
+<td style="text-align:center">べ</td>
+<td style="text-align:center">12409</td>
+<td style="text-align:center">3079</td>
+</tr>
+<tr>
+<td style="text-align:center">ぺ</td>
+<td style="text-align:center">12410</td>
+<td style="text-align:center">307A</td>
+</tr>
+<tr>
+<td style="text-align:center">ほ</td>
+<td style="text-align:center">12411</td>
+<td style="text-align:center">307B</td>
+</tr>
+<tr>
+<td style="text-align:center">ぼ</td>
+<td style="text-align:center">12412</td>
+<td style="text-align:center">307C</td>
+</tr>
+<tr>
+<td style="text-align:center">ぽ</td>
+<td style="text-align:center">12413</td>
+<td style="text-align:center">307D</td>
+</tr>
+<tr>
+<td style="text-align:center">ま</td>
+<td style="text-align:center">12414</td>
+<td style="text-align:center">307E</td>
+</tr>
+<tr>
+<td style="text-align:center">み</td>
+<td style="text-align:center">12415</td>
+<td style="text-align:center">307F</td>
+</tr>
+<tr>
+<td style="text-align:center">む</td>
+<td style="text-align:center">12416</td>
+<td style="text-align:center">3080</td>
+</tr>
+<tr>
+<td style="text-align:center">め</td>
+<td style="text-align:center">12417</td>
+<td style="text-align:center">3081</td>
+</tr>
+<tr>
+<td style="text-align:center">も</td>
+<td style="text-align:center">12418</td>
+<td style="text-align:center">3082</td>
+</tr>
+<tr>
+<td style="text-align:center">ゃ</td>
+<td style="text-align:center">12419</td>
+<td style="text-align:center">3083</td>
+</tr>
+<tr>
+<td style="text-align:center">や</td>
+<td style="text-align:center">12420</td>
+<td style="text-align:center">3084</td>
+</tr>
+<tr>
+<td style="text-align:center">ゅ</td>
+<td style="text-align:center">12421</td>
+<td style="text-align:center">3085</td>
+</tr>
+<tr>
+<td style="text-align:center">ゆ</td>
+<td style="text-align:center">12422</td>
+<td style="text-align:center">3086</td>
+</tr>
+<tr>
+<td style="text-align:center">ょ</td>
+<td style="text-align:center">12423</td>
+<td style="text-align:center">3087</td>
+</tr>
+<tr>
+<td style="text-align:center">よ</td>
+<td style="text-align:center">12424</td>
+<td style="text-align:center">3088</td>
+</tr>
+<tr>
+<td style="text-align:center">ら</td>
+<td style="text-align:center">12425</td>
+<td style="text-align:center">3089</td>
+</tr>
+<tr>
+<td style="text-align:center">り</td>
+<td style="text-align:center">12426</td>
+<td style="text-align:center">308A</td>
+</tr>
+<tr>
+<td style="text-align:center">る</td>
+<td style="text-align:center">12427</td>
+<td style="text-align:center">308B</td>
+</tr>
+<tr>
+<td style="text-align:center">れ</td>
+<td style="text-align:center">12428</td>
+<td style="text-align:center">308C</td>
+</tr>
+<tr>
+<td style="text-align:center">ろ</td>
+<td style="text-align:center">12429</td>
+<td style="text-align:center">308D</td>
+</tr>
+<tr>
+<td style="text-align:center">ゎ</td>
+<td style="text-align:center">12430</td>
+<td style="text-align:center">308E</td>
+</tr>
+<tr>
+<td style="text-align:center">わ</td>
+<td style="text-align:center">12431</td>
+<td style="text-align:center">308F</td>
+</tr>
+<tr>
+<td style="text-align:center">ゐ</td>
+<td style="text-align:center">12432</td>
+<td style="text-align:center">3090</td>
+</tr>
+<tr>
+<td style="text-align:center">ゑ</td>
+<td style="text-align:center">12433</td>
+<td style="text-align:center">3091</td>
+</tr>
+<tr>
+<td style="text-align:center">を</td>
+<td style="text-align:center">12434</td>
+<td style="text-align:center">3092</td>
+</tr>
+<tr>
+<td style="text-align:center">ん</td>
+<td style="text-align:center">12435</td>
+<td style="text-align:center">3093</td>
+</tr>
+<tr>
+<td style="text-align:center">ゔ</td>
+<td style="text-align:center">12436</td>
+<td style="text-align:center">3094</td>
+</tr>
+<tr>
+<td style="text-align:center">ゕ</td>
+<td style="text-align:center">12437</td>
+<td style="text-align:center">3095</td>
+</tr>
+<tr>
+<td style="text-align:center">ゖ</td>
+<td style="text-align:center">12438</td>
+<td style="text-align:center">3096</td>
+</tr>
+<tr>
+<td style="text-align:center">空</td>
+<td style="text-align:center">12439</td>
+<td style="text-align:center">3097</td>
+</tr>
+<tr>
+<td style="text-align:center">空</td>
+<td style="text-align:center">12440</td>
+<td style="text-align:center">3098</td>
+</tr>
+<tr>
+<td style="text-align:center">゙</td>
+<td style="text-align:center">12441</td>
+<td style="text-align:center">3099</td>
+</tr>
+<tr>
+<td style="text-align:center">゚</td>
+<td style="text-align:center">12442</td>
+<td style="text-align:center">309A</td>
+</tr>
+<tr>
+<td style="text-align:center">゛</td>
+<td style="text-align:center">12443</td>
+<td style="text-align:center">309B</td>
+</tr>
+<tr>
+<td style="text-align:center">゜</td>
+<td style="text-align:center">12444</td>
+<td style="text-align:center">309C</td>
+</tr>
+<tr>
+<td style="text-align:center">ゝ</td>
+<td style="text-align:center">12445</td>
+<td style="text-align:center">309D</td>
+</tr>
+<tr>
+<td style="text-align:center">ゞ</td>
+<td style="text-align:center">12446</td>
+<td style="text-align:center">309E</td>
+</tr>
+<tr>
+<td style="text-align:center">ゟ</td>
+<td style="text-align:center">12447</td>
+<td style="text-align:center">309F</td>
+</tr>
+</tbody>
+</table>
+<h2 id="片假名-unicode">片假名 Unicode</h2>
+<p>按 <a href="https://www.unicode.org/charts/PDF/U30A0.pdf">U30A0.pdf</a>，十六进制的范围是<code>[\u30a-\u30ff]</code>，十进制范围是 12448-12543。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Character</th>
+<th style="text-align:center">Decimal</th>
+<th style="text-align:center">Hexadecimal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">゠</td>
+<td style="text-align:center">12448</td>
+<td style="text-align:center">30A0</td>
+</tr>
+<tr>
+<td style="text-align:center">ァ</td>
+<td style="text-align:center">12449</td>
+<td style="text-align:center">30A1</td>
+</tr>
+<tr>
+<td style="text-align:center">ア</td>
+<td style="text-align:center">12450</td>
+<td style="text-align:center">30A2</td>
+</tr>
+<tr>
+<td style="text-align:center">ィ</td>
+<td style="text-align:center">12451</td>
+<td style="text-align:center">30A3</td>
+</tr>
+<tr>
+<td style="text-align:center">イ</td>
+<td style="text-align:center">12452</td>
+<td style="text-align:center">30A4</td>
+</tr>
+<tr>
+<td style="text-align:center">ゥ</td>
+<td style="text-align:center">12453</td>
+<td style="text-align:center">30A5</td>
+</tr>
+<tr>
+<td style="text-align:center">ウ</td>
+<td style="text-align:center">12454</td>
+<td style="text-align:center">30A6</td>
+</tr>
+<tr>
+<td style="text-align:center">ェ</td>
+<td style="text-align:center">12455</td>
+<td style="text-align:center">30A7</td>
+</tr>
+<tr>
+<td style="text-align:center">エ</td>
+<td style="text-align:center">12456</td>
+<td style="text-align:center">30A8</td>
+</tr>
+<tr>
+<td style="text-align:center">ォ</td>
+<td style="text-align:center">12457</td>
+<td style="text-align:center">30A9</td>
+</tr>
+<tr>
+<td style="text-align:center">オ</td>
+<td style="text-align:center">12458</td>
+<td style="text-align:center">30AA</td>
+</tr>
+<tr>
+<td style="text-align:center">カ</td>
+<td style="text-align:center">12459</td>
+<td style="text-align:center">30AB</td>
+</tr>
+<tr>
+<td style="text-align:center">ガ</td>
+<td style="text-align:center">12460</td>
+<td style="text-align:center">30AC</td>
+</tr>
+<tr>
+<td style="text-align:center">キ</td>
+<td style="text-align:center">12461</td>
+<td style="text-align:center">30AD</td>
+</tr>
+<tr>
+<td style="text-align:center">ギ</td>
+<td style="text-align:center">12462</td>
+<td style="text-align:center">30AE</td>
+</tr>
+<tr>
+<td style="text-align:center">ク</td>
+<td style="text-align:center">12463</td>
+<td style="text-align:center">30AF</td>
+</tr>
+<tr>
+<td style="text-align:center">グ</td>
+<td style="text-align:center">12464</td>
+<td style="text-align:center">30B0</td>
+</tr>
+<tr>
+<td style="text-align:center">ケ</td>
+<td style="text-align:center">12465</td>
+<td style="text-align:center">30B1</td>
+</tr>
+<tr>
+<td style="text-align:center">ゲ</td>
+<td style="text-align:center">12466</td>
+<td style="text-align:center">30B2</td>
+</tr>
+<tr>
+<td style="text-align:center">コ</td>
+<td style="text-align:center">12467</td>
+<td style="text-align:center">30B3</td>
+</tr>
+<tr>
+<td style="text-align:center">ゴ</td>
+<td style="text-align:center">12468</td>
+<td style="text-align:center">30B4</td>
+</tr>
+<tr>
+<td style="text-align:center">サ</td>
+<td style="text-align:center">12469</td>
+<td style="text-align:center">30B5</td>
+</tr>
+<tr>
+<td style="text-align:center">ザ</td>
+<td style="text-align:center">12470</td>
+<td style="text-align:center">30B6</td>
+</tr>
+<tr>
+<td style="text-align:center">シ</td>
+<td style="text-align:center">12471</td>
+<td style="text-align:center">30B7</td>
+</tr>
+<tr>
+<td style="text-align:center">ジ</td>
+<td style="text-align:center">12472</td>
+<td style="text-align:center">30B8</td>
+</tr>
+<tr>
+<td style="text-align:center">ス</td>
+<td style="text-align:center">12473</td>
+<td style="text-align:center">30B9</td>
+</tr>
+<tr>
+<td style="text-align:center">ズ</td>
+<td style="text-align:center">12474</td>
+<td style="text-align:center">30BA</td>
+</tr>
+<tr>
+<td style="text-align:center">セ</td>
+<td style="text-align:center">12475</td>
+<td style="text-align:center">30BB</td>
+</tr>
+<tr>
+<td style="text-align:center">ゼ</td>
+<td style="text-align:center">12476</td>
+<td style="text-align:center">30BC</td>
+</tr>
+<tr>
+<td style="text-align:center">ソ</td>
+<td style="text-align:center">12477</td>
+<td style="text-align:center">30BD</td>
+</tr>
+<tr>
+<td style="text-align:center">ゾ</td>
+<td style="text-align:center">12478</td>
+<td style="text-align:center">30BE</td>
+</tr>
+<tr>
+<td style="text-align:center">タ</td>
+<td style="text-align:center">12479</td>
+<td style="text-align:center">30BF</td>
+</tr>
+<tr>
+<td style="text-align:center">ダ</td>
+<td style="text-align:center">12480</td>
+<td style="text-align:center">30C0</td>
+</tr>
+<tr>
+<td style="text-align:center">チ</td>
+<td style="text-align:center">12481</td>
+<td style="text-align:center">30C1</td>
+</tr>
+<tr>
+<td style="text-align:center">ヂ</td>
+<td style="text-align:center">12482</td>
+<td style="text-align:center">30C2</td>
+</tr>
+<tr>
+<td style="text-align:center">ッ</td>
+<td style="text-align:center">12483</td>
+<td style="text-align:center">30C3</td>
+</tr>
+<tr>
+<td style="text-align:center">ツ</td>
+<td style="text-align:center">12484</td>
+<td style="text-align:center">30C4</td>
+</tr>
+<tr>
+<td style="text-align:center">ヅ</td>
+<td style="text-align:center">12485</td>
+<td style="text-align:center">30C5</td>
+</tr>
+<tr>
+<td style="text-align:center">テ</td>
+<td style="text-align:center">12486</td>
+<td style="text-align:center">30C6</td>
+</tr>
+<tr>
+<td style="text-align:center">デ</td>
+<td style="text-align:center">12487</td>
+<td style="text-align:center">30C7</td>
+</tr>
+<tr>
+<td style="text-align:center">ト</td>
+<td style="text-align:center">12488</td>
+<td style="text-align:center">30C8</td>
+</tr>
+<tr>
+<td style="text-align:center">ド</td>
+<td style="text-align:center">12489</td>
+<td style="text-align:center">30C9</td>
+</tr>
+<tr>
+<td style="text-align:center">ナ</td>
+<td style="text-align:center">12490</td>
+<td style="text-align:center">30CA</td>
+</tr>
+<tr>
+<td style="text-align:center">ニ</td>
+<td style="text-align:center">12491</td>
+<td style="text-align:center">30CB</td>
+</tr>
+<tr>
+<td style="text-align:center">ヌ</td>
+<td style="text-align:center">12492</td>
+<td style="text-align:center">30CC</td>
+</tr>
+<tr>
+<td style="text-align:center">ネ</td>
+<td style="text-align:center">12493</td>
+<td style="text-align:center">30CD</td>
+</tr>
+<tr>
+<td style="text-align:center">ノ</td>
+<td style="text-align:center">12494</td>
+<td style="text-align:center">30CE</td>
+</tr>
+<tr>
+<td style="text-align:center">ハ</td>
+<td style="text-align:center">12495</td>
+<td style="text-align:center">30CF</td>
+</tr>
+<tr>
+<td style="text-align:center">バ</td>
+<td style="text-align:center">12496</td>
+<td style="text-align:center">30D0</td>
+</tr>
+<tr>
+<td style="text-align:center">パ</td>
+<td style="text-align:center">12497</td>
+<td style="text-align:center">30D1</td>
+</tr>
+<tr>
+<td style="text-align:center">ヒ</td>
+<td style="text-align:center">12498</td>
+<td style="text-align:center">30D2</td>
+</tr>
+<tr>
+<td style="text-align:center">ビ</td>
+<td style="text-align:center">12499</td>
+<td style="text-align:center">30D3</td>
+</tr>
+<tr>
+<td style="text-align:center">ピ</td>
+<td style="text-align:center">12500</td>
+<td style="text-align:center">30D4</td>
+</tr>
+<tr>
+<td style="text-align:center">フ</td>
+<td style="text-align:center">12501</td>
+<td style="text-align:center">30D5</td>
+</tr>
+<tr>
+<td style="text-align:center">ブ</td>
+<td style="text-align:center">12502</td>
+<td style="text-align:center">30D6</td>
+</tr>
+<tr>
+<td style="text-align:center">プ</td>
+<td style="text-align:center">12503</td>
+<td style="text-align:center">30D7</td>
+</tr>
+<tr>
+<td style="text-align:center">ヘ</td>
+<td style="text-align:center">12504</td>
+<td style="text-align:center">30D8</td>
+</tr>
+<tr>
+<td style="text-align:center">ベ</td>
+<td style="text-align:center">12505</td>
+<td style="text-align:center">30D9</td>
+</tr>
+<tr>
+<td style="text-align:center">ペ</td>
+<td style="text-align:center">12506</td>
+<td style="text-align:center">30DA</td>
+</tr>
+<tr>
+<td style="text-align:center">ホ</td>
+<td style="text-align:center">12507</td>
+<td style="text-align:center">30DB</td>
+</tr>
+<tr>
+<td style="text-align:center">ボ</td>
+<td style="text-align:center">12508</td>
+<td style="text-align:center">30DC</td>
+</tr>
+<tr>
+<td style="text-align:center">ポ</td>
+<td style="text-align:center">12509</td>
+<td style="text-align:center">30DD</td>
+</tr>
+<tr>
+<td style="text-align:center">マ</td>
+<td style="text-align:center">12510</td>
+<td style="text-align:center">30DE</td>
+</tr>
+<tr>
+<td style="text-align:center">ミ</td>
+<td style="text-align:center">12511</td>
+<td style="text-align:center">30DF</td>
+</tr>
+<tr>
+<td style="text-align:center">ム</td>
+<td style="text-align:center">12512</td>
+<td style="text-align:center">30E0</td>
+</tr>
+<tr>
+<td style="text-align:center">メ</td>
+<td style="text-align:center">12513</td>
+<td style="text-align:center">30E1</td>
+</tr>
+<tr>
+<td style="text-align:center">モ</td>
+<td style="text-align:center">12514</td>
+<td style="text-align:center">30E2</td>
+</tr>
+<tr>
+<td style="text-align:center">ャ</td>
+<td style="text-align:center">12515</td>
+<td style="text-align:center">30E3</td>
+</tr>
+<tr>
+<td style="text-align:center">ヤ</td>
+<td style="text-align:center">12516</td>
+<td style="text-align:center">30E4</td>
+</tr>
+<tr>
+<td style="text-align:center">ュ</td>
+<td style="text-align:center">12517</td>
+<td style="text-align:center">30E5</td>
+</tr>
+<tr>
+<td style="text-align:center">ユ</td>
+<td style="text-align:center">12518</td>
+<td style="text-align:center">30E6</td>
+</tr>
+<tr>
+<td style="text-align:center">ョ</td>
+<td style="text-align:center">12519</td>
+<td style="text-align:center">30E7</td>
+</tr>
+<tr>
+<td style="text-align:center">ヨ</td>
+<td style="text-align:center">12520</td>
+<td style="text-align:center">30E8</td>
+</tr>
+<tr>
+<td style="text-align:center">ラ</td>
+<td style="text-align:center">12521</td>
+<td style="text-align:center">30E9</td>
+</tr>
+<tr>
+<td style="text-align:center">リ</td>
+<td style="text-align:center">12522</td>
+<td style="text-align:center">30EA</td>
+</tr>
+<tr>
+<td style="text-align:center">ル</td>
+<td style="text-align:center">12523</td>
+<td style="text-align:center">30EB</td>
+</tr>
+<tr>
+<td style="text-align:center">レ</td>
+<td style="text-align:center">12524</td>
+<td style="text-align:center">30EC</td>
+</tr>
+<tr>
+<td style="text-align:center">ロ</td>
+<td style="text-align:center">12525</td>
+<td style="text-align:center">30ED</td>
+</tr>
+<tr>
+<td style="text-align:center">ヮ</td>
+<td style="text-align:center">12526</td>
+<td style="text-align:center">30EE</td>
+</tr>
+<tr>
+<td style="text-align:center">ワ</td>
+<td style="text-align:center">12527</td>
+<td style="text-align:center">30EF</td>
+</tr>
+<tr>
+<td style="text-align:center">ヰ</td>
+<td style="text-align:center">12528</td>
+<td style="text-align:center">30F0</td>
+</tr>
+<tr>
+<td style="text-align:center">ヱ</td>
+<td style="text-align:center">12529</td>
+<td style="text-align:center">30F1</td>
+</tr>
+<tr>
+<td style="text-align:center">ヲ</td>
+<td style="text-align:center">12530</td>
+<td style="text-align:center">30F2</td>
+</tr>
+<tr>
+<td style="text-align:center">ン</td>
+<td style="text-align:center">12531</td>
+<td style="text-align:center">30F3</td>
+</tr>
+<tr>
+<td style="text-align:center">ヴ</td>
+<td style="text-align:center">12532</td>
+<td style="text-align:center">30F4</td>
+</tr>
+<tr>
+<td style="text-align:center">ヵ</td>
+<td style="text-align:center">12533</td>
+<td style="text-align:center">30F5</td>
+</tr>
+<tr>
+<td style="text-align:center">ヶ</td>
+<td style="text-align:center">12534</td>
+<td style="text-align:center">30F6</td>
+</tr>
+<tr>
+<td style="text-align:center">ヷ</td>
+<td style="text-align:center">12535</td>
+<td style="text-align:center">30F7</td>
+</tr>
+<tr>
+<td style="text-align:center">ヸ</td>
+<td style="text-align:center">12536</td>
+<td style="text-align:center">30F8</td>
+</tr>
+<tr>
+<td style="text-align:center">ヹ</td>
+<td style="text-align:center">12537</td>
+<td style="text-align:center">30F9</td>
+</tr>
+<tr>
+<td style="text-align:center">ヺ</td>
+<td style="text-align:center">12538</td>
+<td style="text-align:center">30FA</td>
+</tr>
+<tr>
+<td style="text-align:center">・</td>
+<td style="text-align:center">12539</td>
+<td style="text-align:center">30FB</td>
+</tr>
+<tr>
+<td style="text-align:center">ー</td>
+<td style="text-align:center">12540</td>
+<td style="text-align:center">30FC</td>
+</tr>
+<tr>
+<td style="text-align:center">ヽ</td>
+<td style="text-align:center">12541</td>
+<td style="text-align:center">30FD</td>
+</tr>
+<tr>
+<td style="text-align:center">ヾ</td>
+<td style="text-align:center">12542</td>
+<td style="text-align:center">30FE</td>
+</tr>
+<tr>
+<td style="text-align:center">ヿ</td>
+<td style="text-align:center">12543</td>
+<td style="text-align:center">30FF</td>
+</tr>
+</tbody>
+</table>
+<h2 id="片假名语音扩展-unicode">片假名语音扩展 Unicode</h2>
+<p>按 <a href="https://www.unicode.org/charts/PDF/U31F0.pdf">U31F0.pdf</a> ，十进制范围：12784-12799，十六进制范围是<code>[\u31f0-\u31ff]</code></p>
+<p>P.S. 按 Unicode 官方的说明，这部分的假名用于「阿伊努语」，但我看不出这部分和上面的区别 233</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Character</th>
+<th style="text-align:center">Decimal</th>
+<th style="text-align:center">Hexadecimal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ㇰ</td>
+<td style="text-align:center">12784</td>
+<td style="text-align:center">31F0</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇱ</td>
+<td style="text-align:center">12785</td>
+<td style="text-align:center">31F1</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇲ</td>
+<td style="text-align:center">12786</td>
+<td style="text-align:center">31F2</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇳ</td>
+<td style="text-align:center">12787</td>
+<td style="text-align:center">31F3</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇴ</td>
+<td style="text-align:center">12788</td>
+<td style="text-align:center">31F4</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇵ</td>
+<td style="text-align:center">12789</td>
+<td style="text-align:center">31F5</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇶ</td>
+<td style="text-align:center">12790</td>
+<td style="text-align:center">31F6</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇷ</td>
+<td style="text-align:center">12791</td>
+<td style="text-align:center">31F7</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇸ</td>
+<td style="text-align:center">12792</td>
+<td style="text-align:center">31F8</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇹ</td>
+<td style="text-align:center">12793</td>
+<td style="text-align:center">31F9</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇺ</td>
+<td style="text-align:center">12794</td>
+<td style="text-align:center">31FA</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇻ</td>
+<td style="text-align:center">12795</td>
+<td style="text-align:center">31FB</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇼ</td>
+<td style="text-align:center">12796</td>
+<td style="text-align:center">31FC</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇽ</td>
+<td style="text-align:center">12797</td>
+<td style="text-align:center">31FD</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇾ</td>
+<td style="text-align:center">12798</td>
+<td style="text-align:center">31FE</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇿ</td>
+<td style="text-align:center">12799</td>
+<td style="text-align:center">31FF</td>
+</tr>
+</tbody>
+</table>
+<h1 id="全半角假名转换">全半角假名转换</h1>
+<h2 id="半角字符-unicode">半角字符 Unicode</h2>
+<p>按 <a href="https://www.unicode.org/charts/PDF/UFF00.pdf">UFF00.pdf</a>，日语半角字符的范围是 65381-65439，十六进制范围：<code>[\uff65-\uff9f]</code>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Character</th>
+<th style="text-align:center">Decimal</th>
+<th style="text-align:center">Hexadecimal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">･</td>
+<td style="text-align:center">65381</td>
+<td style="text-align:center">FF65</td>
+</tr>
+<tr>
+<td style="text-align:center">ｦ</td>
+<td style="text-align:center">65382</td>
+<td style="text-align:center">FF66</td>
+</tr>
+<tr>
+<td style="text-align:center">ｧ</td>
+<td style="text-align:center">65383</td>
+<td style="text-align:center">FF67</td>
+</tr>
+<tr>
+<td style="text-align:center">ｨ</td>
+<td style="text-align:center">65384</td>
+<td style="text-align:center">FF68</td>
+</tr>
+<tr>
+<td style="text-align:center">ｩ</td>
+<td style="text-align:center">65385</td>
+<td style="text-align:center">FF69</td>
+</tr>
+<tr>
+<td style="text-align:center">ｪ</td>
+<td style="text-align:center">65386</td>
+<td style="text-align:center">FF6A</td>
+</tr>
+<tr>
+<td style="text-align:center">ｫ</td>
+<td style="text-align:center">65387</td>
+<td style="text-align:center">FF6B</td>
+</tr>
+<tr>
+<td style="text-align:center">ｬ</td>
+<td style="text-align:center">65388</td>
+<td style="text-align:center">FF6C</td>
+</tr>
+<tr>
+<td style="text-align:center">ｭ</td>
+<td style="text-align:center">65389</td>
+<td style="text-align:center">FF6D</td>
+</tr>
+<tr>
+<td style="text-align:center">ｮ</td>
+<td style="text-align:center">65390</td>
+<td style="text-align:center">FF6E</td>
+</tr>
+<tr>
+<td style="text-align:center">ｯ</td>
+<td style="text-align:center">65391</td>
+<td style="text-align:center">FF6F</td>
+</tr>
+<tr>
+<td style="text-align:center">ｰ</td>
+<td style="text-align:center">65392</td>
+<td style="text-align:center">FF70</td>
+</tr>
+<tr>
+<td style="text-align:center">ｱ</td>
+<td style="text-align:center">65393</td>
+<td style="text-align:center">FF71</td>
+</tr>
+<tr>
+<td style="text-align:center">ｲ</td>
+<td style="text-align:center">65394</td>
+<td style="text-align:center">FF72</td>
+</tr>
+<tr>
+<td style="text-align:center">ｳ</td>
+<td style="text-align:center">65395</td>
+<td style="text-align:center">FF73</td>
+</tr>
+<tr>
+<td style="text-align:center">ｴ</td>
+<td style="text-align:center">65396</td>
+<td style="text-align:center">FF74</td>
+</tr>
+<tr>
+<td style="text-align:center">ｵ</td>
+<td style="text-align:center">65397</td>
+<td style="text-align:center">FF75</td>
+</tr>
+<tr>
+<td style="text-align:center">ｶ</td>
+<td style="text-align:center">65398</td>
+<td style="text-align:center">FF76</td>
+</tr>
+<tr>
+<td style="text-align:center">ｷ</td>
+<td style="text-align:center">65399</td>
+<td style="text-align:center">FF77</td>
+</tr>
+<tr>
+<td style="text-align:center">ｸ</td>
+<td style="text-align:center">65400</td>
+<td style="text-align:center">FF78</td>
+</tr>
+<tr>
+<td style="text-align:center">ｹ</td>
+<td style="text-align:center">65401</td>
+<td style="text-align:center">FF79</td>
+</tr>
+<tr>
+<td style="text-align:center">ｺ</td>
+<td style="text-align:center">65402</td>
+<td style="text-align:center">FF7A</td>
+</tr>
+<tr>
+<td style="text-align:center">ｻ</td>
+<td style="text-align:center">65403</td>
+<td style="text-align:center">FF7B</td>
+</tr>
+<tr>
+<td style="text-align:center">ｼ</td>
+<td style="text-align:center">65404</td>
+<td style="text-align:center">FF7C</td>
+</tr>
+<tr>
+<td style="text-align:center">ｽ</td>
+<td style="text-align:center">65405</td>
+<td style="text-align:center">FF7D</td>
+</tr>
+<tr>
+<td style="text-align:center">ｾ</td>
+<td style="text-align:center">65406</td>
+<td style="text-align:center">FF7E</td>
+</tr>
+<tr>
+<td style="text-align:center">ｿ</td>
+<td style="text-align:center">65407</td>
+<td style="text-align:center">FF7F</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾀ</td>
+<td style="text-align:center">65408</td>
+<td style="text-align:center">FF80</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾁ</td>
+<td style="text-align:center">65409</td>
+<td style="text-align:center">FF81</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾂ</td>
+<td style="text-align:center">65410</td>
+<td style="text-align:center">FF82</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾃ</td>
+<td style="text-align:center">65411</td>
+<td style="text-align:center">FF83</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾄ</td>
+<td style="text-align:center">65412</td>
+<td style="text-align:center">FF84</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾅ</td>
+<td style="text-align:center">65413</td>
+<td style="text-align:center">FF85</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾆ</td>
+<td style="text-align:center">65414</td>
+<td style="text-align:center">FF86</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾇ</td>
+<td style="text-align:center">65415</td>
+<td style="text-align:center">FF87</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾈ</td>
+<td style="text-align:center">65416</td>
+<td style="text-align:center">FF88</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾉ</td>
+<td style="text-align:center">65417</td>
+<td style="text-align:center">FF89</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾊ</td>
+<td style="text-align:center">65418</td>
+<td style="text-align:center">FF8A</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾋ</td>
+<td style="text-align:center">65419</td>
+<td style="text-align:center">FF8B</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾌ</td>
+<td style="text-align:center">65420</td>
+<td style="text-align:center">FF8C</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾍ</td>
+<td style="text-align:center">65421</td>
+<td style="text-align:center">FF8D</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾎ</td>
+<td style="text-align:center">65422</td>
+<td style="text-align:center">FF8E</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾏ</td>
+<td style="text-align:center">65423</td>
+<td style="text-align:center">FF8F</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾐ</td>
+<td style="text-align:center">65424</td>
+<td style="text-align:center">FF90</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾑ</td>
+<td style="text-align:center">65425</td>
+<td style="text-align:center">FF91</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾒ</td>
+<td style="text-align:center">65426</td>
+<td style="text-align:center">FF92</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾓ</td>
+<td style="text-align:center">65427</td>
+<td style="text-align:center">FF93</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾔ</td>
+<td style="text-align:center">65428</td>
+<td style="text-align:center">FF94</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾕ</td>
+<td style="text-align:center">65429</td>
+<td style="text-align:center">FF95</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾖ</td>
+<td style="text-align:center">65430</td>
+<td style="text-align:center">FF96</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾗ</td>
+<td style="text-align:center">65431</td>
+<td style="text-align:center">FF97</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾘ</td>
+<td style="text-align:center">65432</td>
+<td style="text-align:center">FF98</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾙ</td>
+<td style="text-align:center">65433</td>
+<td style="text-align:center">FF99</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾚ</td>
+<td style="text-align:center">65434</td>
+<td style="text-align:center">FF9A</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾛ</td>
+<td style="text-align:center">65435</td>
+<td style="text-align:center">FF9B</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾜ</td>
+<td style="text-align:center">65436</td>
+<td style="text-align:center">FF9C</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾝ</td>
+<td style="text-align:center">65437</td>
+<td style="text-align:center">FF9D</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾞ</td>
+<td style="text-align:center">65438</td>
+<td style="text-align:center">FF9E</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾟ</td>
+<td style="text-align:center">65439</td>
+<td style="text-align:center">FF9F</td>
+</tr>
+</tbody>
+</table>
+<p>注：第一个字符是半角的<code>・</code>。</p>
+<p>观察上面的表格，可以注意到下面 2 点：</p>
+<ol>
+<li>平假名没有半角假名（这一点可以和维基百科的<a href="https://zh.wikipedia.org/zh-cn/%E5%8D%8A%E5%BD%A2%E5%81%87%E5%90%8D">半形假名</a>相印证）</li>
+<li>有部分平假名的半角假名是由 2 个字符构成，所以不可能像平片假名转换那样用<code>hira = chr(int(ord(gana) - 96))</code>轻松转换，而是要用字符串替换的方式。</li>
+</ol>
+<p>所以，全半角假名的转换比平片假名的转换麻烦得多，个人建议使用第三方库。</p>
+<h2 id="mojimoji">mojimoji</h2>
+<p>如果想从全角转为半角，那么 mojimoji 可能是唯一的选择了。</p>
+<pre><code class="language-python">import mojimoji
+print mojimoji.zen_to_han(u'アイウａｂｃ０１２')
+# ｱｲｳabc012
+print mojimoji.zen_to_han(u'アイウａｂｃ０１２', kana=False)
+# アイウabc012
+print mojimoji.zen_to_han(u'アイウａｂｃ０１２', digit=False)
+# ｱｲｳabc０１２
+print mojimoji.zen_to_han(u'アイウａｂｃ０１２', ascii=False)
+# ｱｲｳａｂｃ012
+
+print mojimoji.han_to_zen(u'ｱｲｳabc012')
+# アイウａｂｃ０１２
+print mojimoji.han_to_zen(u'ｱｲｳabc012', kana=False)
+# ｱｲｳａｂｃ０１２
+print mojimoji.han_to_zen(u'ｱｲｳabc012', digit=False)
+# アイウａｂｃ012
+print mojimoji.han_to_zen(u'ｱｲｳabc012', ascii=False)
+# アイウabc０１２
+</code></pre>
+<p>另外，按<a href="https://qiita.com/ikuyamada/items/fea6c8f81e7cac7cf318">Pythonで半角・全角の変換を高速に行う</a>提供的测评来看，mojimoji 也是速度最快的。</p>
+<pre><code class="language-python">%%time
+import mojimoji
+import zenhan
+import jctconv
+
+s = u'アイオエオ０１２３４５' * 10
+
+%time for n in range(1000000): mojimoji.zen_to_han(s)
+&gt;&gt;&gt; CPU times: user 3.90 s, sys: 0.03 s, total: 3.93 s Wall time: 3.97 s
+
+%time for n in range(1000000): zenhan.z2h(s)
+&gt;&gt;&gt; CPU times: user 71.05 s, sys: 0.16 s, total: 71.22 s Wall time: 71.45 s
+
+%time for n in range(1000000): jctconv.z2h(s)
+&gt;&gt;&gt; CPU times: user 19.75 s, sys: 0.06 s, total: 19.81 s Wall time: 19.86 s
+</code></pre>
+<h2 id="unicodedata">unicodedata</h2>
+<p>考虑到更普通的需求其实就是半角转全角，所以 Python 内置的标准库<code>unicodedata</code>就已经够用了。</p>
+<pre><code class="language-python">%%time
+import unicodedata
+
+input = &quot;アイオエオ０１２３４５&quot; * 10
+for n in range(1000000):
+    unicodedata.normalize(&quot;NFKC&quot;, input)
+
+&gt;&gt;&gt; CPU times: total: 11.5 s Wall time: 11.6 s
+</code></pre>
+<p>虽然是标准库，但转换速度不如上面提到的 mojimoji。</p>
+<p>另外，按照<a href="https://docs.python.org/3/library/unicodedata.html"> Python 官方文档</a>的说法，还有<code>NFC</code>、<code>NFD</code> 、<code>NFKD</code>三种模式，这里不做过多解释<s>其实是因为我也没搞懂啦 233</s></p>
+<p>下面再提供一个测试用例：</p>
+<pre><code class="language-python">import unicodedata
+
+HAN_MOJI = &quot;ｧｱｨｲｩｳｪｴｫｵｶｶﾞｷｷﾞｸｸﾞｹｹﾞｺｺﾞｻｻﾞｼｼﾞｽｽﾞｾｾﾞｿｿﾞﾀﾀﾞﾁﾁﾞｯﾂﾂﾞﾃﾃﾞﾄﾄﾞﾅﾆﾇﾈﾉﾊﾊﾞﾊﾟﾋﾋﾞﾋﾟﾌﾌﾞﾌﾟﾍﾍﾞﾍﾟﾎﾎﾞﾎﾟﾏﾐﾑﾒﾓｬﾔｭﾕｮﾖﾗﾘﾙﾚﾛﾜｦﾝｳﾞﾞﾟ&quot;
+ZEN_MOJI = &quot;ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロワヲンヴ゙゚&quot;
+if ZEN_MOJI == unicodedata.normalize(&quot;NFKC&quot;, HAN_MOJI):
+    print(&quot;OK&quot;)
+</code></pre>
+<h2 id="手写函数-half_to_fullwidth">手写函数 half_to_fullwidth</h2>
+<p>前面提到「由于有部分平假名的半角假名是由 2 个字符构成，所以要全半角的转换用字符串替换的方式」，但本人实现后发现这种方式的性能还不如 unicodedata</p>
+<pre><code class="language-python">def half_to_fullwidth(text):
+    zenkaku_mapping = {
+        &quot;ｶ&quot;: &quot;カ&quot;,
+        &quot;ｷ&quot;: &quot;キ&quot;,
+        &quot;ｸ&quot;: &quot;ク&quot;,
+        &quot;ｹ&quot;: &quot;ケ&quot;,
+        &quot;ｺ&quot;: &quot;コ&quot;,
+        &quot;ｻ&quot;: &quot;サ&quot;,
+        &quot;ｼ&quot;: &quot;シ&quot;,
+        &quot;ｽ&quot;: &quot;ス&quot;,
+        &quot;ｾ&quot;: &quot;セ&quot;,
+        &quot;ｿ&quot;: &quot;ソ&quot;,
+        &quot;ﾀ&quot;: &quot;タ&quot;,
+        &quot;ﾁ&quot;: &quot;チ&quot;,
+        &quot;ﾂ&quot;: &quot;ツ&quot;,
+        &quot;ﾃ&quot;: &quot;テ&quot;,
+        &quot;ﾄ&quot;: &quot;ト&quot;,
+        &quot;ﾅ&quot;: &quot;ナ&quot;,
+        &quot;ﾆ&quot;: &quot;ニ&quot;,
+        &quot;ﾇ&quot;: &quot;ヌ&quot;,
+        &quot;ﾈ&quot;: &quot;ネ&quot;,
+        &quot;ﾉ&quot;: &quot;ノ&quot;,
+        &quot;ﾊ&quot;: &quot;ハ&quot;,
+        &quot;ﾋ&quot;: &quot;ヒ&quot;,
+        &quot;ﾌ&quot;: &quot;フ&quot;,
+        &quot;ﾍ&quot;: &quot;ヘ&quot;,
+        &quot;ﾎ&quot;: &quot;ホ&quot;,
+        &quot;ﾏ&quot;: &quot;マ&quot;,
+        &quot;ﾐ&quot;: &quot;ミ&quot;,
+        &quot;ﾑ&quot;: &quot;ム&quot;,
+        &quot;ﾒ&quot;: &quot;メ&quot;,
+        &quot;ﾓ&quot;: &quot;モ&quot;,
+        &quot;ﾔ&quot;: &quot;ヤ&quot;,
+        &quot;ﾕ&quot;: &quot;ユ&quot;,
+        &quot;ﾖ&quot;: &quot;ヨ&quot;,
+        &quot;ﾗ&quot;: &quot;ラ&quot;,
+        &quot;ﾘ&quot;: &quot;リ&quot;,
+        &quot;ﾙ&quot;: &quot;ル&quot;,
+        &quot;ﾚ&quot;: &quot;レ&quot;,
+        &quot;ﾛ&quot;: &quot;ロ&quot;,
+        &quot;ﾜ&quot;: &quot;ワ&quot;,
+        &quot;ｦ&quot;: &quot;ヲ&quot;,
+        &quot;ﾝ&quot;: &quot;ン&quot;,
+        &quot;ｧ&quot;: &quot;ァ&quot;,
+        &quot;ｨ&quot;: &quot;ィ&quot;,
+        &quot;ｩ&quot;: &quot;ゥ&quot;,
+        &quot;ｪ&quot;: &quot;ェ&quot;,
+        &quot;ｫ&quot;: &quot;ォ&quot;,
+        &quot;ｯ&quot;: &quot;ッ&quot;,
+        &quot;ｬ&quot;: &quot;ャ&quot;,
+        &quot;ｭ&quot;: &quot;ュ&quot;,
+        &quot;ｮ&quot;: &quot;ョ&quot;,
+        &quot;ｰ&quot;: &quot;ー&quot;,
+        &quot;ﾞ&quot;: &quot;゛&quot;,
+        &quot;ﾟ&quot;: &quot;゜&quot;,
+    }
+
+    full_width_text = &quot;&quot;
+    for char in text:
+        if char in zenkaku_mapping:
+            full_width_text += zenkaku_mapping[char]
+        else:
+            full_width_text += char
+
+    return full_width_text
+
+# 测试函数
+text = &quot;ｧｱｨｲｩｳｪｴｫｵｶｶﾞｷｷﾞｸｸﾞｹｹﾞｺｺﾞｻｻﾞｼｼﾞｽｽﾞｾｾﾞｿｿﾞﾀﾀﾞﾁﾁﾞｯﾂﾂﾞﾃﾃﾞﾄﾄﾞﾅﾆﾇﾈﾉﾊﾊﾞﾊﾟﾋﾋﾞﾋﾟﾌﾌﾞﾌﾟﾍﾍﾞﾍﾟﾎﾎﾞﾎﾟﾏﾐﾑﾒﾓｬﾔｭﾕｮﾖﾗﾘﾙﾚﾛﾜｦﾝｳﾞﾞﾟ&quot;
+converted_text = half_to_fullwidth(text)
+print(&quot;转换后的全角假名文本：&quot;, converted_text)
+</code></pre>
+<p>测试下性能：</p>
+<pre><code class="language-python">%%time
+input = &quot;アイオエオ０１２３４５&quot; * 10
+for n in range(1000000):
+    half_to_fullwidth(input)
+
+&gt;&gt;&gt; CPU times: total: 25.2 s Wall time: 25.3 s
+</code></pre>
+<p>（单就速度和功能来看，mojimoji 都是第一，但大多数时候只需要半角转全角这一个功能，所以我更推荐内置库 unicodedata 。（另外提醒一下： mojimoji 需要 C++环境，打包时会比较麻烦）</p>
+<h1 id="其他">其他</h1>
+<h3 id="打印一定范围内的-unicode-字符">打印一定范围内的 Unicode 字符</h3>
+<pre><code class="language-python">def print_characters(start_unicode):
+    for i in range(start_unicode, start_unicode + 100):
+        print(i+&quot; : &quot;chr(i))
+
+# 调用函数并传入起始 Unicode 码作为参数
+start_unicode = int(input(&quot;请输入起始的 Unicode 码: &quot;))
+print_characters(start_unicode)
+</code></pre>
+<h1 id="参考">参考</h1>
+<p>[日文假名_Unicode 编码](04Library/04CS/日文假名_Unicode 编码.xlsx)</p>
+<p><a href="https://note.nkmk.me/python-str-convert-full-half-width/">Pythonで全角・半角を変換（mojimojiなど）</a>：非常详细地解释了本文谈到的所有类型转换</p>
+<p><a href="https://qiita.com/ikuyamada/items/fea6c8f81e7cac7cf318">Pythonで半角・全角の変換を高速に行う</a>：mojimoji 作者亲自撰写的文档，比较了 3 个常见的半角转全角的第三方库的性能。</p>
+<p><a href="https://www.unicode.org/charts/">Unicode 15.0 Character Code Charts</a>：从官网查看完整的码表。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[HiNative_‎我要练习中国方言，可以推荐一部电视剧，使用南方言，不要很难听]]></title>
+        <id>https://noheartpen.github.io/post/hinative_wo-yao-lian-xi-zhong-guo-fang-yan-ke-yi-tui-jian-yi-bu-dian-shi-ju-shi-yong-nan-fang-yan-bu-yao-hen-nan-ting/</id>
+        <link href="https://noheartpen.github.io/post/hinative_wo-yao-lian-xi-zhong-guo-fang-yan-ke-yi-tui-jian-yi-bu-dian-shi-ju-shi-yong-nan-fang-yan-bu-yao-hen-nan-ting/">
+        </link>
+        <updated>2023-06-25T14:03:36.000Z</updated>
+        <summary type="html"><![CDATA[<p>摘要： 这是我在<a href="https://zh.hinative.com/questions/24177074">HiNative_‎我要练习中国方言，可以推荐一部电视剧，使用南方言，不要很难听</a>提问下的回答，提到了三部方言配音的影视作品《读心神探》、《疯狂的石头》、《山城棒棒军》。本来还想介绍《刺客伍六七》（Scissor Seven）的，但人家问的是电视剧……</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>摘要： 这是我在<a href="https://zh.hinative.com/questions/24177074">HiNative_‎我要练习中国方言，可以推荐一部电视剧，使用南方言，不要很难听</a>提问下的回答，提到了三部方言配音的影视作品《读心神探》、《疯狂的石头》、《山城棒棒军》。本来还想介绍《刺客伍六七》（Scissor Seven）的，但人家问的是电视剧……</p>
+<!-- more -->
+<hr>
+<p>创建日期: 2023-06-23<br>
+修改日期: 2023-06-25<br>
+url:  https://hinative.com/questions/24177074<br>
+标签: 备份,英语</p>
+<hr>
+<p>If you're curious about Chongqing, you should try &quot;山城棒棒军&quot;.<br>
+如果你对重庆有兴趣的话，你可以试试《山城棒棒军》。</p>
+<p>This drama is about a group of porters who worked in Chongqing. The story of this TV series occurred 30 years ago when the Chinese economy was not as it is today. So, you can know the significance of Chinese economy reform to the general public. You can also see the real life of ordinary people.</p>
+<p>这部电视剧讲述的是一群在重庆工作的搬运工人的故事。由于故事发生在30年前，也就是中国的经济还不像现在这样备受瞩目的时候，所以你可以借这部电视剧了解到对于普通人而言，改革开放意味着什么。同时，你也可以看到老百姓们真实的生活。</p>
+<p>I found that Wikipedia does not have any information on this drama. Therefore, I would like to provide an introduction for it myself.</p>
+<p>我发现在维基百科上找不到关于这部电视剧的任何资料，所以自己动手写了点介绍。</p>
+<p>In terms of language, Chongqinghua is similar to Mandarin. However, as someone who was born and raised in Chongqing for ten years, I disagree with that statement. You may find it difficult at first. And I am happy to respond to any queries regarding the play. Please feel free to ask me anything.</p>
+<p>虽然在语言学上，重庆话被划入北方方言（即和普通话有很多相似的地方），但作为一个土生土长并在重庆生活了十多年的重庆人，我不太同意这样的观点，我觉得你刚开始看的时候可能会有很多不懂的地方。你可以向我提问，我很乐意回答重庆话相关的问题。</p>
+<p>you can watch it on here.</p>
+<p>你可以在YouTube上看它。</p>
+<p>https://m.youtube.com/watch?v=5snbnhfC8Qo</p>
+<p>About ChongQing, there also have a nice movie named Crazy Stone.  You can find more info on Wikipedia</p>
+<p>关于重庆，还有一部很有趣的电影《疯狂的石头》，你可以在维基百科上找到更多介绍<br>
+https://en.m.wikipedia.org/wiki/Crazy_Stone_(film)</p>
+<p>and watch it on YouTube.(This one has a subtitle)</p>
+<p>在YouTube上也能看。（这个有字幕）</p>
+<p>https://youtu.be/oHxFmXKlT-A</p>
+<p>And I also want to share &quot;读心神探&quot;, which is similar to Sherlock (Benedict Cumberbatch). When I was a child, I liked it very much. Since you can find more information on Wikipedia, I won't write anymore.</p>
+<p>另外，我也想推荐TVB的《读心神探》，这部电视剧和本尼迪克特·康伯巴奇主演的《神探夏洛克》比较类似。我小时候特别喜欢这部剧。由于你可以在维基百科上找到详细的介绍，我就不多费笔墨了。</p>
+<p>https://en.m.wikipedia.org/wiki/Every_Move_You_Make</p>
+<p>You can watch it on YouTube with subtitles.</p>
+<p>YouTube上可以找到有字幕的版本。</p>
+<p>https://m.youtube.com/watch?v=KT2wQhHDfWc&amp;list=PLf6G-fGLWGfwcZcADiOo5E8Q3woijLd2A</p>
+<p>Tips: although I had watched this drama a lot times, I also didn‘t know anything about Cantonese, so you may need to ask others.😃</p>
+<p>提示：虽然这部剧我看了好几遍，但我完全不懂粤语，所以可能无法回答关于这部剧的提问:)</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[HiNative_‎‎‎What is the difference between 白晝 and 白天]]></title>
+        <id>https://noheartpen.github.io/post/hinative_what-is-the-difference-between-bai-zhou-and-bai-tian/</id>
+        <link href="https://noheartpen.github.io/post/hinative_what-is-the-difference-between-bai-zhou-and-bai-tian/">
+        </link>
+        <updated>2023-06-22T08:12:06.000Z</updated>
+        <summary type="html"><![CDATA[<p>摘要：本文是我在<a href="https://hinative.com/questions/24170735">‎What is the difference between 白晝 and 白天?</a> 的回答。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>摘要：本文是我在<a href="https://hinative.com/questions/24170735">‎What is the difference between 白晝 and 白天?</a> 的回答。</p>
+<!-- more -->
+<hr>
+<p>创建日期: 2023-06-22<br>
+修改时间:<br>
+标签: 备份,英语</p>
+<hr>
+<h1 id="提问">提问</h1>
+<p>关于中文 (简体) 的问题<br>
+白晝 和 白天 有什么区别？如果难以说明的话，请教我一下例句。</p>
+<blockquote>
+<p>Feel free to just provide example sentences.</p>
+</blockquote>
+<h1 id="回答">回答</h1>
+<p>作为一个中国大陆生活的人，我不知道「白晝」是什么，查了字典才发现原来是「白昼」。从我的反应可以看出：「白晝」在推行简体字的中国大陆地区，一般被当作是古代汉语的写法，基本没有人会使用。<br>
+「白天」与「白昼」：「白昼」是一个比较偏书面语的表达，一般不会出现在口语中。所以你说“我「白天」一般在工作”是很正常的表达，而“我「白昼」一般在工作”就有点奇怪。<br>
+而在文学作品中，如果已经译为「白昼」，那么换为「白天」也会显得有点奇怪。</p>
+<p>比如：黑夜已深，「白昼」将近。我们就当脱去暗昧的行为，带上光明的兵器<br>
+换成：黑夜已深，「白天」将近。我们就当脱去暗昧的行为，带上光明的兵器<br>
+（this sentence is from New American Standard Bible, The night is nearly over; the day is almost here. So let us put aside the deeds of darkness and put on the armor of light.）</p>
+<p>作为一个中文母语者，当我知道这句话是在翻译《圣经》时，我会觉得第一句话的「白昼」是一个更好的表达（这也是《新标点和合本》的翻译，并非我杜撰的翻译）。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[HiNative_‎这是我在sns上想写的内容。您能理解我的中文吗]]></title>
+        <id>https://noheartpen.github.io/post/hinative_zhe-shi-wo-zai-sns-shang-xiang-xie-de-nei-rong-nin-neng-li-jie-wo-de-zhong-wen-ma/</id>
+        <link href="https://noheartpen.github.io/post/hinative_zhe-shi-wo-zai-sns-shang-xiang-xie-de-nei-rong-nin-neng-li-jie-wo-de-zhong-wen-ma/">
+        </link>
+        <updated>2023-06-17T08:19:30.000Z</updated>
+        <summary type="html"><![CDATA[<p>摘要：本文是我在<a href="https://hinative.com/questions/24145204">这是我在sns上想写的内容。您能理解我的中文吗？</a>的回答。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>摘要：本文是我在<a href="https://hinative.com/questions/24145204">这是我在sns上想写的内容。您能理解我的中文吗？</a>的回答。</p>
+<!-- more -->
+<hr>
+<p>创建日期: 2023-06-17<br>
+修改时间:<br>
+标签: 备份,日语</p>
+<hr>
+<h1 id="提问">提问</h1>
+<p>‎︎○我从不寻求浪漫。<br>
+○我不打电话，也不发语音和我的照片。<br>
+○我只使用这个app跟您聊天。<br>
+○​我并不是给所有发给我信息的人回复，对不起。<br>
+○回复很慢。<br>
+谢谢您的理解🙇🏻‍♀️</p>
+<p>↑这是我在sns上想写的内容。<br>
+您能理解我的中文吗？</p>
+<h1 id="回答">回答</h1>
+<p>能，但第一点有点奇怪。如果你是指的不想被搭讪（ナンパされたくないなら），更接地气的说法可能是「我没有网恋的想法」（ネットでナンパされたくない、ただ勉強のために話したい）</p>
+<p>无关紧要的建议：<br>
+我并不是给所有发给我信息的人回复，对不起。<br>
+=&gt;<br>
+对不起，我不一定会回私信。（「私信」とは、Twitter、Weiboのようなアプリで、公開のメッセージではなく、ある人だけ見られるメッセージ。ちなみに、Line、WeChatのようなアプリでは「私信」を書く必要がない）</p>
+<p>○回复很慢。<br>
+=&gt;<br>
+○我打字的速度很慢，希望您能有耐心等我回复。（もしタイピングのスピードが遅くてそう書いたら、「打字」を使うほうがいい）</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[HiNative_‎What does 沉默不是没有情绪 只是觉得说出来没有意义 mean]]></title>
+        <id>https://noheartpen.github.io/post/hinative_what-does-chen-mo-bu-shi-mei-you-qing-xu-zhi-shi-jue-de-shuo-chu-lai-mei-you-yi-yi-mean/</id>
+        <link href="https://noheartpen.github.io/post/hinative_what-does-chen-mo-bu-shi-mei-you-qing-xu-zhi-shi-jue-de-shuo-chu-lai-mei-you-yi-yi-mean/">
+        </link>
+        <updated>2023-06-17T08:08:53.000Z</updated>
+        <summary type="html"><![CDATA[<p>摘要：本文是我在 <a href="https://hinative.com/questions/24145231?locale=en-US">‎What does 沉默不是没有情绪 只是觉得说出来没有意义 mean? </a> 的回答。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>摘要：本文是我在 <a href="https://hinative.com/questions/24145231?locale=en-US">‎What does 沉默不是没有情绪 只是觉得说出来没有意义 mean? </a> 的回答。</p>
+<!-- more -->
+<hr>
+<p>创建日期: 2023-06-17<br>
+修改日期:<br>
+标签: 日语,备份</p>
+<hr>
+<h1 id="提问">提问</h1>
+<blockquote>
+<p>I am curious what context this phrase may be read in, especially the term &quot;情绪&quot;</p>
+</blockquote>
+<h1 id="回答">回答</h1>
+<p>看起来像是情侣吵架时会说的话:)<br>
+我的理解：我现在非常生气，所以我不想和你说话。</p>
+<p>不过我的理解只适用于下面的场景：<br>
+男生：「你是不是生气了？」<br>
+女生：「没有哇」<br>
+男生：「那你怎么不说话？肯定是在生我气吧」<br>
+女生：「我不说话是因为我觉得说出来没有意义」</p>
+<p>另外，你对「情绪」这个词似乎有点兴趣，所以我再补充一下：上面的场景中女生的行为可以用「闹情绪」这个词来形容:)</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MOJi回答_日本三大观音是什么？？]]></title>
+        <id>https://noheartpen.github.io/post/moji-hui-da-_-ri-ben-san-da-guan-yin-shi-shi-me/</id>
+        <link href="https://noheartpen.github.io/post/moji-hui-da-_-ri-ben-san-da-guan-yin-shi-shi-me/">
+        </link>
+        <updated>2023-06-16T12:07:44.000Z</updated>
+        <summary type="html"><![CDATA[<p>摘要：浅草観音、大須観音、津観音</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>摘要：浅草観音、大須観音、津観音</p>
+<!-- more -->
+<hr>
+<p>创建日期:  2023-06-16<br>
+修改时间:<br>
+标签: 日语</p>
+<hr>
+<p>注：本文是在 MOJi问答的<a href="https://m.mojidict.com/question/WxAuOIGV6o">日本三大观音是什么？？</a>问题下的回答。</p>
+<p>浅草観音：金龍山浅草寺<br>
+大須観音：北野山真福寺寶生院<br>
+津観音：恵日山観音寺大宝院<br>
+来自： <a href="https://tabi-mag.jp/kanon-big3/">日本三大観音とは!?</a></p>
+<p>这三者能够并称，应该是由于其作为供奉观音道场，面积较大（按 <a href="https://ja.m.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC%E4%B8%89%E5%A4%A7%E8%A6%B3%E9%9F%B3">日本三大観音 - Wikipedia</a>）</p>
+<p>P.S. 失敬失敬，原来「浅草寺」是观音菩萨的道场呀</p>
+<p>另外，查了下我有点印象的其他寺庙：<br>
+「清水寺」也是观音的道场，而且其中供奉的「十一面千手観音像」是非常重要的文物（重庆人の僕：！？一定要去看看）<br>
+「龍安寺」：本尊是「釈迦如来」<br>
+「薬師寺」：本尊也是如来，但是「薬師如来」</p>
+<p>最后，再补充下「中国佛教四大名山」：<br>
+山西五台山-文殊菩萨<br>
+浙江普陀山-观世音菩萨<br>
+四川峨眉山-普贤菩萨<br>
+安徽九华山-地藏菩萨</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[面向学日语的同学推荐几款中日文字体]]></title>
+        <id>https://noheartpen.github.io/post/mian-xiang-xue-ri-yu-de-tong-xue-tui-jian-ji-kuan-zhong-ri-wen-zi-ti/</id>
+        <link href="https://noheartpen.github.io/post/mian-xiang-xue-ri-yu-de-tong-xue-tui-jian-ji-kuan-zhong-ri-wen-zi-ti/">
+        </link>
+        <updated>2023-06-12T14:38:12.000Z</updated>
+        <summary type="html"><![CDATA[<p>摘要：真宗聖典楷书、秋水書体</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>摘要：真宗聖典楷书、秋水書体</p>
+<!-- more -->
+<p>由于历史原因，计算机对汉字的显示一直是一个让人头疼的问题：</p>
+<p>对于设计者而言，设计汉字不像设计英文，动辄就要上万的工程量，而且设计者往往只会站在中国/日本某一个国家的立场上设计汉字的字形，很容易忽略同一个汉字在中日文中的细微字形差别；</p>
+<p>对于使用者而言，当一段文字同时存在中日文汉字时，不分开设置字体的话，就会出现下图的情况——软件会自动更换为默认字体，导致整体看起来很不协调。</p>
+<figure data-type="image" tabindex="1"><img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2021-11-20-09-41-08.png" alt="|500" loading="lazy"></figure>
+<p>日语专业的同学应该听过「明朝体」和「ゴシック体」，这2个概念分别对应中文字体的「宋体」和「黑体」，中文的「楷体」风格在日文字体里一般称「教科書体」—本文推荐的字体主要就是这种。</p>
+<h1 id="教科书体">教科书体</h1>
+<p>首先谈谈「手写体」与「印刷体」的区别。「宋体」和「黑体」都是「印刷体」，大部分的楷体都可以算是「手写体」。但严格来说，只有像「 <a href="https://www.foundertype.com/index.php/Provider/index/id/25.html">中华精品字库</a> 」这样直接以实际书写为原型的设计的字体才能算是真正的「手写体」，但本人目前尚未接触到的真•手写体的日文字体。<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20230612215111.png" alt="" loading="lazy"><br>
+（字体名：方正王献之小楷）</p>
+<p>大多数人在学习日语时往往以国内出版的教材/资料为参照，很难找到日本人手写的原件。国内的日语教材往往都「不太负责」地采用了「明朝体」，而日本中小学教科书采用的多是前面提到的「教科書体」——我们这边的小学低年级教材使用的也不是宋体，而是楷体。它们之间的差别可以参考下面这张图：<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2021-11-20-09-01-37.png" alt="|500" loading="lazy"></p>
+<p>在意识到教材使用的印刷体有问题后，本人转而开始以Weblio在线词典提供的『デジタル大辞泉』的字形为标准（当时并不知道「教科书体」的概念，只是觉得字典应该更权威），很久之后才意识到其采用的还是印刷体：<br>
+<img src="https://cdn.nlark.com/yuque/0/2021/png/12414947/1620910307697-774c0936-d49e-4683-861f-fec7dd9ded3e.png#height=140&amp;id=clbqP&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=140&amp;originWidth=1606&amp;originalType=binary&amp;ratio=1&amp;size=27717&amp;status=done&amp;style=none&amp;width=1606" alt="image.png" loading="lazy"></p>
+<p>相比印刷体，教科書体最大的特点就是字形更贴近实际手写（甚至会暗示笔顺），更适合作为学日语时的字体。</p>
+<p>但这种字体制作起来相当麻烦，所以数量本就不多，再加上日本字体厂商版权意识很强，能找到的就更少了。</p>
+<p>下面就进入正题，开始推荐字体。</p>
+<h1 id="真宗聖典楷书">真宗聖典楷书</h1>
+<p>直接引用<a href="http://www.yamadera.info/fonts/fonts-index.htm">官网</a>的介绍：</p>
+<blockquote>
+<p>読誦用聖典の印刷を意識した楷書体フォント。浄土三部経、御本典の外字はすべて網羅しています。特殊記号類については「真宗聖典明朝」完全互換。</p>
+</blockquote>
+<p>其收录的字形非常多，即使看古文也很少遇到字体显示异常的情况。不过其对英文和中文简体的支持不是很好，本人一般只用在看日语原文小说的时候，用在 Word 、Obsidian 等中日文混排的地方经常显示异常，但瑕不掩瑜，这款字体值得我在夹带私货前先拿出来说。</p>
+<h1 id="秋水書体">秋水書体</h1>
+<p><strong>下面开始的每个字都是广告</strong></p>
+<p>用过微信读书的话，应该会对「霞骛文楷」有印象。由于这款字体是在日式教科书字体 Klee 的基础上手动补全中文简体字而来，所以用在中日文混排的地方很少会出现违和感。<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2021-11-20-09-51-11.png" alt="|500" loading="lazy"></p>
+<p>但开发者对于那些中日文字形有差异的字，按照中文的书写习惯进行了修改，很容易「误导」日语学习者，下面列举了一些比较重要的字形调整：<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2021-11-20-08-58-43.png" alt="|500" loading="lazy"><br>
+（猜猜看，哪边是霞骛文楷，提示：「中日」）</p>
+<p>而「<a href="https://github.com/NoHeartPen/QiushuiShotai">秋水書体</a>」就是在保留 Klee 的日式字形基础上，用霞骛文楷补齐了简体字—既可以满足日常排版的需要，又可以满足语言学习的需要。</p>
+<figure data-type="image" tabindex="2"><img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20230612215535.png" alt="" loading="lazy"></figure>
+<p>不过，文章谈到的字体的使用场景也很有限——很多软件都不支持直接使用ttf等格式的字体文件；而且上述字体基本都未在主题商店上架，操作系统想更换自定义的字体对于大多数人来说更是「难于上青天」。</p>
+<p>本人主要用在以下软件：</p>
+<ul>
+<li>Anki：通过 css 进行自定义</li>
+<li>Obsidian：安装字体后到应用内的「设置」选即可</li>
+<li>KOReader：字体文件放在 Fonts 文件夹</li>
+<li>静读天下：字体文件可以放在任意文件夹，应用内找到并选中即可</li>
+<li>Kindle：需放在指定路径</li>
+</ul>
+<p>最后，强调一点：以 Word 文档形式给别人发文件时，最好不要使用上述提到的这些字体。如果接收方没有安装相应的字体文件，Word 会自动转成其他字体，甚至可能会直接显示为乱码。如果非要用的话，建议保存为PDF再发送。</p>
+<h1 id="常用字体字符集">常用字体字符集</h1>
+<p>下面介绍本人选字体的一个重要参考指标：「字符集」。</p>
+<p>一个字体覆盖的字符集越广，就更能在中日文混排时保证一段文字的整体风格统一，日常使用时体验也就越好。</p>
+<p>但这并非绝对，还需要关注其具体覆盖的字符集范围。</p>
+<p>下面列一些常见字体覆盖的字符集，使用的工具是夜煞之乐在<a href="https://github.com/NightFurySL2001/CJK-character-count">GitHub</a>和<a href="https://gitee.com/NightFurySL2001/CJK-character-count">码云</a>的开源项目。</p>
+<p>明朝体<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2021-11-18-14-55-46.png" alt="|500" loading="lazy"></p>
+<p>宋体<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2021-11-18-14-59-25.png" alt="|500" loading="lazy"></p>
+<p>真宗聖典楷书<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20230611165248.png" alt="|500" loading="lazy"></p>
+<p>Klee One<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2021-11-18-15-10-54.png" alt="|500" loading="lazy"></p>
+<p>霞骛文楷<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20230611165901.png" alt="|500" loading="lazy"></p>
+<p>如果喜欢黑体的话，更纱黑体和文泉驿出品的系列黑体都是不错的选择。</p>
+<p>更纱黑体<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2021-11-18-15-07-55.png" alt="|500" loading="lazy"></p>
+<p>文泉驿<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2021-11-18-15-35-01.png" alt="|500" loading="lazy"></p>
+<p>如果会接触到非常偏僻的繁体字和异体字，那花园明朝体应该最符合要求——这应该是目前字符集最大的字体，也是唯一一个包含了Unicode字符集里所有汉字的字体。<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2021-11-20-08-45-38.png" alt="|500" loading="lazy"><br>
+（上图只展示了一个字体文件的字符集，这个字体由7个文件组成）</p>
+<h1 id="参考">参考</h1>
+<p><a href="https://www.zhihu.com/question/321346943">标准日本语书上的字体是“教科书体”吗？ - 知乎</a></p>
+<p><a href="https://www.zhihu.com/question/19998028">有哪些值得推荐的日文字体和日文字体系列？ - 知乎</a></p>
+<p><a href="https://github.com/lxgw/LxgwWenKai">霞鹜文楷Github项目地址</a></p>
+<p><a href="https://github.com/NoHeartPen/QiushuiShotai">秋水書体</a></p>
+<h1 id="相关">相关</h1>
+<p><a href="https://www.zhihu.com/question/19998028/answer/1887045926">有哪些值得推荐的日文字体和日文字体系列？ - NoHeartPen的回答 - 知乎</a></p>
+<p><a href="https://forum.freemdict.com/t/topic/15198">FreeMdict_秋水書体：基于霞鹜文楷的日文开源教科书体&amp;大家怎样处理中日文混排的需求</a></p>
+]]></content>
+    </entry>
+</feed>
