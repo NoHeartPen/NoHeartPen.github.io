@@ -1,0 +1,2749 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://noheartpen.github.io</id>
+    <title>NoHeartPen</title>
+    <updated>2024-05-12T01:48:06.878Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://noheartpen.github.io"/>
+    <link rel="self" href="https://noheartpen.github.io/atom.xml"/>
+    <subtitle>遠慮無ければ近憂有り</subtitle>
+    <logo>https://noheartpen.github.io/images/avatar.png</logo>
+    <icon>https://noheartpen.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2024, NoHeartPen</rights>
+    <entry>
+        <title type="html"><![CDATA[如何用正则表达式匹配所有汉字]]></title>
+        <id>https://noheartpen.github.io/post/ru-he-yong-zheng-ze-biao-da-shi-pi-pei-suo-you-han-zi/</id>
+        <link href="https://noheartpen.github.io/post/ru-he-yong-zheng-ze-biao-da-shi-pi-pei-suo-you-han-zi/">
+        </link>
+        <updated>2024-04-21T15:13:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>一个看似简单的需求，但网上流传甚广的<code>[u4e00-u9fa5]</code>其实有点问题。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>一个看似简单的需求，但网上流传甚广的<code>[u4e00-u9fa5]</code>其实有点问题。</p>
+<!-- more -->
+<p>从维基百科上 Unicode 页面的<a href="https://ja.wikipedia.org/wiki/CJK%E7%B5%B1%E5%90%88%E6%BC%A2%E5%AD%97#%E6%AD%B4%E5%8F%B2">歴史</a>章节给出的码表范围就能发现不对劲：中文互联网流传甚广的<code>[u4e00-u9fa5]</code>应该是只计算了【CJK Unified Ideographs】内的汉字，但这部分的内容其实只占了全部汉字的五分之一。虽然CJK Unified Ideographs 以使用频率来分区，但如果是开发语言文字相关的专业工具的话，最好全面覆盖所有相关字符。</p>
+<table>
+<thead>
+<tr>
+<th>範囲</th>
+<th>名称</th>
+<th>字数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>U+4E00 - U+9FFF</td>
+<td>CJK Unified Ideographs</td>
+<td>20,992</td>
+</tr>
+<tr>
+<td>U+3400 - U+4DBF</td>
+<td>CJK Unified Ideographs Extension A</td>
+<td>6,592</td>
+</tr>
+<tr>
+<td>U+20000 - U+2A6DF</td>
+<td>CJK Unified Ideographs Extension B</td>
+<td>42,720</td>
+</tr>
+<tr>
+<td>U+2A700 - U+2B738</td>
+<td>CJK Unified Ideographs Extension C</td>
+<td>4,154</td>
+</tr>
+<tr>
+<td>U+2B740 - U+2B81D</td>
+<td>CJK Unified Ideographs Extension D</td>
+<td>222</td>
+</tr>
+<tr>
+<td>U+2B820 - U+2CEA1</td>
+<td>CJK Unified Ideographs Extension E</td>
+<td>5,762</td>
+</tr>
+<tr>
+<td>U+2CEB0 - U+2EBE0</td>
+<td>CJK Unified Ideographs Extension F</td>
+<td>7,473</td>
+</tr>
+<tr>
+<td>U+30000 - U+3134A</td>
+<td>CJK Unified Ideographs Extension G</td>
+<td>4,939</td>
+</tr>
+<tr>
+<td>U+31350 - U+323AF</td>
+<td>CJK Unified Ideographs Extension H</td>
+<td>4,192</td>
+</tr>
+<tr>
+<td>U+2EBF0 - U+2EE5F</td>
+<td>CJK Unified Ideographs Extension I</td>
+<td>622</td>
+</tr>
+<tr>
+<td>合計</td>
+<td></td>
+<td>97,668</td>
+</tr>
+</tbody>
+</table>
+<p>如果遇到了 UniCode 相关的问题，最好的方法还是查阅 Unicode 官方提供的文档 <a href="https://www.unicode.org/charts/">Unicode 15.1 Character Code Charts</a>。</p>
+<p>下面给一个Python实现的例子：</p>
+<pre><code class="language-python">&quot;&quot;&quot;匹配汉字相关字符&quot;&quot;&quot;
+import re
+
+# noinspection RegExpDuplicateCharacterInClass
+ideographs_reg = re.compile(
+    r&quot;&quot;&quot;(?P&lt;cjk_unified_ideographs&gt;[\u4E00-\u9FFF])|
+        (?P&lt;extension_a&gt;[\u3400-\u4DBF])|
+        (?P&lt;extension_b&gt;[\u20000-\u2A6DF])|
+        (?P&lt;extension_c&gt;[\u2A700-\u2B738])|
+        (?P&lt;extension_d&gt;[\u2B740-\u2B81D])|
+        (?P&lt;extension_e&gt;[\u2B820-\u2CEA1])|
+        (?P&lt;extension_f&gt;[\u2CEB0-\u2EBE0])|
+        (?P&lt;extension_g&gt;[\u30000-\u23134A])|
+        (?P&lt;extension_h&gt;[\u31350-\u323AF])|
+        (?P&lt;extension_i&gt;[\u2EBF0-\u2EE5F])|
+        (?P&lt;compatibility_ideographs&gt;[\uF900-\uFAFF])| # 兼容区：([\x{F900}-\x{FAD9}])
+        (?P&lt;compatibility_ideographs_supplement&gt;[\u2F800-\u2FA1F])| # 兼容扩展区：([\x{2F800}-\x{2FA1D}])
+        (?P&lt;kangxi_radicals&gt;[\u2F00-\u2FDF]) | # 康熙部首：([\x{2F00}-\x{2FD5}])
+        (?P&lt;radicals_supplement&gt;[\u2E80-\u2EFF]) | # 部首扩展：([\u2E80-\u2EF3])
+        (?P&lt;cjk_strokes&gt;[\u31c0-\u31ef]) | # 汉字笔画：([\u31C0-\u31E3])
+        (?P&lt;ideographic_description_characters&gt;[\u2FF0-\u2FFF]) #汉字结构：([\u2FF0-\u2FFB])
+        (?P&lt;bopomofo&gt;[\u3100-\u312F])| # 汉语注音：([\u3105-\u312F])
+        (?P&lt;bopomofo_extend&gt;[\u31A0-\u31BF])| # 注音扩展：([\u31A0-\u31BA])
+        (?P&lt;private_use_area&gt;[\uE000-\uF8FF])| # 私有区：([\uE000-\uF8FF])
+        (?P&lt;supplementary_private_use_area_a&gt;[\uF0000-\uFFFFF])| # 私用PUA-A：([\uF0000-\uFFFFF])
+        (?P&lt;supplementary_private_use_area_b&gt;[\u100000-\u10FFFD])| # 私用PUA-B：([\u100000-\u10FFFF])
+&quot;&quot;&quot;
+)
+
+
+def match_chinese_ideographs(input_text: str) -&gt; bool:
+    &quot;&quot;&quot;匹配是否含有汉字相关字符
+
+    Args:
+        input_text (str): 需要匹配的字符串
+
+    Returns:
+        只要包含汉字相关的字符就返回 True
+    &quot;&quot;&quot;
+    result = False
+    for char in input_text:
+        if re.search(ideographs_reg, char) is not None:
+            print(re.match(ideographs_reg, char).groupdict())
+            result = True
+    return result
+
+match_chinese_ideographs(&quot;食物&quot;)
+</code></pre>
+<h2 id="补充">补充</h2>
+<p>感谢 <a href="https://forum.freemdict.com/u/amob">amob</a> 提供的建议：</p>
+<p>我刚刚看到你博客写的关于正则匹配汉字的文章，我个人对此有些经验（无聊处理过一些生僻字特多的词典）。目前\p{han}还只是基于Unicode 13.0的，许多新汉字都无法匹配，\p{Unified_Ideograph}/u没用过，估计匹配不了一些特殊情况。</p>
+<p>经站内高人jcz777指点，目前最理想的匹配码位如下：</p>
+<pre><code class="language-js">基本区：([\x{3007}\x{4e00}-\x{9fff}])
+A区：([\x{3400}-\x{4DBF}])
+B区：([\x{20000}-\x{2A6DF}])
+C区：([\x{2A700}-\x{2B73F}])
+D区：([\x{2B740}-\x{2B81F}])
+E区：([\x{2B820}-\x{2CEA1}])
+F区：([\x{2CEB0}-\x{2EBE0}])
+G区：([\x{30000}-\x{3134A}])
+H区：([\x{31350}-\x{323AF}])
+I区：([\x{2EBF0}-\x{2EE5F}])
+兼容区：([\x{F900}-\x{FAD9}])
+兼容扩展区：([\x{2F800}-\x{2FA1D}])
+康熙部首：([\x{2F00}-\x{2FD5}])
+汉字笔画：([\x{31C0}-\x{31E3}])
+汉字结构：([\x{2FF0}-\x{2FFB}])
+汉语注音：([\x{3105}-\x{312F}])
+注音扩展：([\x{31A0}-\x{31BA}])
+部首扩展：([\x{2E80}-\x{2EF3}])
+私有区：([\x{E000}-\x{F8FF}])
+私用PUA-A：([\x{F0000}-\x{FFFFF}])
+私用PUA-B：([\x{100000}-\x{10FFFF}])
+</code></pre>
+<p>再算上这几个，<br>
+𝍲、𝍳、𝍳、𝍴、𝍵<br>
+〡、〢、〣、〤、〥、〦、〧、〨、〩、〸</p>
+<h2 id="参考">参考</h2>
+<p><a href="https://zhuanlan.zhihu.com/p/33335629">JavaScript 正则表达式匹配汉字</a>：[[Python]]没有这篇文章的提到的<code>/\p{Unified_Ideograph}/u</code>、和<code>/\p{Script=Han}/u</code>类似的方法，感觉可以写一个第三方库的价值（摊手</p>
+<p><a href="https://zhuanlan.zhihu.com/p/599626710">Python： 组合方式构建复杂正则</a>：介绍了一种在实际开发场景下，如何构建易于修改和调试的正则用法。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[日本生活指南]]></title>
+        <id>https://noheartpen.github.io/post/ri-ben-sheng-huo-zhi-nan/</id>
+        <link href="https://noheartpen.github.io/post/ri-ben-sheng-huo-zhi-nan/">
+        </link>
+        <updated>2024-04-14T04:46:07.000Z</updated>
+        <summary type="html"><![CDATA[<p>记录日本生活的一些细节。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>记录日本生活的一些细节。</p>
+<!-- more -->
+<h2 id="打印">打印</h2>
+<p>便利店都可以自助打印，不过如果要传文件的话，除了用U盘，也可以用软件上传。罗森和 Family Mart 都支持一个叫 PrintSmash（似乎部分门店不支持，可以问问店员）。至于 711，要下载 7-Eleven Muticopy。软件下载方式参考<a href="%E8%B5%B4%E6%97%A5%E5%B7%A5%E4%BD%9C%E5%87%86%E5%A4%87%E6%8C%87%E5%8C%97.md#%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85">赴日工作准备指北的软件安装章节</a>。</p>
+<p>下载后点击上传文件，选择「QRコード」上传，然后一路下一步就好了（大小和彩色什么的还是要检查下，日本的公文文件一般也是 A4 大小）。</p>
+<p>另外，打印前记得准备硬币（或者现金）。</p>
+<h2 id="paypay">PayPay</h2>
+<p>如果怀念国内的微信支付，可以考虑下 PayPay，支持的店面更多。</p>
+<p>无需提交认证材料，也不用绑定银行卡，用日本手机号码注册后，即使不提交认证材料，通过罗森或者711的ATM也可以无手续费充值，具体教程见APP内的说明。</p>
+<p>另外，中国国内办理的信用卡应该都绑不了 PayPay。</p>
+<h2 id="跨境汇款">跨境汇款</h2>
+<h3 id="从国内汇款">从国内汇款</h3>
+<p>ゆうちょ銀行的银行卡在办理后的最初6个月内，不能接受来自国内的转账，来日本前一定要带国内的银行卡做备用。</p>
+<h3 id="向国内汇款">向国内汇款</h3>
+<p>首先，强调一点：国内的所有银行卡都可以存日元等外汇，只是无法直接消费使用：要么按实时汇率换成人民币，要么转到可以使用外汇的外币信用卡（卡组织为非银联）。</p>
+<p>其次，各大银行 APP 内有一般都有跨境汇款功能，但大多需要填写英文材料。本人看了一些相关资料，还是没搞懂，遂作罢。</p>
+<p>个人推荐：「熊猫速汇」。实际体验了下，注册提交认证材料后即可汇款；从日本往国内汇钱的速度、手续费以及操作难度都比「中国银行」低太多了，全程都可以中文操作，还可以开用于抚养控除的送金证明。</p>
+<p>附带一个注册邀请链接：<br>
+<a href="https://p.pandaremit.com/h5activity/launchInvitationCode?countryCode=JPN&amp;shareCode=V0RVTFNL&amp;lang=zh-hans">https://p.pandaremit.com/h5activity/launchInvitationCode?countryCode=JPN&amp;shareCode=V0RVTFNL&amp;lang=zh-hans</a></p>
+<h2 id="ゆうちょ銀行">ゆうちょ銀行</h2>
+<p>线下办银行卡的话，如果没有提前预约，工作人员可能推荐直接用APP申请： <a href="https://www.jp-bank.japanpost.jp/app/app_kouzakaisetu.html">https://www.jp-bank.japanpost.jp/app/app_kouzakaisetu.html</a> （建议干脆直接线上办理，省得白跑一趟</p>
+<p>银行卡到手之后，填公司入职材料的相关信息可能会用到下面这个链接： <a href="https://www.jp-bank.japanpost.jp/kojin/sokin/furikomi/kouza/kj_sk_fm_kz_1.html">https://www.jp-bank.japanpost.jp/kojin/sokin/furikomi/kouza/kj_sk_fm_kz_1.html</a></p>
+<p>也可以把下面的软件下好，可以随时查看余额和网上转账<br>
+<a href="https://www.jp-bank.japanpost.jp/app/app_tsucho.html">https://www.jp-bank.japanpost.jp/app/app_tsucho.html</a></p>
+<p>如果申请ゆうちょ银行卡的时候，没有绑电话号码，或者绑的是别人的，想改的话，直接去 ゆうちょ銀行的ATM上就行了，不用找工作人员（注：人家周六周日节假日不上班）。</p>
+<p>另外，申请信用卡的时候，往往会要求提供一个银行卡，这个时候会向绑定的手机号发验证码做校验，所以没绑自己的手机号前，就别去申请信用卡了。</p>
+<h2 id="衣">衣</h2>
+<p>衣服价格和国内差不多，甚至在其他物价的衬托下，很容易让人产生一种「好便宜」的错觉。</p>
+<p>在优衣库（ユニクロ）买的话，建议试穿下：我在国内买衣服的时候一般买 M 码，买优衣库的 S 居然正好233。</p>
+<h2 id="食">食</h2>
+<ul>
+<li>买了便当记得加热，别结完账就出店门了（别问我为啥知道</li>
+<li>在饭店想吃饱，除了考虑放題，还可以考虑松屋的牛めし（特盛）</li>
+<li>想吃拉面前记一记下面几句话（不然到时候要和店员比划半天2333
+<ul>
+<li>面的软硬度：かため(偏硬)／ふつう(一般)／やわらかめ(偏软)</li>
+<li>汤头浓度：濃いめ(偏浓)／ふつう(一般)／薄め(偏淡)
+<ul>
+<li>スープ割りてもらえませんか：能帮我汤调淡一些吗</li>
+<li>加面：替え玉お願いします（かえだま　おねがいします）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>生鲜蔬菜
+<ul>
+<li>除了ほうれん草（菠菜）、もやし（豆芽），其他菜真的比国内贵</li>
+<li>除了香蕉，水果也基本比国内贵</li>
+<li>肉的价格还好</li>
+<li><s>真有半价便当么，我天天加班加到10点回家路过商店还专门进去看了好几次都没找到</s></li>
+</ul>
+</li>
+</ul>
+<h2 id="住">住</h2>
+<p>关于住本身（住哪里和住什么样的房子），我在<a href="%E6%97%A5%E6%9C%AC%E7%A7%9F%E6%88%BF%E6%8C%87%E5%8C%97.md">日本租房指北</a>谈过了，这里谈谈其他东西吧。</p>
+<p>关于热水：浴室和厨房的热水都有相应的开关。我住的地方的一个开关叫：運転，一个叫：切\入。</p>
+<p>水电煤缴费：收到缴费通知（納入通知書）后，拿着单子去便利店直接交给收银人员然后付钱即可。嫌麻烦的话，可以研究怎么绑信用卡自动扣款。不推荐用「口座振替」，也就是用ゆうちょ銀行办的那种卡来扣费，基本都会有额外的手续费。</p>
+<p>关于丢垃圾：以「地名+ゴミ分別」Google上搜，一般能找到非常详细的指导手册，还会提供详细的数据以供查询。（最好别指望国内平台的搬运内容。大多数文章只是泛泛而谈，真要处理某些垃圾，就会发现人家根本没写……不如直接看日本政府提供的一手材料，就当背几个单词好了）<br>
+比如：我住在「鶴見区」，以「鶴見　ゴミ分別」搜索，多翻几个链接就会发现「横浜市」市役所提供了垃圾分类指导网站，甚至还有一个APP https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/gomi/dashikata.html</p>
+<p>然后分享下我在日本买的东西吧，大家当购物清单看好了：（下面的东西基本是在 ドン・キホーテ即堂吉诃德买的，但由于事先没列清单，导致才到日本的那几天，跑了好几趟。另外事后发现，有些小东西去百元店（百円ショップ）买可能会便宜些（比如：大創</p>
+<ul>
+<li>ガスコンロ
+<ul>
+<li>天然气灶</li>
+</ul>
+</li>
+<li>ガスソフトコード（ゴム管）
+<ul>
+<li>连接天然气灶和天然气管道的管子，不会装找中介（他要不愿上门的话，就问他火灾保险生效没有2333</li>
+</ul>
+</li>
+<li>塵取り
+<ul>
+<li>扫把</li>
+</ul>
+</li>
+<li>洗面器
+<ul>
+<li>脸盆</li>
+</ul>
+</li>
+<li>電気ケトル
+<ul>
+<li>热水壶</li>
+</ul>
+</li>
+<li>タイド tide
+<ul>
+<li>汰渍 洗衣液233</li>
+</ul>
+</li>
+<li>ＡＲ ジェル替え超ジャンボ
+<ul>
+<li>也是洗衣液，但注意洗衣液可能会和「洗衣球」、「柔軟剤」摆在一起，看清楚再买</li>
+</ul>
+</li>
+<li>ハトムギ
+<ul>
+<li>洗面奶</li>
+</ul>
+</li>
+<li>ハミガキ・歯磨き
+<ul>
+<li>牙膏</li>
+</ul>
+</li>
+<li>ボディシャンプー
+<ul>
+<li>沐浴露，シャンプー好像就是洗发水，但「护发素」是啥我不清楚</li>
+</ul>
+</li>
+<li>石けん・石鹼
+<ul>
+<li>肥皂</li>
+</ul>
+</li>
+<li>ソープケース
+<ul>
+<li>肥皂盒</li>
+</ul>
+</li>
+<li>バケツ
+<ul>
+<li>水桶</li>
+</ul>
+</li>
+<li>衣類ハンガー
+<ul>
+<li>衣架</li>
+</ul>
+</li>
+<li>パイプハンガー
+<ul>
+<li>立式晾衣架（应该要自己组装），2人合租的话建议买晾衣绳
+<ul>
+<li>晾衣绳链接： https://item.rakuten.co.jp/happysmiles/r1701-0025/
+<ul>
+<li>这个链接的晾衣绳有特殊的设计，挂上衣服后，衣服不会滑到一起</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>物干し竿
+<ul>
+<li>晾衣杆</li>
+<li>另外，记得看天气预报，如果刮大风的话，记得提前收衣服</li>
+</ul>
+</li>
+<li>除菌ジョイスプレー
+<ul>
+<li>洗洁精（注意别买成洗灶台的了233</li>
+</ul>
+</li>
+<li>抗菌ウレタンスポンジ
+<ul>
+<li>洗碗布</li>
+</ul>
+</li>
+<li>多用丼粉引
+<ul>
+<li>陶瓷大碗</li>
+</ul>
+</li>
+<li>ボーンチイナ深型 プレー
+<ul>
+<li>陶瓷盘</li>
+</ul>
+</li>
+<li>ステンレスたわ
+<ul>
+<li>钢丝球</li>
+</ul>
+</li>
+<li>ワンピースお玉
+<ul>
+<li>汤勺</li>
+</ul>
+</li>
+<li>ワンピースターナー
+<ul>
+<li>锅铲</li>
+</ul>
+</li>
+<li>おろし皮むき
+<ul>
+<li>削土豆皮的工具</li>
+</ul>
+</li>
+<li>イタメナベ
+<ul>
+<li>炒锅</li>
+</ul>
+</li>
+<li>まな板
+<ul>
+<li>菜板</li>
+</ul>
+</li>
+<li>炊飯器 5.5L
+<ul>
+<li>电饭煲</li>
+</ul>
+</li>
+<li>カセット式五徳野菜調理器
+<ul>
+<li>刨土豆丝的工具</li>
+</ul>
+</li>
+<li>キャノラー油
+<ul>
+<li>菜油，日本似乎没有猪油卖233</li>
+</ul>
+</li>
+<li>包丁
+<ul>
+<li>菜刀</li>
+</ul>
+</li>
+<li>南京錠
+<ul>
+<li>锁，用来锁信箱
+<ul>
+<li>国内有锁可以带过来用，样式是一样的，我也是用的国内买的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>蚊取り線香（かとり せんこう）
+<ul>
+<li>蚊香，记得再买一个放蚊香的盘（没错，都11月了，日本居然还有蚊子</li>
+</ul>
+</li>
+<li>蚊取り器
+<ul>
+<li>不是国内的蚊香液，而是用趋光原理诱捕蚊子的灯。</li>
+</ul>
+</li>
+</ul>
+<p>由于让中介提前买好了家电，所以上面不含洗衣机、电冰箱、微波炉这样的大件家电。</p>
+<p>如果不熟悉线下的二手店，可以考虑乐天：<a href="https://item.rakuten.co.jp/trefac-f/999005/?variantId=r-sku00000014">中古家電3点セット</a>，不讲究的话，4万日元就可以买到洗衣机、电冰箱、微波炉的三件套，如果多花1万，就可以买到比较新的二手家电（2020年后制造）。但注意：注册乐天账号要日本手机号，送货最快只能选下单7天之后的日期，想通过这种方式提前准备家电的话，要提前联系在日本生活的人帮忙。</p>
+<p>ニトリ：家具挺好的，也卖家电（无印良品的价格会贵一点，或许这就是日式美学吧）</p>
+<p><a href="https://www.nitori-net.jp/ec/cat/Shingu/FutonSet/1/">【ニトリ】布団セット通販</a>：被子、被套和枕头的套装，不从国内带被子的话，可以买这样的套装。</p>
+<p><a href="https://www.amazon.co.jp/NITORI-%E3%82%BF%E3%83%96%E3%83%AC%E3%83%83%E3%83%88%E8%A6%96%E8%81%B4%E3%81%AB-%E3%81%AE%E6%98%87%E9%99%8D%E5%BC%8F%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB-%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%88%E3%82%A6%E3%82%A9%E3%83%83%E3%82%B7%E3%83%A5-8761123/dp/B0BXXHP16P?th=1">【ニトリ】 NITORI タブレット視聴に の昇降式テーブル 幅60cm YB01 8040 ホワイトウォッシュ 8761123</a>：床上书桌，习惯躺床上的可以入一个；另外，这个可以调节高度，有站着写代码习惯的话，也可以买这个（买之前注意桌子高度和大小，这个桌子有点大）。（链接是Amazon的，但我是在ニトリ的线下店买的，后面发现在ニトリ的APP搜不到这个东西，拿着上面链接的图片问工作人员吧）</p>
+<p>電気ストーブ：烤火炉233</p>
+<p>另外，ニトリ手机上下单满1万的话，免运费，线下店好像也有类似的活动，可以问下工作人员：「アプリではなく、店内で一万円注文したら、送料無料ですか」。</p>
+<p>另外，关于网购，除了 Amazon、楽天市場之外，还有个Temu，这个软件上买些小商品还行，大件家电就算了。（吐槽一句，我很觉得这 Temu 就是日本拼多多，广告风格就不说了，弹窗也是学到了拼多多的精髓，我这样的老油条居然找关闭按钮找了半天……）</p>
+<h2 id="行">行</h2>
+<p>总结：地铁也是真的是贵，经常出去玩的话，可以考虑自行车（我还没买，就不纸上谈兵了233</p>
+<p>实际体验：用 iPhone 的话，通过「钱包」办一张西瓜卡，出门就和在国内没什么区别了。用国内的 Android 手机还是买票进站吧。</p>
+<p>现在买不到单纯的西瓜卡了，只能通过办定期劵的方式获得（定期劵失效后，叶可以当普通的西瓜卡继续用）。注意：购买时需要提供日本电话号码。</p>
+<p>另外，iPhone 办的西瓜卡除了在部分站点可以充值外（充值的机器如果只能插卡的话，就充不了了），711便利店的ATM也可以充，<a href="https://www.sevenbank.co.jp/personal/atm/electronicmoney/electronicmoney_howto.html">操作手顺</a>，没有手续费，参考：<a href="https://www.sevenbank.co.jp/personal/atm/others/PLOGO9430.html">手续费的说明</a></p>
+<p>注意：一些车厢上会标注「女性専用車両」，但有指定的时间段，拿不准的话，上车厢前最好看一眼车厢（我没有进错过！只是排队的时候没注意233</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[赴日工作行李准备指北]]></title>
+        <id>https://noheartpen.github.io/post/fu-ri-gong-zuo-xing-li-zhun-bei-zhi-bei/</id>
+        <link href="https://noheartpen.github.io/post/fu-ri-gong-zuo-xing-li-zhun-bei-zhi-bei/">
+        </link>
+        <updated>2024-04-14T03:38:05.000Z</updated>
+        <summary type="html"><![CDATA[<p>观前提醒：剁手有风险，购买需谨慎。</p>
+<p>网上有很多这类教程，但基本都是以「留学」和「旅游」的视角出发，本文则是以「赴日工作」的角度出发，讨论一些赴日工作前需要做的准备工作。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>观前提醒：剁手有风险，购买需谨慎。</p>
+<p>网上有很多这类教程，但基本都是以「留学」和「旅游」的视角出发，本文则是以「赴日工作」的角度出发，讨论一些赴日工作前需要做的准备工作。</p>
+<!-- more -->
+<h2 id="电话卡">电话卡</h2>
+<h3 id="补充cmlink-使用体验在日购买体验分享">补充：CMLink 使用体验&amp;在日购买体验分享</h3>
+<p>结论： 还行。</p>
+<ol>
+<li>大多数时候（指除了12点-13点，以及晚上9点-10点）都是基本能用，网页都能正常访问，看 360p 的YouTube 基本不卡。按我的观察，单就价格和流量而言，CMlink 已经和我在日本碰到的格安卡不相上下了。</li>
+<li>在一些超市或者饭店的室内可能会没信号，但碰到的次数不多，而且这种地方商家往往会准备 WiFi</li>
+</ol>
+<p>如果到了日本才想办这个卡，需要提交「住民票」和手持「在留卡」的照片。也就是说，到日本后去区役所完成登记后就可以着手办理这张卡。一般来说第二天中午就会有邮件通知审核通过，然后再过一天左右就寄到家了。</p>
+<p>由于是比较重要的材料，应该不会直接放在邮箱里，而是会当面交给你。如果发现自己住处的邮箱里收到了一张「不在联络票」，那扫描票上的二维码提交下次送货的时间就好。（注：填写时会要求留一个「ご連絡先」，这指的是在投递遇到特殊情况时打的电话，建议不要留自己在国内的号码，最好留自己认识的前辈）</p>
+<p>另外：选的时间一定要确认自己能在家，不然…我也不知道会发生什么，有兴趣可以尝试一下（误</p>
+<p>省流版的建议：上<a href="https://www.cmlink.com/jp/zh/get-sim/">CMLink</a>，买一张「纯数据卡」，用于初到日本上网。</p>
+<h3 id="详细解释">详细解释</h3>
+<p>此前我在好几个地方都看到了下面类似的说法：</p>
+<blockquote>
+<p>初到日本想办电话卡，工作人员：请提供银行卡<br>
+找办银行卡的工作人员：请提供电话卡</p>
+</blockquote>
+<p>我个人推荐办中国移动的「CMLink」主要有以下几个理由：</p>
+<ol>
+<li>淘宝、支付宝也可以买到在日本可用的卡，但质量良莠不齐，而CMLink的口碑虽然也不是很好，但吐槽主要就集中在信号和限速上（好像也没差到哪里去233，而且很有可能是手机型号导致了信号比较差）
+<ol>
+<li>CMLink的「纯数据卡」的额度是30天15G，价格 2200 日元（含税），淘宝上这个规格的价格也基本没差多少
+<ol>
+<li>这种卡就是淘宝上随处可见的流量卡/上网卡。注意这种卡无法用于注册账号，因为这种卡没有电话号码</li>
+<li>电信的日本国际漫游，价格是 23.75元/天 ，号称不限量，但官网有<a href="https://manyou.189.cn/newguoman/4gywjs/18535.html">说明</a>“2. 即日起至2023年3月31日，中国澳门全天高速流量；中国香港、中国台湾高速流量升至2GB/日；其余单日漫游包目的地高速流量升至1GB/日，<strong>达量限速。</strong>”</li>
+</ol>
+</li>
+<li>「语音数据卡」这种就是正儿八经的电话卡，有相应的电话号码，可以用于注册账号。18G/月的套餐月租 2250 日元，但办理的时候要收入网费用 2400 日元，所以办的时候一共要花 4890 元
+<ol>
+<li>首充过4000日元，额外送20%</li>
+<li>携号转网有优惠</li>
+<li>默认会勾选一个「10分钟语音放题」，觉得不需要的话可以不勾（勾了这个东西每个月租要多800日元）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>国内即可办理，微信/支付宝下单后通过邮寄签收。注意如果收货地址不是身份证的地址，需要提供居住证。</li>
+<li>无论办哪种卡，记得提前查看<a href="https://www.cmlink.com/jp/zh/apn/">使用方法</a>，把APN配置好。这样一下飞机后激活即可使用。</li>
+<li>如果是办的「纯数据卡」，那么激活后30天不续费，卡就失效了，「语音数据卡」也以随时注销（虽然可能会被强制要求缴纳一个月的话费，但似乎是在月初提交注销导致的）</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>相比只能在日本本土办的「格安卡」确实不算多实惠</li>
+<li>网上有非常多的人吐槽「信号差」和限速的问题
+<ol>
+<li>限速：超出套餐后限速 128 kb</li>
+</ol>
+</li>
+<li>和国内的套餐相比确实是天价，但也还好啦，日本的话费确实比较贵，所以确定住处后可以考虑办宽带<a href="https://zhuanlan.zhihu.com/p/530200492">在日本办宽带 wifi网的方法和费用完整总结 | 日本生活攻略</a></li>
+</ol>
+<h2 id="手机">手机</h2>
+<p>省流：各位最好提前检查下自己的手机是否支持日本的信号。</p>
+<h3 id="补充关于换手机">补充：关于换手机</h3>
+<p>结论：如果不是华为手机，真没必要换。而且华为也没有换的必要。华为最大的问题就是装GMS非常麻烦，但用 <a href="https://m.apkpure.com/jp/">APKPure</a>也没有太大的问题。</p>
+<p>另外，本人提前准备了一个日版的iPhone，最大的感受就2点：</p>
+<ol>
+<li>有西瓜卡坐地铁是真的方便</li>
+<li>拍照声音关不掉也是真的烦</li>
+</ol>
+<p>如果不介意二手的话，可以去秋叶原淘淘，不用进大楼，走在街上就能看到好几家店里都摆着苹果，但价格我没有太注意（<s>注意都在二次元小姐姐上了233</s></p>
+<p>如果想换新手机，还想顺便办电话卡，那推荐考虑下 <a href="https://network.mobile.rakuten.co.jp/">楽天モバイル</a>：单纯办卡月租 2000（<strong>不含手机，注意是不含手机的价格</strong>），和CMLink没差多少。（另外，提醒一句：手机真不是送的，而是分摊在每个月的话费里面了，如果没有楽天カード的话，不管是不是分期其实都比苹果官网要贵）</p>
+<p>小提示：去之前记得提前预约，不然去了店里办不了是小事，店里没有自己喜欢的颜色的iPhone就是大事了。（提醒：预约要有乐天账号，申请乐天账号要用日本电话号码（<s>大笑</s></p>
+<p>如果想一步到位，可以直接去苹果专卖店（笑），或者直接在<a href="https://www.apple.com/jp/iphone/">官网</a>下单，然后去店里取就好了。</p>
+<p>小提示：单看中日苹果官网价格，在日本买确实会便宜些，但中国的第三方平台实在太能卷，即使汇率一路跌到4.9，在中国的第三方平台买都比在日本买便宜233（尤其是某多多百亿补贴，估计只有汇率跌到 3.9，日本官网才敢说自己是全网最低价（大误</p>
+<h3 id="详细解释-2">详细解释</h3>
+<p>如果想在国外正常使用手机，需要符合以下2个条件：</p>
+<ol>
+<li>去相应的运营商营业厅开通国际长途和国际漫游业务；
+<ol>
+<li>或者办理当地运营商的网络服务</li>
+</ol>
+</li>
+<li>你的手机频段必须支持国外的运营商网络</li>
+</ol>
+<p>第一点网上不难找到相关指导，但谈到第二点的不多。</p>
+<p>iPhone 手机频段 一般不会有太大的问题（除非是合约机），但安卓手机就不太好说了，CMLink关于这方面的描述也非常模糊，没有提供确切的支持型号。</p>
+<figure data-type="image" tabindex="1"><img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2023-09-06_19-23-57.png" alt="|500" loading="lazy"></figure>
+<p>建议大家到这个网站 https://www.kimovil.com/en/compare-smartphones 确认下（注意输入手机的英文型号，不知道的话，把手机设成英文，然后去系统信息查看）</p>
+<p>大多数人的手机应该就是下面这样（日本12个信号频段只支持4个，达到了基本能用的水平）<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2023-09-09_13-37-27.png" alt="|500" loading="lazy"><br>
+（型号：Xiaomi Redmi Note 9 5G）</p>
+<p>iPhone手机应该是全绿的（即使是国行，只要不是合约机）<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2023-09-09_13-29-20.png" alt="|500" loading="lazy"><br>
+型号：iPhone SE （第二代）</p>
+<p>补充：我在日本往上面的2款手机都插卡用过几天，感觉 iPhone 和小米没有明显区别。</p>
+<p>安卓手机基本只支持一小半的信号，所以网上吐槽「XX运营商信号差」的人里面，有一半可能其实手机的频段就不支持。</p>
+<h3 id="备用机">备用机</h3>
+<p>如果你的手机是下面这样，那建议准备一个备用机。<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2023-09-09_13-35-18.png" alt="|500" loading="lazy"><br>
+（来自本人高中手机，我都不打算带去日本了233）</p>
+<p>安卓党如果确实不放心，可以买一个二手的iPhone作为备用机。</p>
+<p>型号的话，本人推荐 iPhone SE （第二代）</p>
+<p>理由： 2020 年上市，采用 A13 芯片，2023 年也能满足日常需要。但作为SE的传统艺能，大多数人可能无法接受其屏幕大小，尤其是换了这个手机还想玩游戏的同学，一定要三思。</p>
+<p>这款手机在海鲜市场不难淘到，1000左右就可以淘到4+128G的配置+99新的成色。</p>
+<p>不过，此前没在海鲜市场交过学费的话，还是上「转转」购买有官方鉴定的设备。（当然，价格也会稍微贵一点的啦），不管选择哪种方式，一定要检查自己的iPhone是否是「合约机」，是否是「全网通」。（如果不介意拍照的咔嚓声，可以直接买日版）</p>
+<p>如果不想投敌，想坚守Android阵营的话，也可以去淘日版手机，由于我已经很久不捡洋垃圾了，在此就不浪费笔墨了。</p>
+<p>最后再重申一遍：对于购买手机这样的大额支出，大家一定要三思而后行，如果自己手机支持日本的信号，真没必要买备用机。</p>
+<p>另外，再给一个温馨提示：「肉身」翻「墙」真的会接触到一个全新的世界，但一定要时刻谨记：「墙外」不是法外之地，我们的背后有一个「强大」的国家。</p>
+<h2 id="软件安装">软件安装</h2>
+<p>省流：提前检查下自己的手机能否安装 GMS （Google服务框架）。iOS的同学可以准备一个日区的Apple ID。</p>
+<h3 id="ios">iOS</h3>
+<p>先说iOS，如果之前使用的是「正规」途径注册了Apple ID，在APPStore应该是装不了：LINE、Amazon ショッピングアプリ、ウマ娘 プリティーダービー（好像混入一个奇怪的东西233</p>
+<p>你需要去真正的 Apple 官网，重新注册一个 Apple ID： https://appleid.apple.com/account （COUNTRY / REGION 选日本，手机号可以就用国内的）然后将 APPStore的账号切换为这个新账号。（切换为这个新账号的过程可能需要梯子，这个请自己想办法解决，或者等到了日本再切换也行）</p>
+<p>iOS只需要重新注册一个 Apple ID 到了日本就没啥问题了，安卓就要复杂一些。</p>
+<h3 id="安卓">安卓</h3>
+<p>国外的绝大多数 APP 都只能通过 Google Play Store 安装，Google Play Store 需要一个 Google账号，没有的话，打开 <a href="https://www.google.com/?hl=zh-CN">Google官网</a> 注册一个就好了。但Google Play Store 还要求手机支持 GMS （Google服务框架）。</p>
+<p>国内的安卓手机，大部分需要自己手动安装GMS（梯子+GMS安装工具）；少部分机型被厂商锁死，无法安装 GMS（一般是比较老的机器）；华为近几年的新机型，基本都无法安装GMS——由于被 Google 官方亲自下场针对，网上似乎没有通用的方法。（但无论怎样，大家都要试着装下GMS，不然在国外下个APP，真的会很麻烦）</p>
+<p>如果实在无法安装GMS，可以去第三方的网站，比如 <a href="https://m.apkpure.com/jp/">APKPure</a>，下载安装包，手动安装（很多手机对于非应用商店发起的安装行为都会弹出风险提示，但在无法安装GMS的情况下，只能用这种相对不那么安全的方式）</p>
+<p>下面给大家介绍几个我个人提前装在手机里的应用（主要是不想过去了再消耗流量下载）</p>
+<p>Google Maps（谷歌地图）（115M）<br>
+推荐理由：我也是第一次去东京233</p>
+<p><a href="https://jp.apkpac.com/app/jp.co.yahoo.android.apps.transit?details=dl&amp;gclid=CjwKCAjwjOunBhB4EiwA94JWsNBdfTxu684VVdS-kZf1blcPa1Of7lZVtOyTfP7oKXjLhZoy5GW8NBoCLAcQAvD_BwE#google_vignette">Yahoo!乗換案内乗</a>·（73M）<br>
+推荐理由：专为交通工具设计的APP，推荐的乘车线路更合理（同类软件：乗換NAVITIME · 乗換案内）</p>
+<p><a href="https://apkpure.com/jp/line-calls-messages/jp.naver.line.android">LINE</a>：（280M）<br>
+安装理由：相当于日本的微信（我用国内的手机号也注册成功了，但用不了支付相关的功能（信用卡和LINE Pay），所以建议办理日本电话号码后再注册账号）。</p>
+<p>防災速報（14M）<br>
+推荐理由：相当于天气预报，另外还有「地震预警」（惊！</p>
+<p>TVer(ティーバー) （27M）<br>
+推荐理由：实时转播日本电视台节目。完全免费所以只能看最近一段时间节目。可以不下APP，网页版也挺好用的 https://tver.jp/ 。（本人主要是因为这里可以比国内早2个小时看到《柯南》）</p>
+<p><a href="https://www.kurashiru.com/">クックパッド</a> · <a href="https://cookpad.com/">料理はクラシル</a>：<br>
+推荐理由：下馆子确实是比较贵，但在超市买了食材和调料后到家可能会发现不知道怎么处理（<s>……去掉头，都能吃吧233</s>），可以提前看看日本人怎么做饭。</p>
+<p>PrintMash 或者 7-Eleven Muticopy<br>
+便利店打印东西用来传文件</p>
+<p>Paypay<br>
+相当于日本的支付宝，需要有日本手机号才能使用。没有 MyNumber Card 的话，拿着现金去便利店充值就好了。</p>
+<p>另外，我分享下安装包，没有梯子的话，就用下面的链接吧：<br>
+https://www.123pan.com/s/iGz0Vv-kGHVh.html</p>
+<h2 id="银行卡">银行卡</h2>
+<h3 id="补充信用卡实际使用体验">补充：信用卡实际使用体验</h3>
+<p>先说结论：不是必须，但有的话在日本会方便很多。</p>
+<p>如果有3张的话，在日本基本就能体验到国内一样「出门不用带钱包」的体验。</p>
+<p>至于为什么说是有3张，下面给出详细解释。</p>
+<p>按照卡上标注的卡组织机构和发卡地点，信用卡可以分为3类：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">卡组织机构</th>
+<th style="text-align:center"><div><span style="background-color: var(--background-primary); color: var(--text-normal); font-family: var(--font-interface); font-size: var(--font-ui-medium);">发卡地点</span><br></div></th>
+<th style="text-align:center">卡号前2位</th>
+<th style="text-align:center">线下门店</th>
+<th style="text-align:center">亚马逊</th>
+<th style="text-align:center"> 乐天市场 </th>
+<th style="text-align:center">ApplePay </th>
+<th style="text-align:center">西瓜卡</th>
+<th style="text-align:center"> Paypay </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><div>银联 </div><div><br></div></td>
+<td style="text-align:center">中国 </td>
+<td style="text-align:center">62</td>
+<td style="text-align:center">部分</td>
+<td style="text-align:center">可</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center"><div>可</div></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+</tr>
+<tr>
+<td style="text-align:center"><div>Matercard/VISA/JCB </div></td>
+<td style="text-align:center">中国 </td>
+<td style="text-align:center">46</td>
+<td style="text-align:center">所有</td>
+<td style="text-align:center">可</td>
+<td style="text-align:center">可</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+</tr>
+<tr>
+<td style="text-align:center">Matercard/VISA/JCB </td>
+<td style="text-align:center">日本</td>
+<td style="text-align:center">未知</td>
+<td style="text-align:center">所有</td>
+<td style="text-align:center">可</td>
+<td style="text-align:center">可</td>
+<td style="text-align:center">可</td>
+<td style="text-align:center">可</td>
+<td style="text-align:center">可</td>
+</tr>
+</tbody>
+</table>
+<p>其中，最后一种可使用范围最广，但办理难度也是最大：不仅要求日本电话卡和日本的银行卡，还有各种莫名奇妙的隐形审核条件（比如……要在日本生活满半年），估计大家手上都没有最后一种卡（我也没有233），所以下面重点讨论前2种。</p>
+<p>先说第一种：银联信用卡。这种卡的卡号前2位必然是62，如果之前为了在日本消费，办了一张卡号前2位是62的信用卡，那线下买东西的时候，注意观察店家有没有贴银联的标识，没有贴的话，基本是用不了的。另外，在 Apple Pay 的「钱包」应用绑定这种卡后，即使人在国内，不用翻墙也可以直接办一张西瓜卡，在日本坐地铁就不用买票，直接刷卡进站就好，而且线下很多门店都支持西瓜卡。（上面表格的西瓜卡指的是APP，Apple Pay 里面办不了定期券，只有西瓜卡App里面可以办，但西瓜卡APP不支持中国的所有卡，本人绑手上2张卡时都出现了白屏现象）</p>
+<p>再说第二种：中国办的Matercard/VISA/JCB信用卡，这3种机构的卡在线下门店往往都是受支持的，没什么明显区别。用之前记得仔细读说明书打开相关设置就好。（中国银行需要到APP打开这2个设置：境外支付、免密支付）</p>
+<h3 id="事前准备">事前准备</h3>
+<p>初到日本，可能只能去「ゆうちょ銀行」办卡，但问题在于办的卡基本只能用于取现金，不能用于日本网购和刷卡消费，也无法绑在Apple Pay和 Pay pay上，也无法用来交水电气费（可以交，但要收手续费）。</p>
+<blockquote>
+<p>在中国，银行账户在开户的时候得到的银行卡是以借记卡的形式发行的，即可以用来进行刷卡购物等操作。而在日本，口座虽然与银行账户意义相同，但这张与口座关联的银行卡「キャッシュカード（Cash card）」是不能用来进行刷卡购物等支付行为的，只能在ATM机进行存取款等操作，也就是说日本的口座将中国国内普遍意义上银行卡的功能分离成了两个部分：存取款与刷卡。因此如果想如在中国一样用银行卡购物的话，还需要办理一张与口座绑定的借记卡「デビットカード（Debit Card）」，这张借记卡ATM机是无法识别的，只能进行消费，不能在ATM等终端存取款。</p>
+</blockquote>
+<p>这也是为什么网上会说「信用卡在日本很重要的原因」。不过尴尬的是，初到日本不太好办理日本银行发行的信用卡，本人对此深有体会：到日本后一个月内申请了5家不同银行的信用卡无一例外都被拒了。</p>
+<p>不过也不用紧张，因为我们还有如下对策</p>
+<ul>
+<li>提前准备日元现金
+<ul>
+<li>四大行都有外币兑换业务，不过基本都要在App上提前预约</li>
+<li>注意，兑换是按照实时汇率，预约前可以看看最近的汇率</li>
+<li>中国海关规定超过 5000 美元需要提前申报（具体流程请自行搜索）</li>
+<li>日本规定是 100 万日元需要申报</li>
+</ul>
+</li>
+<li>境外取现
+<ul>
+<li>国内的银联卡在国外都是可以取出日元的，只是有如下限制
+<ul>
+<li>在日本（国外）用银联卡取现。每卡每天不超过1w人民币，同一人名义下所有卡一年不得超过10w人民币</li>
+<li>取现时会按照实时汇率将卡中的人民币兑换成日元</li>
+<li>取现的ATM机也会有额度限制（711最高，10万日元）</li>
+<li>不同银行对境外取现会收取不同的手续费</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>国内办理 MasterCard、VISA、JCB卡
+<ul>
+<li>这三种卡背后都是国外的公司，所以在国内办理起来会稍微麻烦点，但办好之后，在日本线上线下基本都能用</li>
+<li>MasterCard、VISA、JCB 经常有消费返现金的活动，大家有兴趣可以研究下怎么薅资本主义的羊毛（大误</li>
+</ul>
+</li>
+</ul>
+<p>下面简单介绍下如何在国内办一张可以在日本刷卡、网购的信用卡（就是MasterCard、VISA、JCB卡）。（这其实不是必须准备的东西，大家有兴趣的话看看）</p>
+<p>大致流程：</p>
+<ul>
+<li>先去附近的中国银行网点开个户，办一张普通的银行卡
+<ul>
+<li>注意，这张卡一定要是「一」类账户，</li>
+<li>办好之后往里面转点钱，后面申请信用卡时可能会因为在中行有存款而更容易通过审批</li>
+</ul>
+</li>
+<li>然后下载「中银跨境Go」的APP
+<ul>
+<li>非常推荐大家办一个中国银行的卡，因为中国银行的APP支持监控汇率，这样就可以根据汇率来（抄底换日元）或是（在波峰将工资转成人民币）
+<ul>
+<li>短期来看，汇率波动不会很大啦</li>
+<li>但是，本人入学的那一年（2020年），汇率还在0.07，到日本工作时已经跌到0.05了。如果工作几年要回国了，才把工资换成人民币可能会吃「点」小亏</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>打开主页的「信用卡申请」-「全币信用卡」下属的三张卡就是MasterCard、VISA、JCB卡了</li>
+<li>随便挑张自己看得顺眼的卡办就好（大误
+<ul>
+<li>现在办的话，三种卡都免年费，也都有活动</li>
+</ul>
+</li>
+</ul>
+<p>如果介意「信用」卡，也可以考虑<a href="https://zhuanlan.zhihu.com/p/316401472">这里</a>提到的「长城跨境通国际借记卡」</p>
+<blockquote>
+<p>这张卡与长城冰雪借记卡拥有相同的优势——<strong>境外取现免手续费（每月首笔）</strong>，同时在全国各大银行网点皆可办理，并且不占用Ⅰ类账户的数量，但跨境通只能存外币，不能存人民币，要办理的读者需要充分注意这一点。年费方面，白金卡年费20元/年，金卡年费10元/年。</p>
+</blockquote>
+<p>另外，我手上这张可以在日本也能刷的卡是三年前办的，很久没研究过这个话题了，大家有什么问题的话，参考下面的文章吧：</p>
+<p><a href="https://poplite.xyz/post/2018/03/05/boc-debit-card-guide-for-online-payment.html">[2023年8月8日更新] 跨境通VISA/万事达借记卡介绍与网上支付体验</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/316401472">日本留学银行卡与信用卡扫盲攻略（一）</a></p>
+<h2 id="托运">托运</h2>
+<p>洗发水、沐浴露都可以托运的，没用完就带过来吧……</p>
+<p>关于箱子的大小：按照航班的要求，准备即可。另外，注意重量也不要超过航班的要求，有秤的话，提前称一下。</p>
+<p>如果航班的要求是下面这样的话：</p>
+<blockquote>
+<p>登机箱三边尺寸之和不能超过115cm，<br>
+托运箱三边尺寸之和不能超过158cm。</p>
+</blockquote>
+<p>可以看一下这里提供的箱子大小的计算方法：<a href="https://www.zhihu.com/tardis/zm/art/371737807">飞机行李箱尺寸要求与登机箱、托运箱选购攻略（5100字长文）</a></p>
+<p>前面扯3类了那么多，还是谈谈行李怎么准备吧：我参考了网上流传的各路航班行李限制，再翻了下：<a href="https://zhuanlan.zhihu.com/p/560487537">日本留学，赴日前最全指南|必备物品等</a>，感觉没有什么值得说的，就不没话找话了，下面就谈一些建议提前准备的小东西。</p>
+<h2 id="印章">印章</h2>
+<p>日本和国内不太一样，在一些重要的文件上一般不喜欢签字，而是盖章，所以大家入乡随俗，提前准备一个印章吧。</p>
+<p>日本的百元店也会有便宜的印章卖，但卖的印章刻的是常见的日本姓氏，外国人一般都要人工手工雕刻。如果不想体验日本师傅的工匠精神，还是就在国内买吧。国内20多就能解决的事情，去了日本可能就得翻10倍了。</p>
+<p>关于买什么样的印章，可以参考下图：<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//1694178346772.jpg" alt="|500" loading="lazy"><br>
+（之前买过一个送给了日本留学的朋友，他表示用起来没啥太大的问题，但大家遇到了问题，别来找我哈，问就是我也受害者233）</p>
+<p>我一个买了2个，一个是12mm（女生记得选10.5mm的），刻了一个「卿」字，用于日常生活。（下单的时候要写这样的备注：「卿+不加印字+楷体」）</p>
+<p>另一个是15mm，刻了「卿学童」，用于银行等正式场合。（同样记得写这样的备注哈：「卿学童+不加印字+古印体」）</p>
+<p>对了，上面链接的普通套餐会送收纳印章的盒子，但这个盒子是只能放印章，印泥放在单独的一个盒子里。而稍微贵一点的套餐是有所谓的「pu印章盒」，这个不仅可以放印章，还可以放少量的印泥。打开这样的盒子拿出印章往旁边的小印泥盒里一按就可以盖章了，还是比较方便的。（正式场合往往会有印泥，但日常生活中就只能自备干粮啦，对于丢三落四的同学，买认印的时候可以考虑买稍微贵一点的有「pu印章盒」那款）</p>
+<h2 id="插头转换器">插头转换器</h2>
+<p>日本的三口插座和国内的不一样，所以也最好准备一个。不过，如果有一个两脚的插排，也许就不用准备这个了，拿到日本也能用。（手持三角插排留下痛苦的泪水……</p>
+<p>如果是手机和电脑的充电器，在日本也是能正常工作的，但一些小家电很可能用不了。日本的电压是100V，手机和电脑的数据线基本标的是「输入:100-240VAC」，所以来了也能用；而一些小家电往往标的是「额定电压：220V」，这种就要买支持变压的转换插头了。（摊手，太贵了，我选择让我手上的那个小家电吃灰2333</p>
+<p>再次声明：本文仅供参考，不构成任何购买建议，出现质量问题和经济损失，本人都概不负责233</p>
+<p>最后，祝看到这篇文章的同学赴日工作顺利:)</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[日本租房指北]]></title>
+        <id>https://noheartpen.github.io/post/ri-ben-zu-fang-zhi-bei/</id>
+        <link href="https://noheartpen.github.io/post/ri-ben-zu-fang-zhi-bei/">
+        </link>
+        <updated>2024-04-14T02:48:05.000Z</updated>
+        <summary type="html"><![CDATA[<p>赴日前最重要的准备工作。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>赴日前最重要的准备工作。</p>
+<!-- more -->
+<h2 id="省流版">省流版</h2>
+<p>首先推荐一篇文章，对东京的租房市场进行了系统性的概述<a href="https://zhuanlan.zhihu.com/p/225026198">东京23区租房子的平均租金是多少？</a></p>
+<p>这张图很有用，对东京不熟的同学，在挑房子的时候可以参考这张图</p>
+<figure data-type="image" tabindex="1"><img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2023-09-09_10-47-52.png" alt="|500" loading="lazy"></figure>
+<p>其次，推荐这篇<a href="https://zhuanlan.zhihu.com/p/165941592">收藏向 ▏ 在日本租房实用网站汇总</a>：谈了日本常见的租房方式，并整理了直达官网的链接。</p>
+<h2 id="ur团地">UR团地</h2>
+<p>不要和中文互联网的「团地」混淆，在知乎不难找到相关评价，这里就不贴了，只谈一些我认为比较重要的事情。</p>
+<p>房租和收入有一定的要求，按照官网的要求，新卒基本可以自由选择房租在20万以下的房源。（如果是3人合租，还想离市中心近一点的话，尤其要注意这一点）<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2023-09-05_23-54-28.png" alt="|500" loading="lazy"><br>
+当然UR团地官方也有其他规定，有兴趣的话，去官网查吧 https://www.ur-net.go.jp/chintai/rent/requirements/ 。</p>
+<p>官方提供的大致流程： https://www.ur-net.go.jp/chintai/rent/ （按照官方流程，即使是在日本也会和中介（UR店舗的顾问）打交道，所以公司帮你联系中介的话，还省了一些功夫）</p>
+<p>官方提供了一份中文的<a href="https://www.ur-net.go.jp/chintai/pdf/common/plt_chinese_s.pdf">PDF</a>，说明了大量关键信息，比起知乎等国内平台的搬运更为详细</p>
+<p>如何挑房子：</p>
+<ol>
+<li>等公司联系的中介推荐（不推荐这种坐以待毙的行为，万一中介欺负你啥也不懂怎么办……）</li>
+<li>直接上官网搜 https://www.ur-net.go.jp/chintai/kanto/tokyo/area/ （一方面是了解行情，另一方面也是早点准备）
+<ol>
+<li>按照官方的流程，我们可以直接把感兴趣的房源交给中介，让Ta帮我们联系和协商</li>
+<li>如何判断通勤：把房子的地址复制出来，然后去<a href="https://www.bing.com/maps/">Bing地图</a>里计算到现场通过「公交」需要花多长时间。有时间的话，可以研究下给出的路线，去<a href="https://transit.yahoo.co.jp/">Yahoo!乗換案内乗</a> · 乗換NAVITIME · 乗換案内等软件上算下发车时间，以此倒推自己可以在床上赖到几点（大误）以及加班加到几点就只能靠脚走回去（错过了終電的社畜……悲
+<ol>
+<li>推荐几个适合在品川上班的社畜的租房地点：
+<ol>
+<li>川崎（京浜東北線30分钟内可直达</li>
+<li>高岛平（三田線 40分钟直达，高岛平是始发站，所以比较好找到位置坐</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>注意到车站的距离，这是重中之重，建议控制在10分钟之内（最好是5分钟）</li>
+<li>建议合租，因为真的会便宜点</li>
+</ol>
+</li>
+</ol>
+<h2 id="sharehouse">Sharehouse</h2>
+<p>如果没公司的人事安排中介 ，本人可能就直接 all in sharehouse 了，理由如下：</p>
+<ol>
+<li>价格和UR团地差不多，没有礼金那些乱七八糟的东西；</li>
+<li>在公司办完手续就可以拿到钥匙，然后就可以入住了（按照UR团地官方的资料，从提交入住申请到提交相关材料再到拿到钥匙需要一般要10天，目前尚不清楚公司联系的中介是否可以帮我们这些尚未入境的人提前走完这10天的流程）</li>
+<li>大多数户型都会有公用的家电（洗衣机，微波炉，冰箱，空调……），免去了一大笔开销</li>
+<li>部分公司的房租里是算了「电费」和「宽带费」的，所以开空调时不会有太大的心理压力233，也免去了自己拉宽带的麻烦</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>厨房一般都是公用的，如果想自己做饭省钱的话，可能要错开厨房的使用高峰期（不然就得排队）</li>
+<li>合租的室友比较看脸，因为隔着网线无法判断室友怎么样，中介也很难给出具体的评价</li>
+<li>在日本租sharehouse的人里有不少是东南亚和欧美人，日语沟通费力的时候，说不定还得用英语来交流 2333</li>
+</ol>
+<p>关于 sharehouse 本人也是最近才开始研究，主要是看了这篇<a href="https://zhuanlan.zhihu.com/p/240467382">亲身入住体验+朋友反馈 日本东京的GGHouse是否靠谱</a>：非常详细的体验贴，但文章写于2019年，现在已经2023年了，可能会有一些变化。</p>
+<p>官网： https://gghouse.co.jp/zh-hans/</p>
+<p>P.S. 这个公司可以通过微信咨询，对 sharehouse 感兴趣的话，不妨以这个试试水。</p>
+<p>其他公司：（提醒，均为境外网站，不会翻墙的的话，基本无法访问）<a href="https://zhuanlan.zhihu.com/p/165941592">收藏向 ▏ 在日本租房实用网站汇总</a></p>
+<blockquote>
+<p>1、東京シェアハウス<br>
+网址： https://tokyosharehouse.com/<br>
+东京比较大的sharehouse网站，另外上面的ひつじ也有sharehouse出租。</p>
+</blockquote>
+<p>注意，官网没有中文，只有日语:)</p>
+<blockquote>
+<p>2、SHARE PARADE<br>
+网址： https://sharepare.jp/</p>
+</blockquote>
+<p>官网有中文，咨询方式是用邮件</p>
+<blockquote>
+<p>3、TOKYOSTAY<br>
+网址： http://www.tokyostay.co.jp/</p>
+</blockquote>
+<p>嗯……上面的网页失效了， https://www.tokyustay.co.jp/e/hotel/GO/ ，官网虽然有中文，但很多界面还是只有英语和日语，另外，这个最长只支持住31天，超过了的话，需要填一个申请表。（如果不能提前拿到钥匙的话，可以考虑这个过渡）</p>
+<p>4、OAKHOUSE<br>
+网址： https://www.oakhouse.jp/cn/</p>
+<p>官网有中文，咨询方式是注册账号，</p>
+<p>5、桜ハウス<br>
+网址： https://www.sakura-house.com/jp/</p>
+<p>官网有中文，另外，官方回答了一个非常重要的问题：5点才到成田机场，来得及办相关的手续吗？官方给出的回答：建议明天再来呢（悲<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2023-09-09_09-57-25.png" alt="|500" loading="lazy"></p>
+<h2 id="租房">租房</h2>
+<p>分类比较奇怪，但我也想不出更准确的描述了2333</p>
+<p>简单来说就是直接和日本人（房东/中介）沟通租房事宜，一般来说</p>
+<ol>
+<li>对日语的要求比较高，而且也要求对东京租房行情有一定的了解，不然很容易「被人卖了还帮人数钱」（笑</li>
+<li>部分房东不想租给外国人</li>
+<li>大部分要交礼金那些乱七八糟的东西，而且不像UR团地是按退房时的检查多退少补，基本是不退</li>
+<li>基本没有家具</li>
+<li>国内预定的话得找到比较靠谱的中介（我也没有啦，摊手~</li>
+</ol>
+<h2 id="自家房">自家房</h2>
+<p>简单说明下：这个就是找那些已经在日本买了房（或者租了房）的中国人合租。</p>
+<p>由于本人算是半个社恐，再加上此前被「老乡」坑过一次，所以没对这个方向做过多的研究。</p>
+<p>如果对这个方向有兴趣，可以试试<a href="https://apps.apple.com/cn/app/hi%E9%BE%9F%E9%BE%9F-%E5%9C%A8%E6%97%A5%E6%9C%AC-%E7%94%A8%E9%BE%9F%E9%BE%9F/id1473496112">hi龟龟 - 在日本</a>、小春网等在日华人论坛。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Mecab 安装指北]]></title>
+        <id>https://noheartpen.github.io/post/mecab-an-zhuang-zhi-bei/</id>
+        <link href="https://noheartpen.github.io/post/mecab-an-zhuang-zhi-bei/">
+        </link>
+        <updated>2024-02-23T09:27:09.000Z</updated>
+        <summary type="html"><![CDATA[<p>稍微详细地介绍下日语自然语言处理会用到的工具 Mecab 的安装方法</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>稍微详细地介绍下日语自然语言处理会用到的工具 Mecab 的安装方法</p>
+<!-- more -->
+<h1 id="mecab-安装指北">Mecab 安装指北</h1>
+<h2 id="前言">前言</h2>
+<p>如果只是少量分析的话，网上有现成的工具比如 <a href="https://chamame.ninjal.ac.jp/">Web ちゃまめ</a>，在线即可解析。</p>
+<p>网上关于 Meacb 的安装教程不少，但仔细一看往往觉得写得过于随意，只有<a href="https://www.52nlp.cn/%E6%97%A5%E6%96%87%E5%88%86%E8%AF%8D%E5%99%A8-mecab-%E6%96%87%E6%A1%A3#install">日文分词器 Mecab 文档 我爱自然语言处理</a>这篇翻译官方文档的文章有细细研读的价值。此外 ，<a href="https://forum.freemdict.com/t/topic/11762/8">Mecab 日语分词工具的简单使用 - FreeMdict Forum</a> 里的相关讨论也是值得一读。（如果有不错的教程欢迎补充出来。</p>
+<p>在进入正题前，简单提一下影响「形态素解析」的 2 个关键要素：基于不同算法开发的形态素解析器和形态素解析辞典。</p>
+<p>解析器能看到不少，比如 <a href="https://github.com/taishi-i/awesome-japanese-nlp-resources">awesome-japanese-nlp-resources</a>就能找到一大堆用各种语言开发、针对各种使用场景优化的解析器，但形态素解析辞典就比较单一了，目前一般以 <a href="https://ja.osdn.net/projects/chasen-legacy/">ChaSen</a>、<a href="https://github.com/ku-nlp/jumanpp">JUMAN</a>、<a href="https://clrd.ninjal.ac.jp/unidic/">Unidic 辞書</a> 三家为主，其中 ChaSen 最新版 2.4.5 更新时间 2012 年 6 月 25 日 ，JUMAN 最新版 1.02 更新时间 2017 年 1 月 12 日，只有 Unidic 辞書还能在最近 5 年内保持一年一更的频率。</p>
+<p>目前来说，运用最广的开源形态素解析器就是 Meacb 了，下面就讲解下如何在 Windows 下安装使用，只要记住「形态素解析= 形态素解析器+形态素解析辞典」，安装其他形态素解析器也不会有太大的问题。</p>
+<p>先提供一个备份的安装文件：<br>
+<a href="https://www.123pan.com/s/iGz0Vv-svEVh.html">https://www.123pan.com/s/iGz0Vv-svEVh.html</a></p>
+<h2 id="windows-端安装教程">Windows 端安装教程</h2>
+<p>首先到官网首页 <a href="https://taku910.github.io/mecab/#download">MeCab: Yet Another Part-of-Speech and Morphological Analyzer</a>下载官方提供的安装包：<a href="https://drive.google.com/uc?export=download&amp;id=0B4y35FiV1wh7WElGUGt6ejlpVXc">https://drive.google.com/uc?export=download&amp;id=0B4y35FiV1wh7WElGUGt6ejlpVXc</a>。（备份安装包的对应路径： 形态素解析&gt;形态素解析器&gt;mecab）</p>
+<p>（网上能看到各种第三方库，其中一些第三方库自带了 Mecab 安装包，所以不用安装，但版本可能不是最新版的 0.996，所以更推荐像本篇文章一样，自己动手从头开始安装。）</p>
+<p>安装时注意勾选<code>utf-8</code>编码，其他地方一直下一步即可。</p>
+<figure data-type="image" tabindex="1"><img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2024-02-23_10-23-43.png" alt="|500" loading="lazy"></figure>
+<p>注：可以更改程序路径，但更改后可能要手动添加到环境变量。其实 Meacb 的本体程序占用空间不大，个人觉得没有必要改路径。（主要是如果出了问题，可能得老老实实重装一遍 2333）</p>
+<p>确认安装好 Mecab 后，使用<code>pip install mecab-python3</code>安装第三方库，安装完成后运行如下代码进行下测试，没有问题就算是安装完成了。</p>
+<pre><code class="language-python">import MeCab
+tagger = MeCab.Tagger(&quot;-Owakati&quot;)
+print(tagger.parse(&quot;天気が良いから、散歩しましょう。&quot;).split())
+
+tagger = MeCab.Tagger()
+print(tagger.parse(&quot;天気が良いから、散歩しましょう。&quot;))
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2024-02-23_11-08-46.png" alt="|500" loading="lazy"></figure>
+<h2 id="可能会遇到的问题">可能会遇到的问题</h2>
+<p>Mecab 是基于C++开发的工具，网上能找到很多种调用方式。但使用其他方法调用 Mecab 时，经常会在配置环境这一步遇到一些意想不到的问题，这里记录一些反馈 ：</p>
+<p>以下来自 <a href="https://forum.freemdict.com/u/amob/summary">amob</a>的反馈</p>
+<blockquote>
+<p>首先，pip install一些基于C++的python库，要运行visual studio自带的命令行’Native(or Cross) Tools Command Prompt’，而不是系统默认的cmd。<br>
+也忘了之前看哪个坑人的mecab教程，因为mecab用命令行默认编码文字会无法显示，在注册表添加了autorun项设置了默认UTF-8，这也会影响Visual Studio环境的正常运行。。。<br>
+然后还是报错’Microsoft Visual C++ 14.0 is required’，才知道只要运行一句：  <code>pip install --upgrade setuptools</code><br>
+大功告成<br>
+参考网页：<br>
+<a href="https://blog.csdn.net/qq1090504117/article/details/127681896">visual studio：x64 Native Tools Command Prompt for VS 2019初始化失败_script “vsdevcmd\ext\active” could not be found.-CSDN博客</a><br>
+<a href="https://stackoverflow.com/questions/41724445/python-pip-on-windows-command-cl-exe-failed">python pip on Windows - command ‘cl.exe’ failed - Stack Overflow</a><br>
+<a href="https://answers.microsoft.com/en-us/windows/forum/all/microsoft-visual-c-140-is-required-in-windows-10/f0445e6b-d461-4e40-b44f-962622628de7">‘Microsoft Visual C++ 14.0 is required’ in Windows 10 - Microsoft Community</a></p>
+</blockquote>
+<h2 id="macos-安装教程">macOS 安装教程</h2>
+<p>macOS不用安装上面的文件，直接使用<code>mecab-python3</code>第三方库即可。</p>
+<pre><code class="language-bash">pip install mecab-python3
+</code></pre>
+<p>可以使用下面的指令快速安装切换到 unidic-lite 词库。</p>
+<pre><code class="language-bash">pip install unidic-lite
+pip install --no-binary :all: mecab-python3
+</code></pre>
+<h2 id="自定义词库">自定义词库</h2>
+<p>通过上述方法安装的 Meacb 自带的的词库是 ipadic，这个词库的最后一次更新是在 2003 年 5 月了，所以更推荐安装日本国立国语研究所维护的 <a href="https://clrd.ninjal.ac.jp/unidic/">Unidic 辞書</a>。如果没有特殊需求，下载「現代書き言葉 UniDic」的最新版即可<a href="https://clrd.ninjal.ac.jp/unidic_archive/2302/unidic-cwj-202302.zip">https://clrd.ninjal.ac.jp/unidic_archive/2302/unidic-cwj-202302.zip</a>（注： 2023 年 3 月 24 号更新，于 2024 年 2 月 23 日确认为最新版）（备份路径： 形态素解析&gt; 形态素解析辞典&gt; UniDic）</p>
+<p>解压文件时注意文件夹名，最好是<code>unidic-cwj-3.1.1</code>（如果不是这么命名，请修改后续代码的<code>dic_path</code>）。</p>
+<figure data-type="image" tabindex="3"><img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20221107190047.png" alt="|500" loading="lazy"></figure>
+<p>然后到 Mecab 的安装路径（如果安装时没有更改，那么应该是在<code>C:\Program Files (x86)\MeCab\dic\ipadic</code>），在<code>dic</code>文件夹下找到<code>ipadic</code>文件夹里面的<code>dicrc</code><br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2024-02-23_10-30-10.png" alt="|500" loading="lazy"></p>
+<p>复制到<code>unidic-cwj-3.1.1</code>文件夹即可，复制时应该会有下面的提示，选择「替换目标中的文件即可」，如果没有，请注意检查路径。<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//2024-02-23_10-59-00.png" alt="|500" loading="lazy"></p>
+<p>然后测试如下代码进行测试即可。</p>
+<pre><code class="language-python">import os
+import MeCab
+
+# 下面路径请和实际的安装路径保持一致，为了和截图保持统一，修改了文件夹的名字
+dic_path = &quot;D:\00temp\unidic-cwj-3.1.1&quot;
+tagger = MeCab.Tagger(
+    '-r nul -d {} -Ochasen'.format(dic_path).replace('\\', '/'))
+
+text = &quot;天気が良いから、散歩しましょう。&quot;
+print(type(tagger.parse(text)))
+print(tagger.parse(text).split(&quot;\n&quot;))
+print(tagger.parse(text))
+</code></pre>
+<h3 id="mecab-ipadic-neologd">mecab-ipadic-NEologd</h3>
+<p>mecab-ipadic-NEologd : Neologism dictionary for MeCab<br>
+项目地址： <a href="https://github.com/neologd/mecab-ipadic-neologd/blob/master/README.ja.md">https://github.com/neologd/mecab-ipadic-neologd/blob/master/README.ja.md</a><br>
+许可证：<a href="https://github.com/neologd/mecab-ipadic-neologd/blob/master/COPYING">Apache License, Version 2.0</a></p>
+<p>如项目名中的「Neologism」一样，这个形态素解析辞典对于新词有较好的解析效果，不过需要自己编译源码，我没有折腾过，等大佬们出一个教程啦。</p>
+<h2 id="参考">参考</h2>
+<p><a href="https://forum.freemdict.com/t/topic/11762/8">Mecab 日语分词工具的简单使用 - FreeMdict Forum</a> ：提供了非常详细的说明和示例代码。</p>
+<h2 id="其他形态素解析器">其他形态素解析器</h2>
+<p>前面提到了 <a href="https://github.com/taishi-i/awesome-japanese-nlp-resources">awesome-japanese-nlp-resources</a>可以找到非常多的形态素解析器，除了根据具体的使用场景外，不妨看看<a href="https://taku910.github.io/mecab/feature.html">MeCab の開発経緯</a>里对当时其他形态素解析器的评价：</p>
+<blockquote>
+<p>Juman 以前の商用的に配布されていた形態素解析器は, 辞書や品詞体系 連接規則はほぼ固定されており, ユーザ自身自由に定義できなかった. Juman は これらの定義すべて外部に出し自由な定義が可能になった.<br>
+辞書は比較的入手しやすいが, 連接コストや単語生起コストの定義は 人手によって行わざるをえなかった. 解析ミスを発見するたびに副作用が無い範 囲で連接コストを修正する必要があり, 開発コストが大きい.<br>
+また, Juman は日本語の形態素解析として開発されていたので, 未知語処理が日本語に特化されており, 未知語処理の定義を 自分で与えることはできない. また, 品詞は 2 階層までに固定されており, 品詞体系には一種の制限がある.</p>
+</blockquote>
+<blockquote>
+<p>ChaSen の貢献の 1 つは, 統計処理 (HMM) によって連接コストや単語生起コストを 推定するようになった点にある. この処理のおかげで, 解析ミスを 蓄積するだけで自動的にコスト値を推定できるようになった. さらに, 品詞階層も無制限になり, 品詞体系を含めて(本当の意味で) 自由に定義できるようになった.<br>
+しかし, 複雑な品詞体系にすればするほど, データスパースネスの問題が 発生する. HMM を使う場合, HMM の内部状態(Hidden Class)を 1 つに固定する 必要があるため, 各品詞から内部状態への「変換」が必要となる. 単純には 各品詞を 1 つの内部状態に割りあてればよいが, 活用まで含めて品詞を すべて展開すると, その数は 500 にも及び, 低頻度の品詞について 信頼度の高い推定量を得ることができない. 逆に, 頻度の高い「助詞」等の品詞は 語彙も含めて内部状態にしないと高い精度が得られない. 複雑な品詞体系にすればするほど, 内部状態の定義が困難になる. つまり, 現状の(複雑な)品詞体系を扱うには, HMM では力不足であり, それを補助するための人手コストが大きくなっている.<br>
+また, ChaSen にはコスト値推定モジュールが付与されていない. NAIST の内部では利用できるらしいが, 上記の理由から設定すべき パラメータが多く, 使いこなすのが困難である.<br>
+さらに, ChaSen も未知語処理もハードコーディングされており 自由に定義することはできない.</p>
+</blockquote>
+<p>上面评价的关注点和形态素解析器的发展趋势基本一致：</p>
+<ol>
+<li>形态素解析器都在抛弃基于语法规则的思路，完全转向基于统计学的纯数学算法；</li>
+<li>放弃自定义形态素解析辞典，使用 UniDic 这样由权威机构构建维护的资源</li>
+<li>开始尝试同时支持多种语言的解析</li>
+</ol>
+<p>下面列几个我个人稍微研究过的形态素解析器，：</p>
+<p><a href="https://megagonlabs.github.io/ginza/">GiNZA - Japanese NLP Library</a>：<br>
+开发语言：Python<br>
+许可证：MIT license<br>
+最后更新时间：2023-09-25</p>
+<p>备注：由日本公司 recruit （日：リクルート）下属 AI 研究机构 Megagon Labs 于 2019 年开源的形态素解析工具。</p>
+<p><a href="https://github.com/atilika/kuromoji">Kuromoji</a><br>
+开发语言：Java<br>
+许可证：Apache-2.0 license<br>
+最后更新时间：5 年前</p>
+<p>备注：从 MOJi Android 端 APK 解压后的结果来看，应该就是用的这个解析工具。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[字幕翻译の初デビュー]]></title>
+        <id>https://noheartpen.github.io/post/zi-mu-fan-yi-nochu-debiyu/</id>
+        <link href="https://noheartpen.github.io/post/zi-mu-fan-yi-nochu-debiyu/">
+        </link>
+        <updated>2023-09-11T13:58:46.000Z</updated>
+        <summary type="html"><![CDATA[<p>第一次参加字幕组（笑</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>第一次参加字幕组（笑</p>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://noheartpen.github.io/post-images/1694440818367.png" alt="" loading="lazy"></figure>
+<p>猜猜我是哪个岗:)</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[浅入深出ABBYY]]></title>
+        <id>https://noheartpen.github.io/post/qian-ru-shen-chu-abbyy/</id>
+        <link href="https://noheartpen.github.io/post/qian-ru-shen-chu-abbyy/">
+        </link>
+        <updated>2023-07-31T23:22:47.000Z</updated>
+        <summary type="html"><![CDATA[<p>摘要：ABBYY上手指南</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>摘要：ABBYY上手指南</p>
+<!-- more -->
+<hr>
+<p>创建日期: 2022-03-19<br>
+修改日期: 2023-8-1<br>
+标签: 日语，blog</p>
+<hr>
+<h1 id="日语ocr软件推荐">日语OCR软件推荐</h1>
+<p>如果只是偶尔用用的话，更推荐<a href="https://baimiao.uzero.cn/">白描</a>，支持 Android、iOS、Web 端。每天都有几次免费使用次数，用得少的话基本可以白嫖，而且也不贵，<a href="https://apsgo.cn/qRqgZr">30 的永久会员</a>，比起某扫描王一年将近 100 简直是白菜价（何况某扫描王识别效果也不是很好）。</p>
+<p>至于那些套个 API 接口就敢上架的各种垃圾 APP，我建议各位不要浪费时间去下载尝试了，还不如看看<a href="https://www.yuque.com/docs/share/177c6f55-dfff-4fd5-8d71-7374c7128a5e">OCR 文字识别软件</a>和<br>
+<a href="https://mp.weixin.qq.com/s?__biz=MzA5NjEwNjE0OQ==&amp;mid=2247504889&amp;idx=1&amp;sn=eac708f80285cf7eb630fb9c9b1c4fa2&amp;chksm=90b7b033a7c03925574cd74b646e0e30a2787abe72928919a55577b1676ee586ca4504a823a0&amp;scene=4">秒杀年费 258 的同款 APP，微软、联想、Adobe、腾讯的良心产品太香了！ </a>)。</p>
+<p>如果是想啃日语漫画的生肉，更推荐 <a href="https://github.com/kha-white/mokuro">mokuro</a>：将漫画转换一键转为适配了 Yomichan 的HTML，快速查词、添加到Anki</p>
+<p>如果是有大量且高精度的使用需求，或者换个专业点的说法「译前处理」，更推荐 ABBYY——这个软件的对于日文竖排的识别效果可以说是真·降维打击一样的存在。</p>
+<p>不过 ABBYY 使用起来确实比较难，网上针对日语的讲解更是少之又少，所以专门写了这篇文章，记录一个日语专业的学生使用 ABBYY 处理日语 PDF 技巧，希望对提问者有所帮助。</p>
+<h1 id="更改设置">更改设置</h1>
+<p>安装好之后先找到 ABBYY FineReader PDF 15 这个软件，双击打开<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319154208.png" alt="" loading="lazy"></p>
+<p>在下面的界面下，找到<code>选项</code>，双击打开<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319154346.png" alt="" loading="lazy"></p>
+<p>找到<code>图像处理</code>，点击一下<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319154452.png" alt="" loading="lazy"></p>
+<p>在下面这个界面，把红框框起来的地方都勾上吧（这样识别效果会好很多）<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319154559.png" alt="" loading="lazy"></p>
+<p>到此，已经完成了设置，接下来开始正式转换</p>
+<h1 id="转换为-word">转换为 Word</h1>
+<p>在电脑上装好 ABBYY 之后，右键点击一个 PDF 文件，是可以观察到下面这样的选项的，所以右键点击<code>转换为 Word 文档</code><br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220315213232.png" alt="" loading="lazy"></p>
+<p>会弹出这么一个界面，注意一定要选择正确的语言，并且最好把<code>日语</code>放在第一个位置<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319155317.png" alt="" loading="lazy"></p>
+<h3 id="选择语言">选择语言</h3>
+<p>如果上一步找不到<code>日语</code>，那么选择<code>更多语言</code><br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319155501.png" alt="" loading="lazy"><br>
+拉动滚动条，找到<code>日语</code>勾上就可以了<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319155721.png" alt="" loading="lazy"></p>
+<h2 id="识别模式">识别模式</h2>
+<p>设置好语言后，点击<code>选项</code><br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319155914.png" alt="" loading="lazy"></p>
+<p>在<code>格式设置</code>里的<code>文档布局</code>里选择<code>精确副本</code>——这就意味着得到一个与 PDF 完全一样的竖排文档<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319160041.png" alt="" loading="lazy"></p>
+<p>也可以选择<code>格式化文本</code>——这样就可以得到一个符合中文排版习惯的文档<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319160247.png" alt="" loading="lazy"></p>
+<p>选择完后，点击确定，然后就会回到下面这个弹窗，点击<code>保存</code>即可<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319160423.png" alt="" loading="lazy"></p>
+<p>转换过程可能会花一点时间，耐心等待即可。</p>
+<p>最后，给一个生成的最终效果：</p>
+<p><code>精确副本</code><br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319162214.png" alt="" loading="lazy"></p>
+<p><code>格式化文本</code><br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319162335.png" alt="" loading="lazy"></p>
+<p>当然生成的 Word 为了保持和 PDF 一样的页面排版，会夹杂着各种分页符、换行符，而且很多同学最终是要用下面这样排版交作业的，这个时候还得一页一页地手动粘贴过去……<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220312122444.png" alt="" loading="lazy"></p>
+<p>这个时候，就推荐本人开发的一个小工具<a href="https://gitee.com/NoHeartPen/yipai">译排</a>啦（<s>好像暴露了我写这篇文章的目的</s>），感兴趣的话，可以戳<a href="https://www.yuque.com/noheartpen/tnxvz0/rdi750">「YiPai」·「译排」 · 语雀 (yuque.com)</a>了解更多</p>
+<h1 id="转换为-pdf">转换为 PDF</h1>
+<p>可能有人会注意到，ABBYY 有一个可以转成<code>可搜索的 PDF</code>的选项<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319160943.png" alt="" loading="lazy"></p>
+<p>估计很多用 iPad 的同学会有点兴趣，所以就简单介绍一下——操作上和上面转成 Word 是一样的。</p>
+<p>这个选项生成的 PDF 就是把识别出的文字嵌到了 PDF 的对应位置——但不会影响原来的图像<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220313162725.png" alt="可搜索的 PDF" loading="lazy"></p>
+<p>而 WPS、浏览器等都是支持搜索功能的，这不就相当于一本电子词典么？</p>
+<p>强烈，建议在淘宝付费购买的 PDF 都这样处理一下，就可以像下面一样快速查词：<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Video_20220806165756.gif" alt="" loading="lazy"></p>
+<h1 id="在-ocr-编辑器中打开">在 OCR 编辑器中打开</h1>
+<p>很多同学其实一般是不会把 PDF 转成 Word 的，因为或多或少都有错别字，排版也不是很好，需要花时间校对。估计也就在要交给老师的时候，才会用这个。</p>
+<p>这种情况下，要确认 Word 中可能识别错了的地方，就得浪费不少时间找 PDF 中的相应位置。</p>
+<p>所以，如果对识别的准确度有较高要求的话，在右键选择转换方式的时候，最好选择「在 OCR 编辑器打开」的选项<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220315213208.png" alt="" loading="lazy"></p>
+<p>点击上面的提到的<code>在 OCR 编辑器打开</code>，就会进到下面这个界面<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220315213052.png" alt="" loading="lazy"></p>
+<p>看着挺复杂的，但其实大多数人只会用到我箭头指的四个地方——前三个和前面介绍的一样，第四个<code>验证</code>（也就是箭头最细的那个）没有介绍过，但用起来也很简单。</p>
+<p>点击<code>验证</code>，就可以得到下面的界面<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220315212959.png" alt="" loading="lazy"></p>
+<p>ABBYY 会在这里提示它有可能识别错了的地方，并且会同时高亮 2 个地方，把光标移到上面就直接打字修改就可以了。<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319164503.png" alt="" loading="lazy"></p>
+<p>修改完一个之后点击<code>跳过</code>，就会移动到下一个有可能存在错误的地方。当然如果是 ABBYY 误报的话，直接点击<code>跳过</code>就可以了。</p>
+<p>全部修改完后，点击<code>关闭</code>，<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319164652.png" alt="" loading="lazy"></p>
+<p>然后点击<code>精确文本</code>（其他也行）选择导出的文档布局，最后选择<code>发送</code>就可以了。<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220315213052.png" alt="" loading="lazy"></p>
+<h1 id="对比文档">对比文档</h1>
+<p>有人可能好奇，红框框起的的软件功能是什么（<s>好吧……其实是我懒得写其他几个了</s>）<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319165028.png" alt="" loading="lazy"></p>
+<p>这个功能也可以用来校对，把 PDF 放左边，把 ABBYY 导出的 Word 放右边，然后选择<code>文档语言</code>——尴尬的是没有日语……<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319165228.png" alt="" loading="lazy"></p>
+<p>如果用<code>简体中文</code>来对比，那么对比之后，点击<code>保存</code><img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319170034.png" alt="" loading="lazy"></p>
+<p>选择第一个就好<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319170126.png" alt="" loading="lazy"></p>
+<p>然后就选择保存位置（这里也可以改上一步的设置）<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319170213.png" alt="" loading="lazy"></p>
+<p>然后比对 PDF 中高亮部分就可以了<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319170339.png" alt="" loading="lazy"></p>
+<p>但由于这个功能本身不支持日语，所以左边的 PDF 的文本都被高亮——这还不如不高亮呢……</p>
+<p>所以这个功能只能用来快速校对中文的 PDF 和 Word</p>
+<p>至于日语，还是用<code>在 OCR 编辑器中打开</code>的<code>验证</code>一个一个地校对吧。</p>
+<h1 id="补充">补充</h1>
+<ul>
+<li>转换模式的区别：随便找个文件挨个试试就明白了……</li>
+</ul>
+<h2 id="如何转成-kindle-等墨水屏也能看的-pdf如何处理拍得稀烂的-pdf">如何转成 Kindle 等墨水屏也能看的 PDF/如何处理拍得稀烂的 PDF</h2>
+<p>在选项的<code>图像处理</code>的<code>显示自定义设置</code>里面改吧<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319172517.png" alt="" loading="lazy"></p>
+<p>如果只是为了让墨水屏显示得更清晰，勾选<code>转换为黑白色</code>就可以了，其他的选项我也没折腾过<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319172522.png" alt="" loading="lazy"></p>
+<h2 id="如何解决对开页的问题">如何解决对开页的问题</h2>
+<p>像这种双页的 PDF 不仅在小屏幕上看着不方便（有 iPad 的请随意……），还（可能）会导致识别效果下降<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319173732.png" alt="" loading="lazy"></p>
+<p>所以如何切成下面这种单页的 PDF 就是个技术活了——非常麻烦，我一般只在有必要时才搞<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319172849.png" alt="" loading="lazy"></p>
+<p>个人推荐用<a href="https://www.foxitsoftware.cn/downloads/">福昕高级 PDF 编辑器</a>，它们的<code>裁剪页面</code>和<code>提取</code>很好用<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319173008.png" alt="" loading="lazy"></p>
+<p>用其他的也行，我用福昕高级 PDF 编辑器只是因为随时预览效果，避免漏裁（但福昕 PDF 阅读器好像没有这个功能）<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319173425.png" alt="" loading="lazy"></p>
+<p>把所有单数页都转成 PNG 到一个文件夹，再把所有偶数页转到一个文件夹</p>
+<p>之后，再用 2345 好压的批量文件改名，修改成<code>55-源文件名</code>这样的风格（这样在合成时页码才不会乱）<br>
+<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319174401.png" alt="" loading="lazy"></p>
+<p>注意批量修改时可以注意下这三个地方<img src="https://markdoen-1304943362.cos.ap-nanjing.myqcloud.com//Pasted_image_20220319174226.png" alt="" loading="lazy"></p>
+<h1 id="参考">参考</h1>
+<p><a href="https://www.zhihu.com/question/320456344/answer/2613044602">有没有可以识别日文的 OCR 软件？ - 知乎 (zhihu.com)</a>：基于本文的一个备份</p>
+<p><a href="https://forum.freemdict.com/t/topic/21752">SourceBook——使用GAN提高扫描书籍分辨率</a>：对设备的性能要求比较高。</p>
+<p><a href="https://www.bilibili.com/video/BV1ga4y1s73w?p=2&amp;share_source=copy_web&amp;vd_source=c968117e55645b439b5c5d2865ff0caa">【OCR 进阶系列教程分享】 </a>：一个很详细的视频教程，但不是针对日语进行讲解</p>
+<p><a href="https://www.yuque.com/docs/share/177c6f55-dfff-4fd5-8d71-7374c7128a5e">OCR 文字识别软件 · 语雀 (yuque.com)</a>：推荐了其他大量的 OCR 软件，并且附带软件下载资源</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzA5NjEwNjE0OQ==&amp;mid=2247504889&amp;idx=1&amp;sn=eac708f80285cf7eb630fb9c9b1c4fa2&amp;chksm=90b7b033a7c03925574cd74b646e0e30a2787abe72928919a55577b1676ee586ca4504a823a0&amp;scene=4">秒杀年费 258 的同款 APP，微软、联想、Adobe、腾讯的良心产品太香了！ (qq.com)</a>：手机端的 OCR 软件测评</p>
+<p>有能力的的话可以支持下官方正版：<a href="https://www.abbyychina.com/buy.html">购买 OCR 文字识别软件，ABBYY FineReader PDF</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[浅入深出日语假名转换]]></title>
+        <id>https://noheartpen.github.io/post/qian-ru-shen-chu-ri-yu-jia-ming-zhuan-huan/</id>
+        <link href="https://noheartpen.github.io/post/qian-ru-shen-chu-ri-yu-jia-ming-zhuan-huan/">
+        </link>
+        <updated>2023-07-09T13:55:11.000Z</updated>
+        <summary type="html"><![CDATA[<p>摘要：知其然更要知其所以然。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>摘要：知其然更要知其所以然。</p>
+<!-- more -->
+<hr>
+<h2 id="创建日期-2022-08-18修改日期-2023-07-05标签-python非辞書日语blog">创建日期: 2022-08-18<br>
+修改日期: 2023-07-05<br>
+标签: python,非辞書,日语,blog</h2>
+<h1 id="平片假名转换">平片假名转换</h1>
+<h2 id="结论">结论</h2>
+<p>片假名转平假名</p>
+<pre><code class="language-python">def convert_kata_to_hira(input_text):
+    process_texts = []
+    for gana in input_text:
+        if 12448 &lt; ord(gana) &lt; 12543:  # Match katakana characters
+            hira = chr(ord(gana) - 96)  # Convert to hiragana
+            process_texts.append(hira)
+    output_text = &quot;&quot;.join(process_texts)
+    return output_text
+</code></pre>
+<p>平假名转片假名</p>
+<pre><code class="language-python">def convert_hira_to_kata(input_text):
+    process_texts = []
+    for gana in input_text:
+        if 12353 &lt; ord(gana) &lt; 12447:  # Match hiragana characters
+            hira = chr(ord(gana) + 96)  # Convert to katakana
+            process_texts.append(hira)
+    output_text = &quot;&quot;.join(process_texts)
+    return output_text
+</code></pre>
+<h2 id="平假名-unicode">平假名 Unicode</h2>
+<p>按 Unicode 组织提供的 Unicode 标准文件 <a href="https://www.unicode.org/charts/PDF/U3040.pdf">U3040.pdf</a> ，平假名的十进制范围是 12353-12447，十六进制范围是<code>[\u3041-\u309f]</code>（正则表达式的字符转义使用的是十六进制）。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Character</th>
+<th style="text-align:center">Decimal</th>
+<th style="text-align:center">Hexadecimal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ぁ</td>
+<td style="text-align:center">12353</td>
+<td style="text-align:center">3041</td>
+</tr>
+<tr>
+<td style="text-align:center">あ</td>
+<td style="text-align:center">12354</td>
+<td style="text-align:center">3042</td>
+</tr>
+<tr>
+<td style="text-align:center">ぃ</td>
+<td style="text-align:center">12355</td>
+<td style="text-align:center">3043</td>
+</tr>
+<tr>
+<td style="text-align:center">い</td>
+<td style="text-align:center">12356</td>
+<td style="text-align:center">3044</td>
+</tr>
+<tr>
+<td style="text-align:center">ぅ</td>
+<td style="text-align:center">12357</td>
+<td style="text-align:center">3045</td>
+</tr>
+<tr>
+<td style="text-align:center">う</td>
+<td style="text-align:center">12358</td>
+<td style="text-align:center">3046</td>
+</tr>
+<tr>
+<td style="text-align:center">ぇ</td>
+<td style="text-align:center">12359</td>
+<td style="text-align:center">3047</td>
+</tr>
+<tr>
+<td style="text-align:center">え</td>
+<td style="text-align:center">12360</td>
+<td style="text-align:center">3048</td>
+</tr>
+<tr>
+<td style="text-align:center">ぉ</td>
+<td style="text-align:center">12361</td>
+<td style="text-align:center">3049</td>
+</tr>
+<tr>
+<td style="text-align:center">お</td>
+<td style="text-align:center">12362</td>
+<td style="text-align:center">304A</td>
+</tr>
+<tr>
+<td style="text-align:center">か</td>
+<td style="text-align:center">12363</td>
+<td style="text-align:center">304B</td>
+</tr>
+<tr>
+<td style="text-align:center">が</td>
+<td style="text-align:center">12364</td>
+<td style="text-align:center">304C</td>
+</tr>
+<tr>
+<td style="text-align:center">き</td>
+<td style="text-align:center">12365</td>
+<td style="text-align:center">304D</td>
+</tr>
+<tr>
+<td style="text-align:center">ぎ</td>
+<td style="text-align:center">12366</td>
+<td style="text-align:center">304E</td>
+</tr>
+<tr>
+<td style="text-align:center">く</td>
+<td style="text-align:center">12367</td>
+<td style="text-align:center">304F</td>
+</tr>
+<tr>
+<td style="text-align:center">ぐ</td>
+<td style="text-align:center">12368</td>
+<td style="text-align:center">3050</td>
+</tr>
+<tr>
+<td style="text-align:center">け</td>
+<td style="text-align:center">12369</td>
+<td style="text-align:center">3051</td>
+</tr>
+<tr>
+<td style="text-align:center">げ</td>
+<td style="text-align:center">12370</td>
+<td style="text-align:center">3052</td>
+</tr>
+<tr>
+<td style="text-align:center">こ</td>
+<td style="text-align:center">12371</td>
+<td style="text-align:center">3053</td>
+</tr>
+<tr>
+<td style="text-align:center">ご</td>
+<td style="text-align:center">12372</td>
+<td style="text-align:center">3054</td>
+</tr>
+<tr>
+<td style="text-align:center">さ</td>
+<td style="text-align:center">12373</td>
+<td style="text-align:center">3055</td>
+</tr>
+<tr>
+<td style="text-align:center">ざ</td>
+<td style="text-align:center">12374</td>
+<td style="text-align:center">3056</td>
+</tr>
+<tr>
+<td style="text-align:center">し</td>
+<td style="text-align:center">12375</td>
+<td style="text-align:center">3057</td>
+</tr>
+<tr>
+<td style="text-align:center">じ</td>
+<td style="text-align:center">12376</td>
+<td style="text-align:center">3058</td>
+</tr>
+<tr>
+<td style="text-align:center">す</td>
+<td style="text-align:center">12377</td>
+<td style="text-align:center">3059</td>
+</tr>
+<tr>
+<td style="text-align:center">ず</td>
+<td style="text-align:center">12378</td>
+<td style="text-align:center">305A</td>
+</tr>
+<tr>
+<td style="text-align:center">せ</td>
+<td style="text-align:center">12379</td>
+<td style="text-align:center">305B</td>
+</tr>
+<tr>
+<td style="text-align:center">ぜ</td>
+<td style="text-align:center">12380</td>
+<td style="text-align:center">305C</td>
+</tr>
+<tr>
+<td style="text-align:center">そ</td>
+<td style="text-align:center">12381</td>
+<td style="text-align:center">305D</td>
+</tr>
+<tr>
+<td style="text-align:center">ぞ</td>
+<td style="text-align:center">12382</td>
+<td style="text-align:center">305E</td>
+</tr>
+<tr>
+<td style="text-align:center">た</td>
+<td style="text-align:center">12383</td>
+<td style="text-align:center">305F</td>
+</tr>
+<tr>
+<td style="text-align:center">だ</td>
+<td style="text-align:center">12384</td>
+<td style="text-align:center">3060</td>
+</tr>
+<tr>
+<td style="text-align:center">ち</td>
+<td style="text-align:center">12385</td>
+<td style="text-align:center">3061</td>
+</tr>
+<tr>
+<td style="text-align:center">ぢ</td>
+<td style="text-align:center">12386</td>
+<td style="text-align:center">3062</td>
+</tr>
+<tr>
+<td style="text-align:center">っ</td>
+<td style="text-align:center">12387</td>
+<td style="text-align:center">3063</td>
+</tr>
+<tr>
+<td style="text-align:center">つ</td>
+<td style="text-align:center">12388</td>
+<td style="text-align:center">3064</td>
+</tr>
+<tr>
+<td style="text-align:center">づ</td>
+<td style="text-align:center">12389</td>
+<td style="text-align:center">3065</td>
+</tr>
+<tr>
+<td style="text-align:center">て</td>
+<td style="text-align:center">12390</td>
+<td style="text-align:center">3066</td>
+</tr>
+<tr>
+<td style="text-align:center">で</td>
+<td style="text-align:center">12391</td>
+<td style="text-align:center">3067</td>
+</tr>
+<tr>
+<td style="text-align:center">と</td>
+<td style="text-align:center">12392</td>
+<td style="text-align:center">3068</td>
+</tr>
+<tr>
+<td style="text-align:center">ど</td>
+<td style="text-align:center">12393</td>
+<td style="text-align:center">3069</td>
+</tr>
+<tr>
+<td style="text-align:center">な</td>
+<td style="text-align:center">12394</td>
+<td style="text-align:center">306A</td>
+</tr>
+<tr>
+<td style="text-align:center">に</td>
+<td style="text-align:center">12395</td>
+<td style="text-align:center">306B</td>
+</tr>
+<tr>
+<td style="text-align:center">ぬ</td>
+<td style="text-align:center">12396</td>
+<td style="text-align:center">306C</td>
+</tr>
+<tr>
+<td style="text-align:center">ね</td>
+<td style="text-align:center">12397</td>
+<td style="text-align:center">306D</td>
+</tr>
+<tr>
+<td style="text-align:center">の</td>
+<td style="text-align:center">12398</td>
+<td style="text-align:center">306E</td>
+</tr>
+<tr>
+<td style="text-align:center">は</td>
+<td style="text-align:center">12399</td>
+<td style="text-align:center">306F</td>
+</tr>
+<tr>
+<td style="text-align:center">ば</td>
+<td style="text-align:center">12400</td>
+<td style="text-align:center">3070</td>
+</tr>
+<tr>
+<td style="text-align:center">ぱ</td>
+<td style="text-align:center">12401</td>
+<td style="text-align:center">3071</td>
+</tr>
+<tr>
+<td style="text-align:center">ひ</td>
+<td style="text-align:center">12402</td>
+<td style="text-align:center">3072</td>
+</tr>
+<tr>
+<td style="text-align:center">び</td>
+<td style="text-align:center">12403</td>
+<td style="text-align:center">3073</td>
+</tr>
+<tr>
+<td style="text-align:center">ぴ</td>
+<td style="text-align:center">12404</td>
+<td style="text-align:center">3074</td>
+</tr>
+<tr>
+<td style="text-align:center">ふ</td>
+<td style="text-align:center">12405</td>
+<td style="text-align:center">3075</td>
+</tr>
+<tr>
+<td style="text-align:center">ぶ</td>
+<td style="text-align:center">12406</td>
+<td style="text-align:center">3076</td>
+</tr>
+<tr>
+<td style="text-align:center">ぷ</td>
+<td style="text-align:center">12407</td>
+<td style="text-align:center">3077</td>
+</tr>
+<tr>
+<td style="text-align:center">へ</td>
+<td style="text-align:center">12408</td>
+<td style="text-align:center">3078</td>
+</tr>
+<tr>
+<td style="text-align:center">べ</td>
+<td style="text-align:center">12409</td>
+<td style="text-align:center">3079</td>
+</tr>
+<tr>
+<td style="text-align:center">ぺ</td>
+<td style="text-align:center">12410</td>
+<td style="text-align:center">307A</td>
+</tr>
+<tr>
+<td style="text-align:center">ほ</td>
+<td style="text-align:center">12411</td>
+<td style="text-align:center">307B</td>
+</tr>
+<tr>
+<td style="text-align:center">ぼ</td>
+<td style="text-align:center">12412</td>
+<td style="text-align:center">307C</td>
+</tr>
+<tr>
+<td style="text-align:center">ぽ</td>
+<td style="text-align:center">12413</td>
+<td style="text-align:center">307D</td>
+</tr>
+<tr>
+<td style="text-align:center">ま</td>
+<td style="text-align:center">12414</td>
+<td style="text-align:center">307E</td>
+</tr>
+<tr>
+<td style="text-align:center">み</td>
+<td style="text-align:center">12415</td>
+<td style="text-align:center">307F</td>
+</tr>
+<tr>
+<td style="text-align:center">む</td>
+<td style="text-align:center">12416</td>
+<td style="text-align:center">3080</td>
+</tr>
+<tr>
+<td style="text-align:center">め</td>
+<td style="text-align:center">12417</td>
+<td style="text-align:center">3081</td>
+</tr>
+<tr>
+<td style="text-align:center">も</td>
+<td style="text-align:center">12418</td>
+<td style="text-align:center">3082</td>
+</tr>
+<tr>
+<td style="text-align:center">ゃ</td>
+<td style="text-align:center">12419</td>
+<td style="text-align:center">3083</td>
+</tr>
+<tr>
+<td style="text-align:center">や</td>
+<td style="text-align:center">12420</td>
+<td style="text-align:center">3084</td>
+</tr>
+<tr>
+<td style="text-align:center">ゅ</td>
+<td style="text-align:center">12421</td>
+<td style="text-align:center">3085</td>
+</tr>
+<tr>
+<td style="text-align:center">ゆ</td>
+<td style="text-align:center">12422</td>
+<td style="text-align:center">3086</td>
+</tr>
+<tr>
+<td style="text-align:center">ょ</td>
+<td style="text-align:center">12423</td>
+<td style="text-align:center">3087</td>
+</tr>
+<tr>
+<td style="text-align:center">よ</td>
+<td style="text-align:center">12424</td>
+<td style="text-align:center">3088</td>
+</tr>
+<tr>
+<td style="text-align:center">ら</td>
+<td style="text-align:center">12425</td>
+<td style="text-align:center">3089</td>
+</tr>
+<tr>
+<td style="text-align:center">り</td>
+<td style="text-align:center">12426</td>
+<td style="text-align:center">308A</td>
+</tr>
+<tr>
+<td style="text-align:center">る</td>
+<td style="text-align:center">12427</td>
+<td style="text-align:center">308B</td>
+</tr>
+<tr>
+<td style="text-align:center">れ</td>
+<td style="text-align:center">12428</td>
+<td style="text-align:center">308C</td>
+</tr>
+<tr>
+<td style="text-align:center">ろ</td>
+<td style="text-align:center">12429</td>
+<td style="text-align:center">308D</td>
+</tr>
+<tr>
+<td style="text-align:center">ゎ</td>
+<td style="text-align:center">12430</td>
+<td style="text-align:center">308E</td>
+</tr>
+<tr>
+<td style="text-align:center">わ</td>
+<td style="text-align:center">12431</td>
+<td style="text-align:center">308F</td>
+</tr>
+<tr>
+<td style="text-align:center">ゐ</td>
+<td style="text-align:center">12432</td>
+<td style="text-align:center">3090</td>
+</tr>
+<tr>
+<td style="text-align:center">ゑ</td>
+<td style="text-align:center">12433</td>
+<td style="text-align:center">3091</td>
+</tr>
+<tr>
+<td style="text-align:center">を</td>
+<td style="text-align:center">12434</td>
+<td style="text-align:center">3092</td>
+</tr>
+<tr>
+<td style="text-align:center">ん</td>
+<td style="text-align:center">12435</td>
+<td style="text-align:center">3093</td>
+</tr>
+<tr>
+<td style="text-align:center">ゔ</td>
+<td style="text-align:center">12436</td>
+<td style="text-align:center">3094</td>
+</tr>
+<tr>
+<td style="text-align:center">ゕ</td>
+<td style="text-align:center">12437</td>
+<td style="text-align:center">3095</td>
+</tr>
+<tr>
+<td style="text-align:center">ゖ</td>
+<td style="text-align:center">12438</td>
+<td style="text-align:center">3096</td>
+</tr>
+<tr>
+<td style="text-align:center">空</td>
+<td style="text-align:center">12439</td>
+<td style="text-align:center">3097</td>
+</tr>
+<tr>
+<td style="text-align:center">空</td>
+<td style="text-align:center">12440</td>
+<td style="text-align:center">3098</td>
+</tr>
+<tr>
+<td style="text-align:center">゙</td>
+<td style="text-align:center">12441</td>
+<td style="text-align:center">3099</td>
+</tr>
+<tr>
+<td style="text-align:center">゚</td>
+<td style="text-align:center">12442</td>
+<td style="text-align:center">309A</td>
+</tr>
+<tr>
+<td style="text-align:center">゛</td>
+<td style="text-align:center">12443</td>
+<td style="text-align:center">309B</td>
+</tr>
+<tr>
+<td style="text-align:center">゜</td>
+<td style="text-align:center">12444</td>
+<td style="text-align:center">309C</td>
+</tr>
+<tr>
+<td style="text-align:center">ゝ</td>
+<td style="text-align:center">12445</td>
+<td style="text-align:center">309D</td>
+</tr>
+<tr>
+<td style="text-align:center">ゞ</td>
+<td style="text-align:center">12446</td>
+<td style="text-align:center">309E</td>
+</tr>
+<tr>
+<td style="text-align:center">ゟ</td>
+<td style="text-align:center">12447</td>
+<td style="text-align:center">309F</td>
+</tr>
+</tbody>
+</table>
+<h2 id="片假名-unicode">片假名 Unicode</h2>
+<p>按 <a href="https://www.unicode.org/charts/PDF/U30A0.pdf">U30A0.pdf</a>，十六进制的范围是<code>[\u30a-\u30ff]</code>，十进制范围是 12448-12543。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Character</th>
+<th style="text-align:center">Decimal</th>
+<th style="text-align:center">Hexadecimal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">゠</td>
+<td style="text-align:center">12448</td>
+<td style="text-align:center">30A0</td>
+</tr>
+<tr>
+<td style="text-align:center">ァ</td>
+<td style="text-align:center">12449</td>
+<td style="text-align:center">30A1</td>
+</tr>
+<tr>
+<td style="text-align:center">ア</td>
+<td style="text-align:center">12450</td>
+<td style="text-align:center">30A2</td>
+</tr>
+<tr>
+<td style="text-align:center">ィ</td>
+<td style="text-align:center">12451</td>
+<td style="text-align:center">30A3</td>
+</tr>
+<tr>
+<td style="text-align:center">イ</td>
+<td style="text-align:center">12452</td>
+<td style="text-align:center">30A4</td>
+</tr>
+<tr>
+<td style="text-align:center">ゥ</td>
+<td style="text-align:center">12453</td>
+<td style="text-align:center">30A5</td>
+</tr>
+<tr>
+<td style="text-align:center">ウ</td>
+<td style="text-align:center">12454</td>
+<td style="text-align:center">30A6</td>
+</tr>
+<tr>
+<td style="text-align:center">ェ</td>
+<td style="text-align:center">12455</td>
+<td style="text-align:center">30A7</td>
+</tr>
+<tr>
+<td style="text-align:center">エ</td>
+<td style="text-align:center">12456</td>
+<td style="text-align:center">30A8</td>
+</tr>
+<tr>
+<td style="text-align:center">ォ</td>
+<td style="text-align:center">12457</td>
+<td style="text-align:center">30A9</td>
+</tr>
+<tr>
+<td style="text-align:center">オ</td>
+<td style="text-align:center">12458</td>
+<td style="text-align:center">30AA</td>
+</tr>
+<tr>
+<td style="text-align:center">カ</td>
+<td style="text-align:center">12459</td>
+<td style="text-align:center">30AB</td>
+</tr>
+<tr>
+<td style="text-align:center">ガ</td>
+<td style="text-align:center">12460</td>
+<td style="text-align:center">30AC</td>
+</tr>
+<tr>
+<td style="text-align:center">キ</td>
+<td style="text-align:center">12461</td>
+<td style="text-align:center">30AD</td>
+</tr>
+<tr>
+<td style="text-align:center">ギ</td>
+<td style="text-align:center">12462</td>
+<td style="text-align:center">30AE</td>
+</tr>
+<tr>
+<td style="text-align:center">ク</td>
+<td style="text-align:center">12463</td>
+<td style="text-align:center">30AF</td>
+</tr>
+<tr>
+<td style="text-align:center">グ</td>
+<td style="text-align:center">12464</td>
+<td style="text-align:center">30B0</td>
+</tr>
+<tr>
+<td style="text-align:center">ケ</td>
+<td style="text-align:center">12465</td>
+<td style="text-align:center">30B1</td>
+</tr>
+<tr>
+<td style="text-align:center">ゲ</td>
+<td style="text-align:center">12466</td>
+<td style="text-align:center">30B2</td>
+</tr>
+<tr>
+<td style="text-align:center">コ</td>
+<td style="text-align:center">12467</td>
+<td style="text-align:center">30B3</td>
+</tr>
+<tr>
+<td style="text-align:center">ゴ</td>
+<td style="text-align:center">12468</td>
+<td style="text-align:center">30B4</td>
+</tr>
+<tr>
+<td style="text-align:center">サ</td>
+<td style="text-align:center">12469</td>
+<td style="text-align:center">30B5</td>
+</tr>
+<tr>
+<td style="text-align:center">ザ</td>
+<td style="text-align:center">12470</td>
+<td style="text-align:center">30B6</td>
+</tr>
+<tr>
+<td style="text-align:center">シ</td>
+<td style="text-align:center">12471</td>
+<td style="text-align:center">30B7</td>
+</tr>
+<tr>
+<td style="text-align:center">ジ</td>
+<td style="text-align:center">12472</td>
+<td style="text-align:center">30B8</td>
+</tr>
+<tr>
+<td style="text-align:center">ス</td>
+<td style="text-align:center">12473</td>
+<td style="text-align:center">30B9</td>
+</tr>
+<tr>
+<td style="text-align:center">ズ</td>
+<td style="text-align:center">12474</td>
+<td style="text-align:center">30BA</td>
+</tr>
+<tr>
+<td style="text-align:center">セ</td>
+<td style="text-align:center">12475</td>
+<td style="text-align:center">30BB</td>
+</tr>
+<tr>
+<td style="text-align:center">ゼ</td>
+<td style="text-align:center">12476</td>
+<td style="text-align:center">30BC</td>
+</tr>
+<tr>
+<td style="text-align:center">ソ</td>
+<td style="text-align:center">12477</td>
+<td style="text-align:center">30BD</td>
+</tr>
+<tr>
+<td style="text-align:center">ゾ</td>
+<td style="text-align:center">12478</td>
+<td style="text-align:center">30BE</td>
+</tr>
+<tr>
+<td style="text-align:center">タ</td>
+<td style="text-align:center">12479</td>
+<td style="text-align:center">30BF</td>
+</tr>
+<tr>
+<td style="text-align:center">ダ</td>
+<td style="text-align:center">12480</td>
+<td style="text-align:center">30C0</td>
+</tr>
+<tr>
+<td style="text-align:center">チ</td>
+<td style="text-align:center">12481</td>
+<td style="text-align:center">30C1</td>
+</tr>
+<tr>
+<td style="text-align:center">ヂ</td>
+<td style="text-align:center">12482</td>
+<td style="text-align:center">30C2</td>
+</tr>
+<tr>
+<td style="text-align:center">ッ</td>
+<td style="text-align:center">12483</td>
+<td style="text-align:center">30C3</td>
+</tr>
+<tr>
+<td style="text-align:center">ツ</td>
+<td style="text-align:center">12484</td>
+<td style="text-align:center">30C4</td>
+</tr>
+<tr>
+<td style="text-align:center">ヅ</td>
+<td style="text-align:center">12485</td>
+<td style="text-align:center">30C5</td>
+</tr>
+<tr>
+<td style="text-align:center">テ</td>
+<td style="text-align:center">12486</td>
+<td style="text-align:center">30C6</td>
+</tr>
+<tr>
+<td style="text-align:center">デ</td>
+<td style="text-align:center">12487</td>
+<td style="text-align:center">30C7</td>
+</tr>
+<tr>
+<td style="text-align:center">ト</td>
+<td style="text-align:center">12488</td>
+<td style="text-align:center">30C8</td>
+</tr>
+<tr>
+<td style="text-align:center">ド</td>
+<td style="text-align:center">12489</td>
+<td style="text-align:center">30C9</td>
+</tr>
+<tr>
+<td style="text-align:center">ナ</td>
+<td style="text-align:center">12490</td>
+<td style="text-align:center">30CA</td>
+</tr>
+<tr>
+<td style="text-align:center">ニ</td>
+<td style="text-align:center">12491</td>
+<td style="text-align:center">30CB</td>
+</tr>
+<tr>
+<td style="text-align:center">ヌ</td>
+<td style="text-align:center">12492</td>
+<td style="text-align:center">30CC</td>
+</tr>
+<tr>
+<td style="text-align:center">ネ</td>
+<td style="text-align:center">12493</td>
+<td style="text-align:center">30CD</td>
+</tr>
+<tr>
+<td style="text-align:center">ノ</td>
+<td style="text-align:center">12494</td>
+<td style="text-align:center">30CE</td>
+</tr>
+<tr>
+<td style="text-align:center">ハ</td>
+<td style="text-align:center">12495</td>
+<td style="text-align:center">30CF</td>
+</tr>
+<tr>
+<td style="text-align:center">バ</td>
+<td style="text-align:center">12496</td>
+<td style="text-align:center">30D0</td>
+</tr>
+<tr>
+<td style="text-align:center">パ</td>
+<td style="text-align:center">12497</td>
+<td style="text-align:center">30D1</td>
+</tr>
+<tr>
+<td style="text-align:center">ヒ</td>
+<td style="text-align:center">12498</td>
+<td style="text-align:center">30D2</td>
+</tr>
+<tr>
+<td style="text-align:center">ビ</td>
+<td style="text-align:center">12499</td>
+<td style="text-align:center">30D3</td>
+</tr>
+<tr>
+<td style="text-align:center">ピ</td>
+<td style="text-align:center">12500</td>
+<td style="text-align:center">30D4</td>
+</tr>
+<tr>
+<td style="text-align:center">フ</td>
+<td style="text-align:center">12501</td>
+<td style="text-align:center">30D5</td>
+</tr>
+<tr>
+<td style="text-align:center">ブ</td>
+<td style="text-align:center">12502</td>
+<td style="text-align:center">30D6</td>
+</tr>
+<tr>
+<td style="text-align:center">プ</td>
+<td style="text-align:center">12503</td>
+<td style="text-align:center">30D7</td>
+</tr>
+<tr>
+<td style="text-align:center">ヘ</td>
+<td style="text-align:center">12504</td>
+<td style="text-align:center">30D8</td>
+</tr>
+<tr>
+<td style="text-align:center">ベ</td>
+<td style="text-align:center">12505</td>
+<td style="text-align:center">30D9</td>
+</tr>
+<tr>
+<td style="text-align:center">ペ</td>
+<td style="text-align:center">12506</td>
+<td style="text-align:center">30DA</td>
+</tr>
+<tr>
+<td style="text-align:center">ホ</td>
+<td style="text-align:center">12507</td>
+<td style="text-align:center">30DB</td>
+</tr>
+<tr>
+<td style="text-align:center">ボ</td>
+<td style="text-align:center">12508</td>
+<td style="text-align:center">30DC</td>
+</tr>
+<tr>
+<td style="text-align:center">ポ</td>
+<td style="text-align:center">12509</td>
+<td style="text-align:center">30DD</td>
+</tr>
+<tr>
+<td style="text-align:center">マ</td>
+<td style="text-align:center">12510</td>
+<td style="text-align:center">30DE</td>
+</tr>
+<tr>
+<td style="text-align:center">ミ</td>
+<td style="text-align:center">12511</td>
+<td style="text-align:center">30DF</td>
+</tr>
+<tr>
+<td style="text-align:center">ム</td>
+<td style="text-align:center">12512</td>
+<td style="text-align:center">30E0</td>
+</tr>
+<tr>
+<td style="text-align:center">メ</td>
+<td style="text-align:center">12513</td>
+<td style="text-align:center">30E1</td>
+</tr>
+<tr>
+<td style="text-align:center">モ</td>
+<td style="text-align:center">12514</td>
+<td style="text-align:center">30E2</td>
+</tr>
+<tr>
+<td style="text-align:center">ャ</td>
+<td style="text-align:center">12515</td>
+<td style="text-align:center">30E3</td>
+</tr>
+<tr>
+<td style="text-align:center">ヤ</td>
+<td style="text-align:center">12516</td>
+<td style="text-align:center">30E4</td>
+</tr>
+<tr>
+<td style="text-align:center">ュ</td>
+<td style="text-align:center">12517</td>
+<td style="text-align:center">30E5</td>
+</tr>
+<tr>
+<td style="text-align:center">ユ</td>
+<td style="text-align:center">12518</td>
+<td style="text-align:center">30E6</td>
+</tr>
+<tr>
+<td style="text-align:center">ョ</td>
+<td style="text-align:center">12519</td>
+<td style="text-align:center">30E7</td>
+</tr>
+<tr>
+<td style="text-align:center">ヨ</td>
+<td style="text-align:center">12520</td>
+<td style="text-align:center">30E8</td>
+</tr>
+<tr>
+<td style="text-align:center">ラ</td>
+<td style="text-align:center">12521</td>
+<td style="text-align:center">30E9</td>
+</tr>
+<tr>
+<td style="text-align:center">リ</td>
+<td style="text-align:center">12522</td>
+<td style="text-align:center">30EA</td>
+</tr>
+<tr>
+<td style="text-align:center">ル</td>
+<td style="text-align:center">12523</td>
+<td style="text-align:center">30EB</td>
+</tr>
+<tr>
+<td style="text-align:center">レ</td>
+<td style="text-align:center">12524</td>
+<td style="text-align:center">30EC</td>
+</tr>
+<tr>
+<td style="text-align:center">ロ</td>
+<td style="text-align:center">12525</td>
+<td style="text-align:center">30ED</td>
+</tr>
+<tr>
+<td style="text-align:center">ヮ</td>
+<td style="text-align:center">12526</td>
+<td style="text-align:center">30EE</td>
+</tr>
+<tr>
+<td style="text-align:center">ワ</td>
+<td style="text-align:center">12527</td>
+<td style="text-align:center">30EF</td>
+</tr>
+<tr>
+<td style="text-align:center">ヰ</td>
+<td style="text-align:center">12528</td>
+<td style="text-align:center">30F0</td>
+</tr>
+<tr>
+<td style="text-align:center">ヱ</td>
+<td style="text-align:center">12529</td>
+<td style="text-align:center">30F1</td>
+</tr>
+<tr>
+<td style="text-align:center">ヲ</td>
+<td style="text-align:center">12530</td>
+<td style="text-align:center">30F2</td>
+</tr>
+<tr>
+<td style="text-align:center">ン</td>
+<td style="text-align:center">12531</td>
+<td style="text-align:center">30F3</td>
+</tr>
+<tr>
+<td style="text-align:center">ヴ</td>
+<td style="text-align:center">12532</td>
+<td style="text-align:center">30F4</td>
+</tr>
+<tr>
+<td style="text-align:center">ヵ</td>
+<td style="text-align:center">12533</td>
+<td style="text-align:center">30F5</td>
+</tr>
+<tr>
+<td style="text-align:center">ヶ</td>
+<td style="text-align:center">12534</td>
+<td style="text-align:center">30F6</td>
+</tr>
+<tr>
+<td style="text-align:center">ヷ</td>
+<td style="text-align:center">12535</td>
+<td style="text-align:center">30F7</td>
+</tr>
+<tr>
+<td style="text-align:center">ヸ</td>
+<td style="text-align:center">12536</td>
+<td style="text-align:center">30F8</td>
+</tr>
+<tr>
+<td style="text-align:center">ヹ</td>
+<td style="text-align:center">12537</td>
+<td style="text-align:center">30F9</td>
+</tr>
+<tr>
+<td style="text-align:center">ヺ</td>
+<td style="text-align:center">12538</td>
+<td style="text-align:center">30FA</td>
+</tr>
+<tr>
+<td style="text-align:center">・</td>
+<td style="text-align:center">12539</td>
+<td style="text-align:center">30FB</td>
+</tr>
+<tr>
+<td style="text-align:center">ー</td>
+<td style="text-align:center">12540</td>
+<td style="text-align:center">30FC</td>
+</tr>
+<tr>
+<td style="text-align:center">ヽ</td>
+<td style="text-align:center">12541</td>
+<td style="text-align:center">30FD</td>
+</tr>
+<tr>
+<td style="text-align:center">ヾ</td>
+<td style="text-align:center">12542</td>
+<td style="text-align:center">30FE</td>
+</tr>
+<tr>
+<td style="text-align:center">ヿ</td>
+<td style="text-align:center">12543</td>
+<td style="text-align:center">30FF</td>
+</tr>
+</tbody>
+</table>
+<h2 id="片假名语音扩展-unicode">片假名语音扩展 Unicode</h2>
+<p>按 <a href="https://www.unicode.org/charts/PDF/U31F0.pdf">U31F0.pdf</a> ，十进制范围：12784-12799，十六进制范围是<code>[\u31f0-\u31ff]</code></p>
+<p>P.S. 按 Unicode 官方的说明，这部分的假名用于「阿伊努语」，但我看不出这部分和上面的区别 233</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Character</th>
+<th style="text-align:center">Decimal</th>
+<th style="text-align:center">Hexadecimal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ㇰ</td>
+<td style="text-align:center">12784</td>
+<td style="text-align:center">31F0</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇱ</td>
+<td style="text-align:center">12785</td>
+<td style="text-align:center">31F1</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇲ</td>
+<td style="text-align:center">12786</td>
+<td style="text-align:center">31F2</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇳ</td>
+<td style="text-align:center">12787</td>
+<td style="text-align:center">31F3</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇴ</td>
+<td style="text-align:center">12788</td>
+<td style="text-align:center">31F4</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇵ</td>
+<td style="text-align:center">12789</td>
+<td style="text-align:center">31F5</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇶ</td>
+<td style="text-align:center">12790</td>
+<td style="text-align:center">31F6</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇷ</td>
+<td style="text-align:center">12791</td>
+<td style="text-align:center">31F7</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇸ</td>
+<td style="text-align:center">12792</td>
+<td style="text-align:center">31F8</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇹ</td>
+<td style="text-align:center">12793</td>
+<td style="text-align:center">31F9</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇺ</td>
+<td style="text-align:center">12794</td>
+<td style="text-align:center">31FA</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇻ</td>
+<td style="text-align:center">12795</td>
+<td style="text-align:center">31FB</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇼ</td>
+<td style="text-align:center">12796</td>
+<td style="text-align:center">31FC</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇽ</td>
+<td style="text-align:center">12797</td>
+<td style="text-align:center">31FD</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇾ</td>
+<td style="text-align:center">12798</td>
+<td style="text-align:center">31FE</td>
+</tr>
+<tr>
+<td style="text-align:center">ㇿ</td>
+<td style="text-align:center">12799</td>
+<td style="text-align:center">31FF</td>
+</tr>
+</tbody>
+</table>
+<h1 id="全半角假名转换">全半角假名转换</h1>
+<h2 id="半角字符-unicode">半角字符 Unicode</h2>
+<p>按 <a href="https://www.unicode.org/charts/PDF/UFF00.pdf">UFF00.pdf</a>，日语半角字符的范围是 65381-65439，十六进制范围：<code>[\uff65-\uff9f]</code>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Character</th>
+<th style="text-align:center">Decimal</th>
+<th style="text-align:center">Hexadecimal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">･</td>
+<td style="text-align:center">65381</td>
+<td style="text-align:center">FF65</td>
+</tr>
+<tr>
+<td style="text-align:center">ｦ</td>
+<td style="text-align:center">65382</td>
+<td style="text-align:center">FF66</td>
+</tr>
+<tr>
+<td style="text-align:center">ｧ</td>
+<td style="text-align:center">65383</td>
+<td style="text-align:center">FF67</td>
+</tr>
+<tr>
+<td style="text-align:center">ｨ</td>
+<td style="text-align:center">65384</td>
+<td style="text-align:center">FF68</td>
+</tr>
+<tr>
+<td style="text-align:center">ｩ</td>
+<td style="text-align:center">65385</td>
+<td style="text-align:center">FF69</td>
+</tr>
+<tr>
+<td style="text-align:center">ｪ</td>
+<td style="text-align:center">65386</td>
+<td style="text-align:center">FF6A</td>
+</tr>
+<tr>
+<td style="text-align:center">ｫ</td>
+<td style="text-align:center">65387</td>
+<td style="text-align:center">FF6B</td>
+</tr>
+<tr>
+<td style="text-align:center">ｬ</td>
+<td style="text-align:center">65388</td>
+<td style="text-align:center">FF6C</td>
+</tr>
+<tr>
+<td style="text-align:center">ｭ</td>
+<td style="text-align:center">65389</td>
+<td style="text-align:center">FF6D</td>
+</tr>
+<tr>
+<td style="text-align:center">ｮ</td>
+<td style="text-align:center">65390</td>
+<td style="text-align:center">FF6E</td>
+</tr>
+<tr>
+<td style="text-align:center">ｯ</td>
+<td style="text-align:center">65391</td>
+<td style="text-align:center">FF6F</td>
+</tr>
+<tr>
+<td style="text-align:center">ｰ</td>
+<td style="text-align:center">65392</td>
+<td style="text-align:center">FF70</td>
+</tr>
+<tr>
+<td style="text-align:center">ｱ</td>
+<td style="text-align:center">65393</td>
+<td style="text-align:center">FF71</td>
+</tr>
+<tr>
+<td style="text-align:center">ｲ</td>
+<td style="text-align:center">65394</td>
+<td style="text-align:center">FF72</td>
+</tr>
+<tr>
+<td style="text-align:center">ｳ</td>
+<td style="text-align:center">65395</td>
+<td style="text-align:center">FF73</td>
+</tr>
+<tr>
+<td style="text-align:center">ｴ</td>
+<td style="text-align:center">65396</td>
+<td style="text-align:center">FF74</td>
+</tr>
+<tr>
+<td style="text-align:center">ｵ</td>
+<td style="text-align:center">65397</td>
+<td style="text-align:center">FF75</td>
+</tr>
+<tr>
+<td style="text-align:center">ｶ</td>
+<td style="text-align:center">65398</td>
+<td style="text-align:center">FF76</td>
+</tr>
+<tr>
+<td style="text-align:center">ｷ</td>
+<td style="text-align:center">65399</td>
+<td style="text-align:center">FF77</td>
+</tr>
+<tr>
+<td style="text-align:center">ｸ</td>
+<td style="text-align:center">65400</td>
+<td style="text-align:center">FF78</td>
+</tr>
+<tr>
+<td style="text-align:center">ｹ</td>
+<td style="text-align:center">65401</td>
+<td style="text-align:center">FF79</td>
+</tr>
+<tr>
+<td style="text-align:center">ｺ</td>
+<td style="text-align:center">65402</td>
+<td style="text-align:center">FF7A</td>
+</tr>
+<tr>
+<td style="text-align:center">ｻ</td>
+<td style="text-align:center">65403</td>
+<td style="text-align:center">FF7B</td>
+</tr>
+<tr>
+<td style="text-align:center">ｼ</td>
+<td style="text-align:center">65404</td>
+<td style="text-align:center">FF7C</td>
+</tr>
+<tr>
+<td style="text-align:center">ｽ</td>
+<td style="text-align:center">65405</td>
+<td style="text-align:center">FF7D</td>
+</tr>
+<tr>
+<td style="text-align:center">ｾ</td>
+<td style="text-align:center">65406</td>
+<td style="text-align:center">FF7E</td>
+</tr>
+<tr>
+<td style="text-align:center">ｿ</td>
+<td style="text-align:center">65407</td>
+<td style="text-align:center">FF7F</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾀ</td>
+<td style="text-align:center">65408</td>
+<td style="text-align:center">FF80</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾁ</td>
+<td style="text-align:center">65409</td>
+<td style="text-align:center">FF81</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾂ</td>
+<td style="text-align:center">65410</td>
+<td style="text-align:center">FF82</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾃ</td>
+<td style="text-align:center">65411</td>
+<td style="text-align:center">FF83</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾄ</td>
+<td style="text-align:center">65412</td>
+<td style="text-align:center">FF84</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾅ</td>
+<td style="text-align:center">65413</td>
+<td style="text-align:center">FF85</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾆ</td>
+<td style="text-align:center">65414</td>
+<td style="text-align:center">FF86</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾇ</td>
+<td style="text-align:center">65415</td>
+<td style="text-align:center">FF87</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾈ</td>
+<td style="text-align:center">65416</td>
+<td style="text-align:center">FF88</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾉ</td>
+<td style="text-align:center">65417</td>
+<td style="text-align:center">FF89</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾊ</td>
+<td style="text-align:center">65418</td>
+<td style="text-align:center">FF8A</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾋ</td>
+<td style="text-align:center">65419</td>
+<td style="text-align:center">FF8B</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾌ</td>
+<td style="text-align:center">65420</td>
+<td style="text-align:center">FF8C</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾍ</td>
+<td style="text-align:center">65421</td>
+<td style="text-align:center">FF8D</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾎ</td>
+<td style="text-align:center">65422</td>
+<td style="text-align:center">FF8E</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾏ</td>
+<td style="text-align:center">65423</td>
+<td style="text-align:center">FF8F</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾐ</td>
+<td style="text-align:center">65424</td>
+<td style="text-align:center">FF90</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾑ</td>
+<td style="text-align:center">65425</td>
+<td style="text-align:center">FF91</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾒ</td>
+<td style="text-align:center">65426</td>
+<td style="text-align:center">FF92</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾓ</td>
+<td style="text-align:center">65427</td>
+<td style="text-align:center">FF93</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾔ</td>
+<td style="text-align:center">65428</td>
+<td style="text-align:center">FF94</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾕ</td>
+<td style="text-align:center">65429</td>
+<td style="text-align:center">FF95</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾖ</td>
+<td style="text-align:center">65430</td>
+<td style="text-align:center">FF96</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾗ</td>
+<td style="text-align:center">65431</td>
+<td style="text-align:center">FF97</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾘ</td>
+<td style="text-align:center">65432</td>
+<td style="text-align:center">FF98</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾙ</td>
+<td style="text-align:center">65433</td>
+<td style="text-align:center">FF99</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾚ</td>
+<td style="text-align:center">65434</td>
+<td style="text-align:center">FF9A</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾛ</td>
+<td style="text-align:center">65435</td>
+<td style="text-align:center">FF9B</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾜ</td>
+<td style="text-align:center">65436</td>
+<td style="text-align:center">FF9C</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾝ</td>
+<td style="text-align:center">65437</td>
+<td style="text-align:center">FF9D</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾞ</td>
+<td style="text-align:center">65438</td>
+<td style="text-align:center">FF9E</td>
+</tr>
+<tr>
+<td style="text-align:center">ﾟ</td>
+<td style="text-align:center">65439</td>
+<td style="text-align:center">FF9F</td>
+</tr>
+</tbody>
+</table>
+<p>注：第一个字符是半角的<code>・</code>。</p>
+<p>观察上面的表格，可以注意到下面 2 点：</p>
+<ol>
+<li>平假名没有半角假名（这一点可以和维基百科的<a href="https://zh.wikipedia.org/zh-cn/%E5%8D%8A%E5%BD%A2%E5%81%87%E5%90%8D">半形假名</a>相印证）</li>
+<li>有部分平假名的半角假名是由 2 个字符构成，所以不可能像平片假名转换那样用<code>hira = chr(int(ord(gana) - 96))</code>轻松转换，而是要用字符串替换的方式。</li>
+</ol>
+<p>所以，全半角假名的转换比平片假名的转换麻烦得多，个人建议使用第三方库。</p>
+<h2 id="mojimoji">mojimoji</h2>
+<p>如果想从全角转为半角，那么 mojimoji 可能是唯一的选择了。</p>
+<pre><code class="language-python">import mojimoji
+print mojimoji.zen_to_han(u'アイウａｂｃ０１２')
+# ｱｲｳabc012
+print mojimoji.zen_to_han(u'アイウａｂｃ０１２', kana=False)
+# アイウabc012
+print mojimoji.zen_to_han(u'アイウａｂｃ０１２', digit=False)
+# ｱｲｳabc０１２
+print mojimoji.zen_to_han(u'アイウａｂｃ０１２', ascii=False)
+# ｱｲｳａｂｃ012
+
+print mojimoji.han_to_zen(u'ｱｲｳabc012')
+# アイウａｂｃ０１２
+print mojimoji.han_to_zen(u'ｱｲｳabc012', kana=False)
+# ｱｲｳａｂｃ０１２
+print mojimoji.han_to_zen(u'ｱｲｳabc012', digit=False)
+# アイウａｂｃ012
+print mojimoji.han_to_zen(u'ｱｲｳabc012', ascii=False)
+# アイウabc０１２
+</code></pre>
+<p>另外，按<a href="https://qiita.com/ikuyamada/items/fea6c8f81e7cac7cf318">Pythonで半角・全角の変換を高速に行う</a>提供的测评来看，mojimoji 也是速度最快的。</p>
+<pre><code class="language-python">%%time
+import mojimoji
+import zenhan
+import jctconv
+
+s = u'アイオエオ０１２３４５' * 10
+
+%time for n in range(1000000): mojimoji.zen_to_han(s)
+&gt;&gt;&gt; CPU times: user 3.90 s, sys: 0.03 s, total: 3.93 s Wall time: 3.97 s
+
+%time for n in range(1000000): zenhan.z2h(s)
+&gt;&gt;&gt; CPU times: user 71.05 s, sys: 0.16 s, total: 71.22 s Wall time: 71.45 s
+
+%time for n in range(1000000): jctconv.z2h(s)
+&gt;&gt;&gt; CPU times: user 19.75 s, sys: 0.06 s, total: 19.81 s Wall time: 19.86 s
+</code></pre>
+<h2 id="unicodedata">unicodedata</h2>
+<p>考虑到更普通的需求其实就是半角转全角，所以 Python 内置的标准库<code>unicodedata</code>就已经够用了。</p>
+<pre><code class="language-python">%%time
+import unicodedata
+
+input = &quot;アイオエオ０１２３４５&quot; * 10
+for n in range(1000000):
+    unicodedata.normalize(&quot;NFKC&quot;, input)
+
+&gt;&gt;&gt; CPU times: total: 11.5 s Wall time: 11.6 s
+</code></pre>
+<p>虽然是标准库，但转换速度不如上面提到的 mojimoji。</p>
+<p>另外，按照<a href="https://docs.python.org/3/library/unicodedata.html"> Python 官方文档</a>的说法，还有<code>NFC</code>、<code>NFD</code> 、<code>NFKD</code>三种模式，这里不做过多解释<s>其实是因为我也没搞懂啦 233</s></p>
+<p>下面再提供一个测试用例：</p>
+<pre><code class="language-python">import unicodedata
+
+HAN_MOJI = &quot;ｧｱｨｲｩｳｪｴｫｵｶｶﾞｷｷﾞｸｸﾞｹｹﾞｺｺﾞｻｻﾞｼｼﾞｽｽﾞｾｾﾞｿｿﾞﾀﾀﾞﾁﾁﾞｯﾂﾂﾞﾃﾃﾞﾄﾄﾞﾅﾆﾇﾈﾉﾊﾊﾞﾊﾟﾋﾋﾞﾋﾟﾌﾌﾞﾌﾟﾍﾍﾞﾍﾟﾎﾎﾞﾎﾟﾏﾐﾑﾒﾓｬﾔｭﾕｮﾖﾗﾘﾙﾚﾛﾜｦﾝｳﾞﾞﾟ&quot;
+ZEN_MOJI = &quot;ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロワヲンヴ゙゚&quot;
+if ZEN_MOJI == unicodedata.normalize(&quot;NFKC&quot;, HAN_MOJI):
+    print(&quot;OK&quot;)
+</code></pre>
+<h2 id="手写函数-half_to_fullwidth">手写函数 half_to_fullwidth</h2>
+<p>前面提到「由于有部分平假名的半角假名是由 2 个字符构成，所以要全半角的转换用字符串替换的方式」，但本人实现后发现这种方式的性能还不如 unicodedata</p>
+<pre><code class="language-python">def half_to_fullwidth(text):
+    zenkaku_mapping = {
+        &quot;ｶ&quot;: &quot;カ&quot;,
+        &quot;ｷ&quot;: &quot;キ&quot;,
+        &quot;ｸ&quot;: &quot;ク&quot;,
+        &quot;ｹ&quot;: &quot;ケ&quot;,
+        &quot;ｺ&quot;: &quot;コ&quot;,
+        &quot;ｻ&quot;: &quot;サ&quot;,
+        &quot;ｼ&quot;: &quot;シ&quot;,
+        &quot;ｽ&quot;: &quot;ス&quot;,
+        &quot;ｾ&quot;: &quot;セ&quot;,
+        &quot;ｿ&quot;: &quot;ソ&quot;,
+        &quot;ﾀ&quot;: &quot;タ&quot;,
+        &quot;ﾁ&quot;: &quot;チ&quot;,
+        &quot;ﾂ&quot;: &quot;ツ&quot;,
+        &quot;ﾃ&quot;: &quot;テ&quot;,
+        &quot;ﾄ&quot;: &quot;ト&quot;,
+        &quot;ﾅ&quot;: &quot;ナ&quot;,
+        &quot;ﾆ&quot;: &quot;ニ&quot;,
+        &quot;ﾇ&quot;: &quot;ヌ&quot;,
+        &quot;ﾈ&quot;: &quot;ネ&quot;,
+        &quot;ﾉ&quot;: &quot;ノ&quot;,
+        &quot;ﾊ&quot;: &quot;ハ&quot;,
+        &quot;ﾋ&quot;: &quot;ヒ&quot;,
+        &quot;ﾌ&quot;: &quot;フ&quot;,
+        &quot;ﾍ&quot;: &quot;ヘ&quot;,
+        &quot;ﾎ&quot;: &quot;ホ&quot;,
+        &quot;ﾏ&quot;: &quot;マ&quot;,
+        &quot;ﾐ&quot;: &quot;ミ&quot;,
+        &quot;ﾑ&quot;: &quot;ム&quot;,
+        &quot;ﾒ&quot;: &quot;メ&quot;,
+        &quot;ﾓ&quot;: &quot;モ&quot;,
+        &quot;ﾔ&quot;: &quot;ヤ&quot;,
+        &quot;ﾕ&quot;: &quot;ユ&quot;,
+        &quot;ﾖ&quot;: &quot;ヨ&quot;,
+        &quot;ﾗ&quot;: &quot;ラ&quot;,
+        &quot;ﾘ&quot;: &quot;リ&quot;,
+        &quot;ﾙ&quot;: &quot;ル&quot;,
+        &quot;ﾚ&quot;: &quot;レ&quot;,
+        &quot;ﾛ&quot;: &quot;ロ&quot;,
+        &quot;ﾜ&quot;: &quot;ワ&quot;,
+        &quot;ｦ&quot;: &quot;ヲ&quot;,
+        &quot;ﾝ&quot;: &quot;ン&quot;,
+        &quot;ｧ&quot;: &quot;ァ&quot;,
+        &quot;ｨ&quot;: &quot;ィ&quot;,
+        &quot;ｩ&quot;: &quot;ゥ&quot;,
+        &quot;ｪ&quot;: &quot;ェ&quot;,
+        &quot;ｫ&quot;: &quot;ォ&quot;,
+        &quot;ｯ&quot;: &quot;ッ&quot;,
+        &quot;ｬ&quot;: &quot;ャ&quot;,
+        &quot;ｭ&quot;: &quot;ュ&quot;,
+        &quot;ｮ&quot;: &quot;ョ&quot;,
+        &quot;ｰ&quot;: &quot;ー&quot;,
+        &quot;ﾞ&quot;: &quot;゛&quot;,
+        &quot;ﾟ&quot;: &quot;゜&quot;,
+    }
+
+    full_width_text = &quot;&quot;
+    for char in text:
+        if char in zenkaku_mapping:
+            full_width_text += zenkaku_mapping[char]
+        else:
+            full_width_text += char
+
+    return full_width_text
+
+# 测试函数
+text = &quot;ｧｱｨｲｩｳｪｴｫｵｶｶﾞｷｷﾞｸｸﾞｹｹﾞｺｺﾞｻｻﾞｼｼﾞｽｽﾞｾｾﾞｿｿﾞﾀﾀﾞﾁﾁﾞｯﾂﾂﾞﾃﾃﾞﾄﾄﾞﾅﾆﾇﾈﾉﾊﾊﾞﾊﾟﾋﾋﾞﾋﾟﾌﾌﾞﾌﾟﾍﾍﾞﾍﾟﾎﾎﾞﾎﾟﾏﾐﾑﾒﾓｬﾔｭﾕｮﾖﾗﾘﾙﾚﾛﾜｦﾝｳﾞﾞﾟ&quot;
+converted_text = half_to_fullwidth(text)
+print(&quot;转换后的全角假名文本：&quot;, converted_text)
+</code></pre>
+<p>测试下性能：</p>
+<pre><code class="language-python">%%time
+input = &quot;アイオエオ０１２３４５&quot; * 10
+for n in range(1000000):
+    half_to_fullwidth(input)
+
+&gt;&gt;&gt; CPU times: total: 25.2 s Wall time: 25.3 s
+</code></pre>
+<p>（单就速度和功能来看，mojimoji 都是第一，但大多数时候只需要半角转全角这一个功能，所以我更推荐内置库 unicodedata 。（另外提醒一下： mojimoji 需要 C++环境，打包时会比较麻烦）</p>
+<h1 id="其他">其他</h1>
+<h3 id="打印一定范围内的-unicode-字符">打印一定范围内的 Unicode 字符</h3>
+<pre><code class="language-python">def print_characters(start_unicode):
+    for i in range(start_unicode, start_unicode + 100):
+        print(i+&quot; : &quot;chr(i))
+
+# 调用函数并传入起始 Unicode 码作为参数
+start_unicode = int(input(&quot;请输入起始的 Unicode 码: &quot;))
+print_characters(start_unicode)
+</code></pre>
+<h1 id="参考">参考</h1>
+<p>[日文假名_Unicode 编码](04Library/04CS/日文假名_Unicode 编码.xlsx)</p>
+<p><a href="https://note.nkmk.me/python-str-convert-full-half-width/">Pythonで全角・半角を変換（mojimojiなど）</a>：非常详细地解释了本文谈到的所有类型转换</p>
+<p><a href="https://qiita.com/ikuyamada/items/fea6c8f81e7cac7cf318">Pythonで半角・全角の変換を高速に行う</a>：mojimoji 作者亲自撰写的文档，比较了 3 个常见的半角转全角的第三方库的性能。</p>
+<p><a href="https://www.unicode.org/charts/">Unicode 15.0 Character Code Charts</a>：从官网查看完整的码表。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[HiNative_‎我要练习中国方言，可以推荐一部电视剧，使用南方言，不要很难听]]></title>
+        <id>https://noheartpen.github.io/post/hinative_wo-yao-lian-xi-zhong-guo-fang-yan-ke-yi-tui-jian-yi-bu-dian-shi-ju-shi-yong-nan-fang-yan-bu-yao-hen-nan-ting/</id>
+        <link href="https://noheartpen.github.io/post/hinative_wo-yao-lian-xi-zhong-guo-fang-yan-ke-yi-tui-jian-yi-bu-dian-shi-ju-shi-yong-nan-fang-yan-bu-yao-hen-nan-ting/">
+        </link>
+        <updated>2023-06-25T14:03:36.000Z</updated>
+        <summary type="html"><![CDATA[<p>摘要： 这是我在<a href="https://zh.hinative.com/questions/24177074">HiNative_‎我要练习中国方言，可以推荐一部电视剧，使用南方言，不要很难听</a>提问下的回答，提到了三部方言配音的影视作品《读心神探》、《疯狂的石头》、《山城棒棒军》。本来还想介绍《刺客伍六七》（Scissor Seven）的，但人家问的是电视剧……</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>摘要： 这是我在<a href="https://zh.hinative.com/questions/24177074">HiNative_‎我要练习中国方言，可以推荐一部电视剧，使用南方言，不要很难听</a>提问下的回答，提到了三部方言配音的影视作品《读心神探》、《疯狂的石头》、《山城棒棒军》。本来还想介绍《刺客伍六七》（Scissor Seven）的，但人家问的是电视剧……</p>
+<!-- more -->
+<hr>
+<p>创建日期: 2023-06-23<br>
+修改日期: 2023-06-25<br>
+url:  https://hinative.com/questions/24177074<br>
+标签: 备份,英语</p>
+<hr>
+<p>If you're curious about Chongqing, you should try &quot;山城棒棒军&quot;.<br>
+如果你对重庆有兴趣的话，你可以试试《山城棒棒军》。</p>
+<p>This drama is about a group of porters who worked in Chongqing. The story of this TV series occurred 30 years ago when the Chinese economy was not as it is today. So, you can know the significance of Chinese economy reform to the general public. You can also see the real life of ordinary people.</p>
+<p>这部电视剧讲述的是一群在重庆工作的搬运工人的故事。由于故事发生在30年前，也就是中国的经济还不像现在这样备受瞩目的时候，所以你可以借这部电视剧了解到对于普通人而言，改革开放意味着什么。同时，你也可以看到老百姓们真实的生活。</p>
+<p>I found that Wikipedia does not have any information on this drama. Therefore, I would like to provide an introduction for it myself.</p>
+<p>我发现在维基百科上找不到关于这部电视剧的任何资料，所以自己动手写了点介绍。</p>
+<p>In terms of language, Chongqinghua is similar to Mandarin. However, as someone who was born and raised in Chongqing for ten years, I disagree with that statement. You may find it difficult at first. And I am happy to respond to any queries regarding the play. Please feel free to ask me anything.</p>
+<p>虽然在语言学上，重庆话被划入北方方言（即和普通话有很多相似的地方），但作为一个土生土长并在重庆生活了十多年的重庆人，我不太同意这样的观点，我觉得你刚开始看的时候可能会有很多不懂的地方。你可以向我提问，我很乐意回答重庆话相关的问题。</p>
+<p>you can watch it on here.</p>
+<p>你可以在YouTube上看它。</p>
+<p>https://m.youtube.com/watch?v=5snbnhfC8Qo</p>
+<p>About ChongQing, there also have a nice movie named Crazy Stone.  You can find more info on Wikipedia</p>
+<p>关于重庆，还有一部很有趣的电影《疯狂的石头》，你可以在维基百科上找到更多介绍<br>
+https://en.m.wikipedia.org/wiki/Crazy_Stone_(film)</p>
+<p>and watch it on YouTube.(This one has a subtitle)</p>
+<p>在YouTube上也能看。（这个有字幕）</p>
+<p>https://youtu.be/oHxFmXKlT-A</p>
+<p>And I also want to share &quot;读心神探&quot;, which is similar to Sherlock (Benedict Cumberbatch). When I was a child, I liked it very much. Since you can find more information on Wikipedia, I won't write anymore.</p>
+<p>另外，我也想推荐TVB的《读心神探》，这部电视剧和本尼迪克特·康伯巴奇主演的《神探夏洛克》比较类似。我小时候特别喜欢这部剧。由于你可以在维基百科上找到详细的介绍，我就不多费笔墨了。</p>
+<p>https://en.m.wikipedia.org/wiki/Every_Move_You_Make</p>
+<p>You can watch it on YouTube with subtitles.</p>
+<p>YouTube上可以找到有字幕的版本。</p>
+<p>https://m.youtube.com/watch?v=KT2wQhHDfWc&amp;list=PLf6G-fGLWGfwcZcADiOo5E8Q3woijLd2A</p>
+<p>Tips: although I had watched this drama a lot times, I also didn‘t know anything about Cantonese, so you may need to ask others.😃</p>
+<p>提示：虽然这部剧我看了好几遍，但我完全不懂粤语，所以可能无法回答关于这部剧的提问:)</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[HiNative_‎‎‎What is the difference between 白晝 and 白天]]></title>
+        <id>https://noheartpen.github.io/post/hinative_what-is-the-difference-between-bai-zhou-and-bai-tian/</id>
+        <link href="https://noheartpen.github.io/post/hinative_what-is-the-difference-between-bai-zhou-and-bai-tian/">
+        </link>
+        <updated>2023-06-22T08:12:06.000Z</updated>
+        <summary type="html"><![CDATA[<p>摘要：本文是我在<a href="https://hinative.com/questions/24170735">‎What is the difference between 白晝 and 白天?</a> 的回答。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>摘要：本文是我在<a href="https://hinative.com/questions/24170735">‎What is the difference between 白晝 and 白天?</a> 的回答。</p>
+<!-- more -->
+<hr>
+<p>创建日期: 2023-06-22<br>
+修改时间:<br>
+标签: 备份,英语</p>
+<hr>
+<h1 id="提问">提问</h1>
+<p>关于中文 (简体) 的问题<br>
+白晝 和 白天 有什么区别？如果难以说明的话，请教我一下例句。</p>
+<blockquote>
+<p>Feel free to just provide example sentences.</p>
+</blockquote>
+<h1 id="回答">回答</h1>
+<p>作为一个中国大陆生活的人，我不知道「白晝」是什么，查了字典才发现原来是「白昼」。从我的反应可以看出：「白晝」在推行简体字的中国大陆地区，一般被当作是古代汉语的写法，基本没有人会使用。<br>
+「白天」与「白昼」：「白昼」是一个比较偏书面语的表达，一般不会出现在口语中。所以你说“我「白天」一般在工作”是很正常的表达，而“我「白昼」一般在工作”就有点奇怪。<br>
+而在文学作品中，如果已经译为「白昼」，那么换为「白天」也会显得有点奇怪。</p>
+<p>比如：黑夜已深，「白昼」将近。我们就当脱去暗昧的行为，带上光明的兵器<br>
+换成：黑夜已深，「白天」将近。我们就当脱去暗昧的行为，带上光明的兵器<br>
+（this sentence is from New American Standard Bible, The night is nearly over; the day is almost here. So let us put aside the deeds of darkness and put on the armor of light.）</p>
+<p>作为一个中文母语者，当我知道这句话是在翻译《圣经》时，我会觉得第一句话的「白昼」是一个更好的表达（这也是《新标点和合本》的翻译，并非我杜撰的翻译）。</p>
+]]></content>
+    </entry>
+</feed>
