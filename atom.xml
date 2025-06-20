@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://noheartpen.github.io</id>
+    <title>NoHeartPen</title>
+    <updated>2025-06-20T12:50:31.463Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://noheartpen.github.io"/>
+    <link rel="self" href="https://noheartpen.github.io/atom.xml"/>
+    <subtitle>JavaScript &amp; Japanese, Python &amp; Polyglot, TypeScript &amp; Translate.</subtitle>
+    <logo>https://noheartpen.github.io/images/avatar.png</logo>
+    <icon>https://noheartpen.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2025, NoHeartPen</rights>
+    <entry>
+        <title type="html"><![CDATA[v2ex 关于赴日的相关讨论]]></title>
+        <id>https://noheartpen.github.io/post/v2ex-discussion-about-japanese-it/</id>
+        <link href="https://noheartpen.github.io/post/v2ex-discussion-about-japanese-it/">
+        </link>
+        <updated>2025-06-19T16:28:39.000Z</updated>
+        <summary type="html"><![CDATA[<p>这里整理了 v2ex 的 <a href="https://www.v2ex.com/go/ja">日本語</a> 和 <a href="https://www.v2ex.com/go/jp">日本</a> 节点下[[日本 IT]]相关的讨论。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>这里整理了 v2ex 的 <a href="https://www.v2ex.com/go/ja">日本語</a> 和 <a href="https://www.v2ex.com/go/jp">日本</a> 节点下[[日本 IT]]相关的讨论。</p>
+<!-- more -->
+<h2 id="v2ex-关于赴日的相关讨论">v2ex 关于赴日的相关讨论</h2>
+<p>小红书和知乎上的培训机构把[[日本 IT]]吹得天花乱坠，但大多数都是派遣公司写的软文。而 v2ex 作为程序员聚集的论坛，从这里可以更近距离地观察国内程序员对赴日的真实看法，所以这里专门整理了 v2ex 的 <a href="https://www.v2ex.com/go/ja">日本語</a> 和 <a href="https://www.v2ex.com/go/jp">日本</a> 节点下[[日本 IT]]相关的讨论。</p>
+<p>中年想去日本，求指点迷津 <a href="https://www.v2ex.com/t/1108789">https://www.v2ex.com/t/1108789</a></p>
+<p>被裁员后我靠副业撑到日本留学 <a href="https://www.v2ex.com/t/1125200">https://www.v2ex.com/t/1125200</a> 「不过新生活才刚开始，下一步我打算写三语博客，把案例和技术经验整理出来，拓展渠道，争取不光靠闲鱼接单。如果你对我在日本的生活感兴趣，我会继续更新。」</p>
+<p>赴日两年下一步拿永驻的阶段性总结和一些介绍 <a href="https://www.v2ex.com/t/1116665">https://www.v2ex.com/t/1116665</a></p>
+<p>谈论一些日本程序员工作相关 <a href="https://www.v2ex.com/t/946887">https://www.v2ex.com/t/946887</a></p>
+<p>[[有兄弟在日本工作的吗？给点意见]] <a href="https://www.v2ex.com/t/1049015">https://www.v2ex.com/t/1049015</a> 劝退。</p>
+<p>[[二次元肥宅的日本一年以及如何润日]] <a href="https://www.v2ex.com/t/1070801)">https://www.v2ex.com/t/1070801)</a> 很真实的分享，不过更难得的是总结了[[日本 IT]]的开发流程。</p>
+<p><a href="https://www.v2ex.com/t/1075102">二本前端应届 日语 n2 好去日本就业吗？</a> 如果你有其他选择，那就别来趟华人派遣的浑水。</p>
+<p><a href="https://www.v2ex.com/t/1049015">有兄弟在日本工作的吗？给点意见</a> ：真的想好了再来。另外，语言能力不够的话（尤其是口语），想要真正地融入日本其实没那么简单。</p>
+<p><a href="https://www.v2ex.com/t/1051047">大龄程序员在日本的一些观察</a> 中日生活相关的比较和思考。</p>
+<p><a href="https://www.v2ex.com/t/1036068">除非能进外企大厂，否则真心不要来日本做 IT 派遣</a>：「凌晨 3 点，今天喝酒喝多了，说点心里话。 日本 IT 行业真的太特么垃圾了，如果你们说国内是洼地，日本 IT 就是人类洼地。 如果不是自找苦吃或者受虐狂抖 M ，真的不要来日本搞 IT ，特别是 IT 派遣。」</p>
+<p><a href="https://www.v2ex.com/t/1021932">想赴日的 Javaer 呢～ 前路迷惘、求大师指点迷津吧</a>：「以前啊、我还想着、把日语学好、直接走华人派遣过去的、但是、自从去年开始啊、日本 IT 红海、容易待机的声音就不绝于耳、我这几天观察的几个营业发的案件啊、也是要求一个月左右入场、这肯定国内 IT 人员是无法满足条件的」</p>
+<p><a href="https://www.v2ex.com/t/432202">（一个）在日本的程序员现状分享 2018 年版（个人发展、工作机会、薪资待遇、生活成本等）</a> ：比起帖子本身，讨论区更有意思。</p>
+<h2 id="旅游-生活">旅游 &amp; 生活</h2>
+<p><a href="https://www.v2ex.com/t/1079983#reply17">来日一周的感受</a> 偏生活向的分享。</p>
+<p>有没有人评论一下日本本地人的居住水平 <a href="https://www.v2ex.com/t/1107992">https://www.v2ex.com/t/1107992</a></p>
+<p>第一次日本自由行的个人心得 <a href="https://www.v2ex.com/t/1100392">https://www.v2ex.com/t/1100392</a> 楼主详细分享了自己在 2024 年底一个人去日本旅行的经验，后续的回复和讨论也很有趣。</p>
+<h2 id="关于程序员学日语">关于程序员学日语</h2>
+<p><a href="https://www.v2ex.com/t/768598#reply62">有学习日语的群或者好点的论坛么</a></p>
+<p>[[想要学习日语，有过来人推荐一下怎么学比较好，好少走弯路吗]] <a href="https://www.v2ex.com/t/917669">https://www.v2ex.com/t/917669</a></p>
+<p>[[V2ex：没有人觉得日语的学习难度很大吗？]]  <a href="https://www.v2ex.com/t/1138764">https://www.v2ex.com/t/1138764</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[面向日语专业的 Python 自学&考证指北]]></title>
+        <id>https://noheartpen.github.io/post/python-learn-roadmap-for-japanese-undergraduate/</id>
+        <link href="https://noheartpen.github.io/post/python-learn-roadmap-for-japanese-undergraduate/">
+        </link>
+        <updated>2025-05-12T16:59:49.000Z</updated>
+        <summary type="html"><![CDATA[<p>摘要：针对日语专业想学编程的同学，推荐了编程语言和相应的教材以及视频课；也谈了下自己备考计算机二级（Python 方向）的一些经验；[[2025]] 还（计划）谈下怎么学习 Python Web 开发，以便毕业后来日本工作（非华人派遣）。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>摘要：针对日语专业想学编程的同学，推荐了编程语言和相应的教材以及视频课；也谈了下自己备考计算机二级（Python 方向）的一些经验；[[2025]] 还（计划）谈下怎么学习 Python Web 开发，以便毕业后来日本工作（非华人派遣）。</p>
+<!-- more -->
+<p>[[为什么日专生应该学 Python]]：进可攻，退可守，Python 真的是最适合日专生入坑的编程语言。</p>
+<p><a href="https://noheartpen.github.io/post/why-japanese-undergraduate-should-learn-python">https://noheartpen.github.io/post/why-japanese-undergraduate-should-learn-python</a></p>
+<p>[[北理工 Python 语言程序设计]]：如果让我给日语专业的学弟学妹推荐 Python 入门的视频教程和教材，那我一定会推荐嵩天老师的<a href="https://www.icourse163.org/course/bit-268001">Python语言程序设计</a>。</p>
+<p><a href="https://noheartpen.github.io/post/the-best-python-mooc-for-japanese-undergraduate">https://noheartpen.github.io/post/the-best-python-mooc-for-japanese-undergraduate</a></p>
+<p>[[计算机二级 Python 方向的备考指南]]：谈了下备考经验。</p>
+<p><a href="https://noheartpen.github.io/post/the-guide-of-ncre-for-python">https://noheartpen.github.io/post/the-guide-of-ncre-for-python</a></p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-3062437"><label class="task-list-item-label" for="task-item-3062437"> [[日专生如何学习 Python Web 开发]]：如何成为一名专业的 Python Web 开发者。[[2025]] ：在写了，在写了。</label></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[PyCon APAC 2025 参加报告会]]></title>
+        <id>https://noheartpen.github.io/post/pycon-apac-2025-pyconjp-members-report/</id>
+        <link href="https://noheartpen.github.io/post/pycon-apac-2025-pyconjp-members-report/">
+        </link>
+        <updated>2025-05-05T17:17:25.000Z</updated>
+        <summary type="html"><![CDATA[<p>一个挺有趣的活动。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>一个挺有趣的活动。</p>
+<!-- more -->
+<h2 id="活动流程">活动流程</h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>活动流程</th>
+<th>发表人</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>18:30</td>
+<td>開場・集合</td>
+<td></td>
+</tr>
+<tr>
+<td>19:00</td>
+<td>イベント開始・全体説明</td>
+<td></td>
+</tr>
+<tr>
+<td>19:10</td>
+<td>テキスト解析で見る PyCon APAC 2025 セッション＆スピーカートレンド分析</td>
+<td>丹野 良介</td>
+</tr>
+<tr>
+<td>19:20</td>
+<td>初めての PyCon 登壇 トークテーマの決め方と準備</td>
+<td>齊藤 優</td>
+</tr>
+<tr>
+<td>19:30</td>
+<td>海外開催 PyCon 初登壇</td>
+<td>武居 和也</td>
+</tr>
+<tr>
+<td>19:40</td>
+<td>近年の PyCon 情勢から見た PyCon APAC のまとめ</td>
+<td>寺田 学</td>
+</tr>
+<tr>
+<td>19:50</td>
+<td>PyCon 参加方法と PyCon JP 参加の薦め</td>
+<td>三池 大樹</td>
+</tr>
+<tr>
+<td>20:00</td>
+<td>休憩</td>
+<td></td>
+</tr>
+<tr>
+<td>20:10</td>
+<td>パネルディスカッション</td>
+<td></td>
+</tr>
+<tr>
+<td>20:40</td>
+<td>懇親会 ＠オンサイト</td>
+<td></td>
+</tr>
+<tr>
+<td>21:30</td>
+<td>イベント終了</td>
+<td></td>
+</tr>
+<tr>
+<td>22:00</td>
+<td>後片付け完了</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>活动本身是 PyConJP 的成员分享参加 PyCon APAC 2025 的经验，算是聊天喝茶。虽然不是很硬核的技术分享，但对 [[PyConJP]] 有兴趣，尤其是想做发表的话，还是可以听听的。</p>
+<p>另外，这次是在微软的日本总部（日本マイクロソフト株式会社）举办，借机参观了下别人家的办公室，<s>还成功白嫖了微软的一罐饮料</s>。</p>
+<h2 id="pycon-apac-时代结束pao-时代开始这对日本的-python-社区意味着什么">PyCon APAC 时代结束，PAO 时代开始，这对日本的 Python 社区意味着什么？</h2>
+<blockquote>
+<p>参加報告会の録画を YouTube にて公開しました。<br>
+https://pyconjp.blogspot.com/2025/04/pycon-apac-2025.html</p>
+</blockquote>
+<p>个人对这次活动印象最深的是「近年の PyCon 情勢から見た PyCon APAC のまとめ」这个分享提到的 PyCon APAC 了：</p>
+<blockquote>
+<p>PyCon APAC is the <strong>regional</strong> counterpart of <strong><a href="https://pretalx.com/redirect/?url=https%3A//pycon.org/%3AZbgOikHhzxHgjlVNyHodZBwfnhv2vogs14yQo2-v8gU">PyCon</a> in Asia-Pacific</strong>. It is hosted in one (1) of the following countries every year: Singapore, Malaysia, Indonesia, Philippines, Thailand, South Korea, Hong Kong, Vietnam, Japan, Taiwan, India and Bangladesh.</p>
+</blockquote>
+<p>是的，你没有看错，没有中国（大陆）（悲……</p>
+<p>但更有意思的是 PyCon APAC 今年将会更新为 PAO （Python Asia Organization），更详细的情况可以参考这篇 <a href="https://iqbalabdullah.net/en/posts/2025/03/the-final-pycon-apac/">Goodbye PyCon APAC: A New Chapter Begins</a>。</p>
+<p><a href="https://youtu.be/Zyjq5Dwj3dk?si=H3hO5Z8ezDc-9Lvr&amp;t=5489">https://youtu.be/Zyjq5Dwj3dk?si=H3hO5Z8ezDc-9Lvr&amp;t=5489</a></p>
+<blockquote>
+<p>(to寺田さん) PyCon APACが終わりPAOが始まることは、 Python の日本コミュニティにとってはどういった意味を持ちますか？</p>
+</blockquote>
+<p>（注：「寺田さん」是 PyCon JP Association 的理事）</p>
+<p>有兴趣的话，可以去听听我在 B站上传的完整翻译：</p>
+<p><a href="https://www.bilibili.com/video/BV1P6VzziEbE">https://www.bilibili.com/video/BV1P6VzziEbE</a></p>
+<p>寺田先生的回答其实用 <a href="https://iqbalabdullah.net/en/posts/2025/03/the-final-pycon-apac/">Goodbye PyCon APAC: A New Chapter Begins</a> 就能很好的总结：</p>
+<blockquote>
+<p>But let me be clear: PAO is not an umbrella organization representing all Asian Python communities. Each country and community remains independent. PAO serves as a hub to facilitate collaboration, empower community leaders, share resources, and ensure that future Python conferences in Asia no longer have to start from scratch each year.<br>
+但需要明确的是，PAO 组织并非代表所有亚洲 Python 社区的伞式机构，各国社区仍是保持独立运作。它旨在搭建协作枢纽，通过汇聚社区领袖、共享资源，确保亚洲地区未来的 Python 会议不必每年都从零起步。</p>
+</blockquote>
+<h2 id="其他小彩蛋">其他小彩蛋</h2>
+<p>会后聊天时，我说自己是一名来自中国的 Pythonista，寺田先生听到了很高兴，说希望能借 PAO 这个契机，促进和 PyCon China 的交流。<s>然而拖了一个月才写完这篇博客</s></p>
+<p>高天叔叔的<a href="https://www.bilibili.com/video/BV17wXSYgEJt/?share_source=copy_web&amp;vd_source=c968117e55645b439b5c5d2865ff0caa&amp;t=80">【PyCon是什么，为什么我玩的这么开心！】 </a> 里提到的「比如今年有个日本小哥的 talk 怎么用 Python 学日语」的发表人「鈴木たかのり」也参加了这次活动。和铃木叔叔聊天时，我还提到了这件事，说「中国的 Pythonista 里有很多对日语感兴趣<s>的二次元</s>，他们应该会喜欢这个分享，期待您来 PyCon China 来发表！」，铃木叔叔听了非常开心，<s>并表示明年一定</s>。</p>
+<p>二次会的时候和这次活动的主持人 <a href="https://www.whitphx.info/">橘 祐一郎</a> 聊天，小哥提到自己去过一次中国，参加了 2024 年 12 月 07 日 在厦门举办的 <a href="https://fequan.com/2024/">第七届 FEDAY</a> ，但我以为是参加的 PyCon China 2024，问他感觉怎么样。小哥回答说很开心，而且没想到还遇到了 Anthony Fu 老师——这后半句直接把我给宕机了，我赶紧问他是 Vue 的那个 Anthony Fu 吗，小哥说是的，就是 Vue 的那位。我：嗯？？？ Anthony Fu 老师不是 Vue 团队成员吗？自己前不久还在 [[v-tokyo Meetup 22：リアクティビィティ特集！]] 上蹭到了老师亲手送的贴纸，<s>没听到说 Vue 核心团队成员提桶跑路干 Python 后端的新闻啊（大雾）</s></p>
+<p>回来一查才发现原来是前端的活动233，还顺便看了下小哥的分享「使用 Gradio 和 Transformers 构建 Web AI应用」：</p>
+<blockquote>
+<p>从模型推理到 UI 构建，Python 拥有丰富的 AI 生态系统，而通过 WebAssembly 编译的 Python 实现 —— Pyodide 则将这个生态系统带入了前端世界。<br>
+Gradio 和 Transformers 是构建 AI 应用最有前景的 Python 框架组合之一，它们都有 Pyodide 版本：Gradio-Lite 和 Transformers.js.py，这使得开发纯前端 AI 应用成为可能。<br>
+它们为 AI 开发者开启了前端开发的新天地。<br>
+<a href="https://fequan.com/2024/#schedulesRef">https://fequan.com/2024/#schedulesRef</a></p>
+</blockquote>
+<p><s>啊，这熟悉的看不懂的感觉，东大大佬果然名不虚传</s></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Who I am sponsoring]]></title>
+        <id>https://noheartpen.github.io/post/who-i-am-sponsoring/</id>
+        <link href="https://noheartpen.github.io/post/who-i-am-sponsoring/">
+        </link>
+        <updated>2025-05-04T15:13:30.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="github">GitHub</h2>
+<p><a href="https://github.com/NoHeartPen?tab=sponsoring">https://github.com/NoHeartPen?tab=sponsoring</a></p>
+<p><a href="https://github.com/DIYgod">DIYgod</a>: Since 30 April 2024,  for his great work on <a href="https://github.com/DIYgod/RSSHub">RSSHub</a>, which made Everything RSSible.</p>
+<p><a href="https://github.com/L-M-Sherlock">Jarrett Ye</a>: Since 1 May 2024, for his work on <a href="https://github.com/open-spaced-repetition">Open Spaced Repetition</a> and <a href="https://github.com/L-M-Sherlock/thoughts-memo-translation">Thought Memo Translation</a>, both of which may change my life.</p>
+<p><a href="https://github.com/arianneorpilla">Arianne Orpilla</a>: since 16 December 2024, for her great work on <a href="https://github.com/arianneorpilla/jidoujisho">jidoujisho</a>, a full-featured mobile immersion language learning suite that is changing the way I learn foreign languages.</p>
+<h2 id="opencollective">OpenCollective</h2>
+<p><a href="https://opencollective.com/qingxuetong">https://opencollective.com/qingxuetong</a></p>
+<p><a href="https://opencollective.com/ankidroid">AnkiDroid</a>: Since December 2021, this app has changed my study.</p>
+<h2 id="other">Other</h2>
+<p><a href="https://www.patreon.com/c/shoui/">Shoui</a>: Since December 2025, He made <a href="https://learnjapanese.moe/">themoway</a> which helped me learn Japanese a lot.</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Flask 文章清单]]></title>
+        <id>https://noheartpen.github.io/post/good-articles-about-flask/</id>
+        <link href="https://noheartpen.github.io/post/good-articles-about-flask/">
+        </link>
+        <updated>2025-05-03T15:52:44.000Z</updated>
+        <summary type="html"><![CDATA[<p>分享 [[Flask]] 相关的好文章。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>分享 [[Flask]] 相关的好文章。</p>
+<!-- more -->
+<p>[[推荐 几个 Flask 学习资源]] <a href="https://zhuanlan.zhihu.com/p/43853688">https://zhuanlan.zhihu.com/p/43853688</a> 分享的东西都很旧了，但质量都还不错。</p>
+<h2 id="李辉老师的-hello-flask-专栏">李辉老师的 Hello, Flask! 专栏</h2>
+<p><a href="https://zhuanlan.zhihu.com/flask">https://zhuanlan.zhihu.com/flask</a></p>
+<blockquote>
+<p>用 Flask 和 Python 探索 Web 开发的无限可能。</p>
+</blockquote>
+<p>[[请不要把 Flask 和 FastAPI 放到一起比较]] <a href="https://greyli.com/flask-fastapi/">https://greyli.com/flask-fastapi/</a>「经常看到有人把 FastAPI 和 Flask 放到一起比较，但是却没有意识到这完全是两种东西——前者是基于 Web 框架 Starlette 添加了 Web API 功能支持的（框架之上的）框架，而后者是和 Starlette 同类的通用 Web 框架。你怎么能让小明和骑电动车的小军赛跑然后还夸小军好快好强？」</p>
+<p>[[Flask 已死，FastAPI 永生]] <a href="https://greyli.com/flask-fastapi-2023/">https://greyli.com/flask-fastapi-2023/</a> 「在一些商业场景(例如 CMS ) Django 依然是首选，而 Flask (甚至 FastAPI ) 看起来更像个「玩具」，所以 Django 短时间不会被取代(Flask这些年不是也是没取代的了嘛)。」</p>
+<p>[[如果你在 macOS 上无法访问 Flask 程序]] <a href="https://greyli.com/thank-you-apple/">https://greyli.com/thank-you-apple/</a> 端口被占用了。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[v站回复：被裁员后我靠副业撑到日本留学]]></title>
+        <id>https://noheartpen.github.io/post/reply-v2ex-1125200/</id>
+        <link href="https://noheartpen.github.io/post/reply-v2ex-1125200/">
+        </link>
+        <updated>2025-04-15T15:09:19.000Z</updated>
+        <summary type="html"><![CDATA[<p>这是我在<a href="https://www.v2ex.com/t/1125200">被裁员后我靠副业撑到日本留学</a>的回复。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>这是我在<a href="https://www.v2ex.com/t/1125200">被裁员后我靠副业撑到日本留学</a>的回复。</p>
+<!-- more -->
+<h1 id="v站回复被裁员后我靠副业撑到日本留学">v站回复：被裁员后我靠副业撑到日本留学</h1>
+<p>既然楼主有计划写三语博客，那现在可以多关注下面当地开发者社区举办的活动。既可以先混个眼熟，还能尬聊练下口语和听力（小红书所谓的日语角基本都是中国人，去了只能练中文）：</p>
+<p>Vue JP发布活动的地方，不定期发布活动。<br>
+<a href="https://vuejs-meetup.connpass.com/">https://vuejs-meetup.connpass.com/</a></p>
+<blockquote>
+<p>日本最大級のTypeScriptをテーマとした技術カンファレンス「TSKaigi 2025」開催決定！<br>
+<a href="https://2025.tskaigi.org/">https://2025.tskaigi.org/</a></p>
+</blockquote>
+<p>对日本的前端开发工作有兴趣的话，可以关注下面的赞助商页面：</p>
+<blockquote>
+<p>スポンサー<br>
+<a href="https://2025.tskaigi.org/sponsors">https://2025.tskaigi.org/sponsors</a></p>
+</blockquote>
+<p>然后自荐几篇博客，希望对楼主有点帮助：</p>
+<blockquote>
+<p>[[エンジニア白書 2024：日本 IT 行业 2024年度报告]]<br>
+个人觉得这份报告统计里的数据应该只有很少一部分来自华人 IT 派遣，因为 Python 和 JavaScript 在这份报告里面居然稳压了 Java 一头。<br>
+<a href="https://noheartpen.github.io/post/japanese-it-white-papers-2024/">https://noheartpen.github.io/post/japanese-it-white-papers-2024/</a></p>
+</blockquote>
+<blockquote>
+<p>[[萌途日语：日语自学指南（摘要版）]]<br>
+如果你是真想学好日语，那最好花时间认真读一读。因为，这些文章真的可以帮你少走一些弯路。<br>
+<a href="https://noheartpen.github.io/post/themoeway-translate-digest/">https://noheartpen.github.io/post/themoeway-translate-digest/</a></p>
+</blockquote>
+<blockquote>
+<p>赛高の日语学习工具<br>
+这里收集日语学习和日本工作相关的网站、工具和文章。<br>
+<a href="https://github.com/NoHeartPen/awesome-japanese-study-tools">https://github.com/NoHeartPen/awesome-japanese-study-tools</a></p>
+</blockquote>
+<blockquote>
+<p>guide：收录系统性的日语学习教程。<br>
+<a href="https://github.com/NoHeartPen/awesome-japanese-study-tools/tree/master/guide">https://github.com/NoHeartPen/awesome-japanese-study-tools/tree/master/guide</a></p>
+</blockquote>
+<blockquote>
+<p>这里记录那些会分享日本工作、生活相关内容的个人博客，欢迎自荐！<br>
+<a href="https://github.com/NoHeartPen/awesome-japanese-study-tools/tree/master/share#%E6%97%A5%E6%9C%AC%E7%94%9F%E6%B4%BB%E7%9B%B8%E5%85%B3%E5%8D%9A%E5%AE%A2">https://github.com/NoHeartPen/awesome-japanese-study-tools/tree/master/share#日本生活相关博客</a></p>
+</blockquote>
+<p>最后，祝楼主生活和工作顺利<sup>_</sup></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[O'Reilly Japan-Python-Book-2021]]></title>
+        <id>https://noheartpen.github.io/post/o-reilly-japan-python-book-published-on-2021/</id>
+        <link href="https://noheartpen.github.io/post/o-reilly-japan-python-book-published-on-2021/">
+        </link>
+        <updated>2025-04-05T16:58:49.000Z</updated>
+        <summary type="html"><![CDATA[<p>记录 [[O'Reilly Japan-Python-Book]] 2021年出版的 Python 相关的书。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>记录 [[O'Reilly Japan-Python-Book]] 2021年出版的 Python 相关的书。</p>
+<!-- more -->
+<h1 id="oreilly-japan-python-book-2021">O'Reilly Japan-Python-Book-2021</h1>
+<h2 id="todo-pytorchとfastaiではじめるディープラーニング">TODO PyTorchとfastaiではじめるディープラーニング</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784873119427/">https://www.oreilly.co.jp/books/9784873119427/</a></p>
+<p>虽然估计电子出版社的老师们是看到英文版封面上的「Al Applications Without a PhD」，所以才把「Deep Learning for Coders with fastai and PyTorch」的「Coders」翻译成了「码农」，但中文版的书名<a href="https://book.douban.com/subject/36437731/">码农的零门槛AI课：基于fastai与PyTorch的深度学习</a>蹭流量的嫌疑真的太大了……要不是看在 O'Reilly 出品的份上，我都懒得看一眼2333。</p>
+<h2 id="入門-python-3-第2版">入門 Python 3 第2版</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784873119328/">https://www.oreilly.co.jp/books/9784873119328/</a></p>
+<p>[[《Python语言及其应用（第2版）》]] <a href="https://book.douban.com/subject/35799211/">https://book.douban.com/subject/35799211/</a> 微信读书已经上架了，很适合才学 Python 的同学了解这门语言在各个方向的工程最佳实践。</p>
+<h2 id="pythonチュートリアル-第4版">Pythonチュートリアル 第4版</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784873119359/">https://www.oreilly.co.jp/books/9784873119359/</a></p>
+<blockquote>
+<p>本書はプログラミング言語Pythonの作者Guido氏が書き下ろした、Python入門者のための手引書です。</p>
+</blockquote>
+<p>豆瓣上的<a href="https://book.douban.com/subject/3142908/">Python Tutorial</a>不是最新版，但这个东西在 <a href="%3Chttps://docs.python.org/ja/3.13/tutorial/%3E">Python 官网</a>也能看吧……</p>
+<h2 id="todo-pythonではじめる数学の冒険">TODO Pythonではじめる数学の冒険</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784873119304/">https://www.oreilly.co.jp/books/9784873119304/</a></p>
+<blockquote>
+<p>代数、幾何学、三角関数などの高校レベルの数学を使った数多くの例題を盛り込み、実際にProcessingでPythonプログラムを動かしながら、AI時代に求められる数学の能力を磨いていきます。</p>
+</blockquote>
+<p>看日文介绍还以为真是小学二年级的难度，结果被劝退了。中文译名<a href="https://book.douban.com/subject/35479859/">用Python学数学</a>直接省略了「Adventures」这个让我产生了能读懂的错觉的单词……感谢编辑老师们的良苦用心2333。不过截止2025年3月，这本书还没上架微信阅读，可以去<a href="https://www.ituring.com.cn/book/2783">图灵社区</a>买电子版。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[O'Reilly Japan-Python-Book-2022]]></title>
+        <id>https://noheartpen.github.io/post/o-reilly-japan-python-book-published-on-2022/</id>
+        <link href="https://noheartpen.github.io/post/o-reilly-japan-python-book-published-on-2022/">
+        </link>
+        <updated>2025-04-05T14:56:37.000Z</updated>
+        <summary type="html"><![CDATA[<p>记录 [[O'Reilly Japan-Python-Book]] 2022年出版的 Python 相关的书。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>记录 [[O'Reilly Japan-Python-Book]] 2022年出版的 Python 相关的书。</p>
+<!-- more -->
+<h1 id="oreilly-japan-python-book-2022">O'Reilly Japan-Python-Book-2022</h1>
+<h2 id="サイバーセキュリティプログラミング-第2版">サイバーセキュリティプログラミング 第2版</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784873119731/">https://www.oreilly.co.jp/books/9784873119731/</a></p>
+<blockquote>
+<p>本書ではPythonを使ったサイバー攻撃手法について解説します。基本的な通信プログラムからProxyやRawデータ、Webアプリケーションへの攻撃やトロイの木馬の動作、そしてフォレンジック手法やOSINTまで、攻撃者の実践手法から防御方法を学びます。</p>
+</blockquote>
+<p><a href="https://book.douban.com/subject/35817553/">Python黑帽子：黑客与渗透测试编程之道（第2版）</a>，不是很懂这个方向……但日文版的译者在附录补充了英文版没有的内容：</p>
+<blockquote>
+<p>日本語版オリジナルの巻末付録として「Slackボットを通じた命令の送受信」「OpenDirのダンプツール」「Twitter IoCクローラー」を追加収録しました。</p>
+</blockquote>
+<h2 id="pythonからはじめるアルゴリズムトレード">Pythonからはじめるアルゴリズムトレード</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784873119793/">https://www.oreilly.co.jp/books/9784873119793/</a></p>
+<blockquote>
+<p>『Pythonによるファイナンス 第2版』の著者が、アルゴリズムトレードを始める上で必要な自動売買の基礎と、機械学習を本格的に導入するために必要なPythonの知識について解説します。</p>
+</blockquote>
+<p><a href="https://book.douban.com/subject/35141911/">Python for Algorithmic Trading</a>，呃？量化交易？那算了。</p>
+<h2 id="ゼロから作るdeep-learning-❹">ゼロから作るDeep Learning ❹</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784873119755/">https://www.oreilly.co.jp/books/9784873119755/</a></p>
+<p><a href="https://book.douban.com/subject/36991430/">深度学习入门4</a>：鱼书第四部。</p>
+<h2 id="sphinxをはじめよう-第3版">Sphinxをはじめよう 第3版</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784873119830/">https://www.oreilly.co.jp/books/9784873119830/</a></p>
+<blockquote>
+<p>本書はPythonの公式ドキュメント作成ツールとして誕生し、Python製の各種ソフトウェアやLinuxカーネルなどのドキュメント作成にも採用されているドキュメント変換ツールSphinxの、開発者自身による入門書です。Windows、macOS、Linux（Ubuntu）を例に、Sphinxの概要からインストール、基本的な利用方法について、またSphinxからLaTeXを経由してPDFを作成したり、EPUBフォーマットの電子書籍を作成する方法を、初めて触れる方にもわかりやすく紹介しています。Sphinxのバージョン4.3.1以降に対応。</p>
+</blockquote>
+<p>这玩意儿能出到第三版……只能说「真不愧是你啊，霓虹」（滑稽</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[O'Reilly Japan-Python-Book-2023]]></title>
+        <id>https://noheartpen.github.io/post/o-reilly-japan-python-book-published-on-2023/</id>
+        <link href="https://noheartpen.github.io/post/o-reilly-japan-python-book-published-on-2023/">
+        </link>
+        <updated>2025-04-04T14:55:12.000Z</updated>
+        <summary type="html"><![CDATA[<p>记录 [[O'Reilly Japan-Python-Book]] 2023年出版的 Python 相关的书。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>记录 [[O'Reilly Japan-Python-Book]] 2023年出版的 Python 相关的书。</p>
+<!-- more -->
+<h1 id="oreilly-japan-python-book-2023">O'Reilly Japan-Python-Book-2023</h1>
+<h2 id="pythonではじめるオープンエンドな進化的アルゴリズム">Pythonではじめるオープンエンドな進化的アルゴリズム</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784814400003/">https://www.oreilly.co.jp/books/9784814400003/</a></p>
+<blockquote>
+<p>本書はこの革新的な発散型アルゴリズムに焦点を当て、進化計算の基礎となる集団的探索の考え方、既存の収束型アルゴリズムとの違い、そして有用性について説明します。NEAT、新規性探索、品質多様性、共進化といった代表的なアルゴリズムのほか、CPPN、POETなどの最新アルゴリズムも取り上げています。</p>
+</blockquote>
+<p>日本人写的书，2025年还没被翻译成中文，但完全看不懂讨论的东西……</p>
+<h2 id="todo-python-distilled">TODO Python Distilled</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784814400461/">https://www.oreilly.co.jp/books/9784814400461/</a></p>
+<blockquote>
+<p>タイトルの「distilled」は「蒸留する」「抽出する」という意味があり、そのタイトルの通り、本書は、Pythonの言語仕様に関するトピックの中でも重要なものを抽出しています。Pythonはオンラインドキュメントが充実しているものの、ややもすれば、本当に必要な情報が見つけづらい、たどりつけないという状況も起こりがちです。本書では本当に必要で重要な情報にアクセスできるよう、Pythonのエッセンスを凝縮した内容となっています。</p>
+</blockquote>
+<p>虽然这本[[『Python Distilled』]]还没有中文翻译，但豆瓣有人在<a href="https://book.douban.com/subject/35563594/">英文版</a>下评价：「书如其名，精炼透彻，各种细节尤佳，进阶必备。Beazley 出品值得信赖，Twitter 上有人说 “No human should be allowed to write Python code before reading it” 虽然过于夸张，但是道出了本书的价值；Beazley 对于本书的定位是 “... there's the book of everything that I should actually use to solve actual problems. ... I wrote it for myself.”」</p>
+<h2 id="pythonによる地理空間データ分析">Pythonによる地理空間データ分析</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784814400324/">https://www.oreilly.co.jp/books/9784814400324/</a></p>
+<p>没兴趣。</p>
+<h2 id="pythonによるデータ分析入門-第3版">Pythonによるデータ分析入門 第3版</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784814400195/">https://www.oreilly.co.jp/books/9784814400195/</a></p>
+<p><a href="https://book.douban.com/subject/36632126/">利用Python进行数据分析 (原书第3版)</a>：豆瓣评分： 9.0</p>
+<h2 id="pythonではじめるバイオインフォマティクス">Pythonではじめるバイオインフォマティクス</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784814400379/">https://www.oreilly.co.jp/books/9784814400379/</a></p>
+<blockquote>
+<p>2部構成に分かれ、第Ⅰ部ではバイオインフォマティクスとプログラミングを学習するためのプラットフォーム「Rosalind」を使って14の課題に取り組みながら実践的に学習します。第Ⅱ部ではそのほかの重要パターンや概念を取り上げ、より複雑なプログラムについて説明します。ソフトウェアの開発、テスト、文書化、リリース、そしてサポートといった重要な方法を学び、Pythonを使ってバイオインフォマティクス研究を発展させるテクニックを学べる1冊です。</p>
+</blockquote>
+<p><a href="https://book.douban.com/subject/35595826/">Mastering Python for Bioinformatics: How to Write Flexible, Documented, Tested Python Code for Research Computing</a></p>
+<p>Bioinformatics……生物信息学？那算了。</p>
+<h2 id="todo-プログラミング文体練習">TODO プログラミング文体練習</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784814400225/">https://www.oreilly.co.jp/books/9784814400225/</a></p>
+<blockquote>
+<p>本書は、「単語の出現頻度をカウントして多いものから出力する」という課題を、40のスタイルで実装しています。リソース制約が大きかった時代の方法から、オブジェクト指向、純粋関数型、リフレクション、並行処理、ニューラルネットワークまで幅広いスタイルを扱い、マルチパラダイム言語Pythonの威力と魅力を感じられる構成となっています。</p>
+</blockquote>
+<p>中译<a href="https://book.douban.com/subject/27102599/">编程风格</a>是第一版，豆瓣的介绍「本书对一个常见的编程问题定义了不同的约束，分别使用33种方法实现了同一个词频统计任务，从而形成了风格迥异的编程风格」就非常有趣，适合和 Frost Ming  老师的[[友好的 Python：封装和复用]] 放在一起读。不过可惜，微信读书和图灵社区都没有出电子版，Z站只有扫描版的PDF。 ^rrdfjf</p>
+<h2 id="todo-ハイパフォーマンスpython-第2版">TODO ハイパフォーマンスPython 第2版</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784873119908/">https://www.oreilly.co.jp/books/9784873119908/</a></p>
+<blockquote>
+<p>本書ではCPUやメモリ使用量の観点からハイパフォーマンスなコードを書くための考え方や手法を解説します。そのために、パフォーマンスのボトルネックを測定する方法から、最適なデータ構造の選択方法、CythonやNumbaなどのコンパイラの比較、非同期処理、マルチコアCPUの活用法といった最適化のノウハウを、シンプルなサンプルプログラムを使って実際に効果を確認しながら学びます。</p>
+</blockquote>
+<p><a href="https://book.douban.com/subject/36500831/">Python高性能编程（第2版）</a>，微信读书连第一版都没上架，但<a href="https://www.epubit.com/bookDetails?id=UB8325fdf360af2&amp;typeName=%E6%90%9C%E7%B4%A2">异步社区</a>有e读版电子版卖。</p>
+<h2 id="todo-ロバストpython">TODO ロバストPython</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784814400171/">https://www.oreilly.co.jp/books/9784814400171/</a></p>
+<blockquote>
+<p>全4部構成のうち、Ⅰ部とⅡ部ではPythonにおける型ヒントの位置づけや組み込み型について基本的な事柄をしっかりおさえ、ユーザ定義型を使う方法、部分型、プロトコル、pydanticによる実行時型チェックなど、Pythonの型システムを最大限に活用する方法を詳しく説明します。Ⅲ部は依存関係や設計手法について、Ⅳ部はセーフティネットとして高度なテスト手法を扱います。</p>
+</blockquote>
+<p>中译<a href="https://book.douban.com/subject/36319025/">健壮的Python</a>，我只读了个开头，希望今年能读完并写完[[《健壮的Python》]]的书评。</p>
+<h2 id="todo-退屈なことはpythonにやらせよう-第2版">TODO 退屈なことはPythonにやらせよう 第2版</h2>
+<p><a href="https://www.oreilly.co.jp/books/9784873119274/">https://www.oreilly.co.jp/books/9784873119274/</a></p>
+<blockquote>
+<p>本書ではWordやExcel、PDF文書の一括処理、Webサイトからのダウンロード、メールやSMSの送受信、画像処理、GUI操作といった日常業務でよく直面する面倒で退屈な作業を、Pythonと豊富なモジュールを使って自動化します。今回の改訂では、GmailやGoogleスプレッドシートの操作、Pythonと各種モジュールの最新版への対応、演習等を増補しています。</p>
+<p>日本語版では、PyInstallerによるEXEファイルの作成方法を巻末付録として収録しました。</p>
+</blockquote>
+<p>哈哈，第一版是我个人的入门参考书，当时跟着一起瞎搞充满了各种快乐，没想到<a href="https://book.douban.com/subject/35387685/">Python编程快速上手（第2版）</a>也出了。不过，微信读书 2025 年还没上架，可以去<a href="https://www.epubit.com/bookDetails?id=UBbf1aa359cbf9&amp;typeName=%E6%90%9C%E7%B4%A2">异步社区</a>买下载版的电子书。</p>
+<p>另吐槽一下书名的翻译：<a href="https://book.douban.com/subject/36139383/">《Python编程快速上手2：趣味小项目轻松学》</a>和<a href="https://book.douban.com/subject/35387685/">Python编程快速上手（第2版）：让繁琐工作自动化</a>只能靠封面来区别了……我在微信读书上找电子版的时候，只看到了<a href="https://weread.qq.com/web/reader/f6a32e50813ab73f9g01889e#outline?noScroll=1">《Python编程快速上手2：趣味小项目轻松学》</a>，点进去一看，还想为什么第二版改了这么多地方，原来压根就不是一本书啊……</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[O'Reilly Japan-Python-Book-Summary]]></title>
+        <id>https://noheartpen.github.io/post/o-reilly-japan-python-book-summary/</id>
+        <link href="https://noheartpen.github.io/post/o-reilly-japan-python-book-summary/">
+        </link>
+        <updated>2025-03-30T17:52:19.000Z</updated>
+        <summary type="html"><![CDATA[<p>介绍 O'Reilly Japan 最近 5 年出版的有关 Python 的好书。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>介绍 O'Reilly Japan 最近 5 年出版的有关 Python 的好书。</p>
+<!-- more -->
+<h1 id="oreilly-japan-python-book-summary">O'Reilly Japan-Python-Book-Summary</h1>
+<p>首先，O'Reilly 其实有专门的日文版官网，专门卖日文版的电子版，不过只支持外币信用卡。</p>
+<blockquote>
+<p>O'Reilly Japanの書籍がすべてDRM Free、可搬性と検索性に優れたEbookでご活用いただけます。<br>
+<a href="https://www.oreilly.co.jp/ebook/">https://www.oreilly.co.jp/ebook/</a></p>
+</blockquote>
+<p>如果对日本举办的 Python 的相关活动有兴趣的话，也不要错过它家的博客 <a href="https://www.oreilly.co.jp/blog/">O'Reilly Japan Blog</a>。最近几年的文章几乎全是 「O'Reilly Japan 又参加了 Python 相关的啥啥活动」，建议直接改名叫 O'Reilly Japan Python Blog 好了2333。</p>
+<p>可以在下面的链接查看 O'Reilly Japan 出版的 Python 相关的所有书。</p>
+<p><a href="https://www.oreilly.co.jp/books/python/">https://www.oreilly.co.jp/books/python/</a></p>
+<p>接下来按年为单位推荐下那些2025年日本已经出版，但国内还没出版的好书。不建议大家买日语版，因为绝大多数其实都是翻译的英文版。但比起直接去 <a href="https://www.oreilly.com/">O'Reilly</a> 开盲盒，还是从 <a href="https://www.oreilly.co.jp/ebook/">O'Reilly Japan</a> 的编辑老师们精选过的这些书开始看起比较保险。</p>
+<p>如果对那一年出版的所有 Python 相关的书有兴趣，可以查看附带的完整版的博客，我会给出国内译本的豆瓣链接和我个人的主观评价，方便大家做个取舍。</p>
+<p>如果是计划来日本找 Python 相关的工作，可以把这里列出的书当做「IT日语泛读」的材料，但建议日专生最好有了 N1 左右再看比较好，至于程序员出身自学日语的同学，有了 N2 水平就差不多可以看了，如果已经读过中文版，那 N3 左右其实也能试试。</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-6006012"><label class="task-list-item-label" for="task-item-6006012"> 后面我也会写一篇博客[[IT日语相关听力材料]]，介绍我用来做「IT日语泛听」的材料。</label></li>
+</ul>
+<h2 id="2024">2024</h2>
+<p>[[O'Reilly Japan-Python-Book-2024]] ：强推 [[『ハイパーモダン Python』]]！</p>
+<p>完整版：<a href="https://noheartpen.github.io/post/o-reilly-japan-python-book-published-on-2024/">https://noheartpen.github.io/post/o-reilly-japan-python-book-published-on-2024/</a></p>
+<h2 id="2023">2023</h2>
+<p>[[O'Reilly Japan-Python-Book-2023]]：强推[[『プログラミング文体練習』]]和[[『Python Distilled』]]。</p>
+<p>完整版：<a href="https://noheartpen.github.io/post/o-reilly-japan-python-book-published-on-2023/">https://noheartpen.github.io/post/o-reilly-japan-python-book-published-on-2023/</a></p>
+<h2 id="2022">2022</h2>
+<p>[[O'Reilly Japan-Python-Book-2022]]：只有[[ゼロから作るDeep Learning ❹-強化学習編]]有点兴趣，其他书和我个人的方向不太一致，就算啦。</p>
+<p>完整版：<a href="https://noheartpen.github.io/post/o-reilly-japan-python-book-published-on-2022/">https://noheartpen.github.io/post/o-reilly-japan-python-book-published-on-2022/</a></p>
+<h2 id="2021">2021</h2>
+<p>[[O'Reilly Japan-Python-Book-2021]]：没有我特别感兴趣的。</p>
+<p>完整版：<a href="https://noheartpen.github.io/post/o-reilly-japan-python-book-published-on-2021/">https://noheartpen.github.io/post/o-reilly-japan-python-book-published-on-2021/</a></p>
+<h2 id="2020-以前出版">2020 以前出版</h2>
+<p>先把上面的看完了，再整理下面的吧233</p>
+<table>
+<thead>
+<tr>
+<th>ISBN</th>
+<th><strong>Title</strong></th>
+<th>発行日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>978-4-87311-930-4</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873119304/">Pythonではじめる数学の冒険</a></td>
+<td>2020/11/16</td>
+</tr>
+<tr>
+<td>978-4-87311-926-7</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873119267/">データサイエンスのための統計学入門 第2版</a></td>
+<td>2020/11/9</td>
+</tr>
+<tr>
+<td>978-4-87311-917-5</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873119175/">Effective Python 第2版</a></td>
+<td>2020/7/16</td>
+</tr>
+<tr>
+<td>978-4-87311-911-3</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873119113/">ゼロからはじめるデータサイエンス 第2版</a></td>
+<td>2020/5/1</td>
+</tr>
+<tr>
+<td>978-4-87311-906-9</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873119069/">ゼロから作るDeep Learning ❸</a></td>
+<td>2020/4/20</td>
+</tr>
+<tr>
+<td>978-4-87311-910-6</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873119106/">Pythonではじめる教師なし学習</a></td>
+<td>2020/4/13</td>
+</tr>
+<tr>
+<td>978-4-87311-890-1</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118901/">Pythonによるファイナンス 第2版</a></td>
+<td>2019/12/26</td>
+</tr>
+<tr>
+<td>978-4-87311-887-1</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118871/">NumPyによるデータ分析入門</a></td>
+<td>2019/9/27</td>
+</tr>
+<tr>
+<td>978-4-87311-881-9</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118819/">Python計算機科学新教本</a></td>
+<td>2019/6/26</td>
+</tr>
+<tr>
+<td>978-4-87311-854-3</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118543/">IPythonデータサイエンスクックブック 第2版</a></td>
+<td>2019/5/25</td>
+</tr>
+<tr>
+<td>978-4-87311-874-1</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118741/">Head First はじめてのプログラミング</a></td>
+<td>2019/4/26</td>
+</tr>
+<tr>
+<td>978-4-87311-871-0</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118710/">PythonによるWebスクレイピング 第2版</a></td>
+<td>2019/3/26</td>
+</tr>
+<tr>
+<td>978-4-87311-872-7</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118727/">PythonによるAIプログラミング入門</a></td>
+<td>2019/3/20</td>
+</tr>
+<tr>
+<td>978-4-87311-868-0</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118680/">機械学習のための特徴量エンジニアリング</a></td>
+<td>2019/2/23</td>
+</tr>
+<tr>
+<td>978-4-87311-860-4</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118604/">エレガントなSciPy</a></td>
+<td>2018/11/10</td>
+</tr>
+<tr>
+<td>978-4-87311-851-2</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118512/">問題解決のPythonプログラミング</a></td>
+<td>2018/9/22</td>
+</tr>
+<tr>
+<td>978-4-87311-826-0</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118260/">直感 Deep Learning</a></td>
+<td>2018/8/11</td>
+</tr>
+<tr>
+<td>978-4-87311-847-5</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118475/">作って動かすALife</a></td>
+<td>2018/7/28</td>
+</tr>
+<tr>
+<td>978-4-87311-836-9</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118369/">ゼロから作るDeep Learning ❷</a></td>
+<td>2018/7/21</td>
+</tr>
+<tr>
+<td>978-4-87311-829-1</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118291/">Head First Python 第2版</a></td>
+<td>2018/3/24</td>
+</tr>
+<tr>
+<td>978-4-87311-809-3</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118093/">プログラミングROS</a></td>
+<td>2017/12/13</td>
+</tr>
+<tr>
+<td>978-4-87311-818-5</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118185/">入門 PySpark</a></td>
+<td>2017/11/22</td>
+</tr>
+<tr>
+<td>978-4-87311-817-8</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118178/">Fluent Python</a></td>
+<td>2017/10/7</td>
+</tr>
+<tr>
+<td>978-4-87311-808-6</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873118086/">PythonとJavaScriptではじめるデータビジュアライゼーション</a></td>
+<td>2017/8/25</td>
+</tr>
+<tr>
+<td>978-4-87311-798-0</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873117980/">Pythonではじめる機械学習</a></td>
+<td>2017/5/25</td>
+</tr>
+<tr>
+<td>978-4-87311-794-2</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873117942/">Pythonではじめるデータラングリング</a></td>
+<td>2017/4/26</td>
+</tr>
+<tr>
+<td>978-4-87311-777-5</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873117775/">行列プログラマー</a></td>
+<td>2016/10/5</td>
+</tr>
+<tr>
+<td>978-4-87311-758-4</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873117584/">ゼロから作るDeep Learning</a></td>
+<td>2016/9/24</td>
+</tr>
+<tr>
+<td>978-4-87311-768-3</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873117683/">Pythonからはじめる数学入門</a></td>
+<td>2016/5/21</td>
+</tr>
+<tr>
+<td>978-4-87311-739-3</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873117393/">実践 Python 3</a></td>
+<td>2015/12/1</td>
+</tr>
+<tr>
+<td>978-4-87311-735-5</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873117355/">Think Stats 第2版</a></td>
+<td>2015/8/19</td>
+</tr>
+<tr>
+<td>978-4-87311-727-0</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873117270/">Cython</a></td>
+<td>2015/6/19</td>
+</tr>
+<tr>
+<td>978-4-87311-698-3</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873116983/">実践 機械学習システム</a></td>
+<td>2014/10/25</td>
+</tr>
+<tr>
+<td>978-4-87311-688-4</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873116884/">Python文法詳解</a></td>
+<td>2014/9/18</td>
+</tr>
+<tr>
+<td>978-4-87311-694-5</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873116945/">Think Bayes</a></td>
+<td>2014/9/6</td>
+</tr>
+<tr>
+<td>978-4-87311-607-5</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873116075/">実践 コンピュータビジョン</a></td>
+<td>2013/3/23</td>
+</tr>
+<tr>
+<td>978-4-87311-470-5</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873114705/">入門 自然言語処理</a></td>
+<td>2010/11/10</td>
+</tr>
+<tr>
+<td>978-4-87311-448-4</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873114484/">リバースエンジニアリング</a></td>
+<td>2010/5/21</td>
+</tr>
+<tr>
+<td>978-4-87311-393-7</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873113937/">初めてのPython 第3版</a></td>
+<td>2009/2/25</td>
+</tr>
+<tr>
+<td>978-4-87311-364-7</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873113647/">集合知プログラミング</a></td>
+<td>2008/7/24</td>
+</tr>
+<tr>
+<td>978-4-87311-276-3</td>
+<td><a href="https://www.oreilly.co.jp/books/9784873112763/">Python クックブック 第2版</a></td>
+<td>2007/6/23</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    </entry>
+</feed>
