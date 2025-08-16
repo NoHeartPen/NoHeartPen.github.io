@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://noheartpen.github.io</id>
+    <title>NoHeartPen</title>
+    <updated>2025-08-16T14:03:30.575Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://noheartpen.github.io"/>
+    <link rel="self" href="https://noheartpen.github.io/atom.xml"/>
+    <subtitle>JavaScript &amp; Japanese, Python &amp; Polyglot, TypeScript &amp; Translate.</subtitle>
+    <logo>https://noheartpen.github.io/images/avatar.png</logo>
+    <icon>https://noheartpen.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2025, NoHeartPen</rights>
+    <entry>
+        <title type="html"><![CDATA[我的 Java 文章清单]]></title>
+        <id>https://noheartpen.github.io/post/good-articles-about-java/</id>
+        <link href="https://noheartpen.github.io/post/good-articles-about-java/">
+        </link>
+        <updated>2025-08-15T15:39:29.000Z</updated>
+        <summary type="html"><![CDATA[<p>分享 [[Java]] 相关的好文章。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>分享 [[Java]] 相关的好文章。</p>
+<!-- more -->
+<h2 id="锐评-java">锐评 Java</h2>
+<p>[[给 Java 说句公道话]]：王垠前辈还真是一如既往的毒舌2333 <a href="https://www.yinwang.org/blog-cn/2016/01/18/java">原文地址</a></p>
+<p>[[Java与Go差别在哪，谁要被时代抛弃？]]：不止比较了基本语法，还比较了各自的最佳实践。<a href="https://mp.weixin.qq.com/s?__biz=MzI2NDU4OTExOQ==&amp;mid=2247689208&amp;idx=1&amp;sn=d32c9628d711e242a6bfc9a211efc227&amp;chksm=eb998b8a29ef1861dd5bdbdf9b19fc666ab7d6efae33fd2a9572ee4b8d64ce445efc041f8517&amp;mpshare=1&amp;scene=1&amp;srcid=0318orDbFYoGQjzURC7QcBaE&amp;sharer_shareinfo=9d7b8c97fb2d13d85283af2385f34364&amp;sharer_shareinfo_first=9d7b8c97fb2d13d85283af2385f34364#rd">原文地址</a></p>
+<p>[[从 Java 到 Go ：“哭笑不得”]]：介绍 Go 和 Java 的区别。<a href="https://mp.weixin.qq.com/s?__biz=MzI2NDU4OTExOQ==&amp;mid=2247687913&amp;idx=1&amp;sn=ac21308ed8c45235c69b18bd3fcd7d40&amp;sharer_shareinfo=948dc86f5eb01ceaf5c5d804b2cd646f&amp;sharer_shareinfo_first=948dc86f5eb01ceaf5c5d804b2cd646f#rd">原文地址</a></p>
+<p>[[Java 程序员说句心里话：麻了]] ： 虽然标题让人有点绷不住，但内容其实梳理  Java 比较重要的更新。<a href="https://mp.weixin.qq.com/s?__biz=MzI2NDU4OTExOQ==&amp;mid=2247689150&amp;idx=1&amp;sn=c666cea4341e59bb4678325dc031fa00&amp;chksm=ebc0eddb2d41b2d04cbb2913bc6bd6ae690c40837de8469f314e631d57b0e6ade66fe2eea55f&amp;mpshare=1&amp;scene=1&amp;srcid=0313DOoAoNWvqufpUl6zeqIW&amp;sharer_shareinfo=88664abaa541f655ecec029014c86b55&amp;sharer_shareinfo_first=88664abaa541f655ecec029014c86b55#rd">原文地址</a></p>
+<p>[[Java 如今还重要吗？]] [[JetBrian]] 拱火的姿势很熟练嘛（笑）<a href="https://blog.jetbrains.com/zh-hans/idea/2024/08/is-java-still-relevant-nowadays/">原文地址</a></p>
+<p>[[Java三十载风雨路，与缔造者 Gosling 共探传奇历程与未来走向]] ： Java 缔造者亲自讲述 Java 的历史。<a href="https://mp.weixin.qq.com/s?__biz=MjM5NTk0NjMwOQ==&amp;mid=2651203889&amp;idx=2&amp;sn=18738526c0ef88e800b76e3d035b86c2&amp;chksm=bc0561003ee8cb1a55904fb2aa71b699fdb9861e4dce7cea71f261e6f725bde1120dfe56dd81&amp;mpshare=1&amp;scene=1&amp;srcid=0603T3EbTH5kse6wc3IxRGKp&amp;sharer_shareinfo=0898c038ee5f5f7b6eec1a1057d8f50c&amp;sharer_shareinfo_first=0898c038ee5f5f7b6eec1a1057d8f50c#rd">原文地址</a></p>
+<h2 id="如何学习">如何学习</h2>
+<p>[[如何快速打好 Java 基础？]] 「每书数过，一意求知」<a href="https://www.zhihu.com/question/50904128/answer/521519858">原文地址</a></p>
+<p>[[目前 Java 后端有哪些不是很有必要去学的？]] 「JSP、Struts、Hibernate、Applet、Swing、JDBC、XML」 <a href="https://www.zhihu.com/question/305924723/answer/557800752">原文地址</a></p>
+<p>[[非科班的 Java 程序员该如何补充计算机基础知识，需要看哪些书？]]「博观而约取，厚积而薄发，吾告子止于此矣」 <a href="https://www.zhihu.com/question/267840917/answer/572085174">原文地址</a></p>
+<h2 id="spring">Spring</h2>
+<p>这个单独列在 [[Spring 文章清单]] 里。</p>
+<h2 id="最佳实践">最佳实践</h2>
+<p>[[Java 最佳做法]] [[JetBrian]] 教你写出好的 Java 代码。<a href="https://blog.jetbrains.com/zh-hans/idea/2024/03/java-best-practices/">原文地址</a></p>
+<p>[[公司刚入职了一名 Java 中级开发，短短 4 行代码居然凑齐了 3 个 bug！我哭了]] 多判断下 <code>null</code>，另外，记得配置代码质量扫描工具。<a href="https://mp.weixin.qq.com/s?__biz=MzUxOTc4NjEyMw==&amp;mid=2247593373&amp;idx=1&amp;sn=de9a23e939036eba29c63b011460cb5c&amp;chksm=f8215f25762d3c45d036cb4be04552aa08dd922253c60d1839c7baa806302cdba17ead248d9c&amp;mpshare=1&amp;scene=1&amp;srcid=0709o9ZmyNIPt1SIIciGibXr&amp;sharer_shareinfo=b47a92396f6c0cd8c3307f15cfa862e2&amp;sharer_shareinfo_first=b47a92396f6c0cd8c3307f15cfa862e2#rd">原文地址</a></p>
+<h2 id="我的文章">我的文章</h2>
+<p>[[JetBrian#IDEA]]：整理 IDEA 相关的技巧。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[中国辞书速报（2025年6月刊）]]></title>
+        <id>https://noheartpen.github.io/post/chinese-dictionaries-news-2025-06-on-chinese/</id>
+        <link href="https://noheartpen.github.io/post/chinese-dictionaries-news-2025-06-on-chinese/">
+        </link>
+        <updated>2025-07-05T14:39:46.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="词典出版相关信息">词典出版相关信息</h2>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzkxNDI5MDA0NQ==&amp;mid=2247494396&amp;idx=1&amp;sn=0b02f8d7e82629d2a58c4f3a9c9cadbd&amp;chksm=c05cf0fbe67e00086f62d8ebac5184962cc22c84f8853626fd4ac890de8118bc0a8f5024e406&amp;mpshare=1&amp;scene=1&amp;srcid=0609nkF5brGY2qR005Kq2phv&amp;sharer_shareinfo=61008d5618927693110307b00143249b&amp;sharer_shareinfo_first=61008d5618927693110307b00143249b#rd">《日语口语词典》（第二版）诞生记——邦迪兰+新增344个词</a> [[中国辞书速报（2025年5月刊）]] 提到的《日语口语词典》（第二版）的译者潘钧老师分享了翻译这本辞典的心路历程，也解释了中文版的封面设计的思路。[[《日语口语词典》（第二版）诞生记——邦迪兰+新增344个词]]</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=Mzg4NzEyNzIxMw==&amp;mid=2247506807&amp;idx=1&amp;sn=ffd0f1cfbc0a4350a146978b05e8e241&amp;chksm=ce8da2566bfcd28a8c3ab5d59cb38b4c3042944feb94a1179005a348e045303d29ee3ba23d09&amp;mpshare=1&amp;scene=1&amp;srcid=0626VxkMyK656DlJwLxH5JkB&amp;sharer_shareinfo=b8f5e68d75f398a6ed08d8c060f8a20e&amp;sharer_shareinfo_first=b8f5e68d75f398a6ed08d8c060f8a20e#rd">《中国大百科全书（第三版）·语言文字》纸质版在北京首发</a>  2025年6月21日，《中国大百科全书（第三版）·语言文字》卷举行纸质版的首发仪式。《中国大百科全书（第三版）》 目前在<a href="https://www.zgbk.com/">这里</a>可以免费访问，此次出版的纸质版应该是<a href="https://www.zgbk.com/ecph/subject?SiteID=1&amp;ID=44583">语言文字分类</a>下的词条。另外，有点好奇『日本大百科全書(ニッポニカ)』项目的资金来源<s>小学馆: 我养你</s>。</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=Mzg4NzEyNzIxMw==&amp;mid=2247506814&amp;idx=1&amp;sn=a806561ea13fb8f591d7a27a82a66ce8&amp;chksm=ce1afebebee0635cf74abdb9aff0ec501d0341e1952417ce92731f83e622c84e21923b24b936&amp;mpshare=1&amp;scene=1&amp;srcid=0626wGPPf9GkfrE0s6Rpsheh&amp;sharer_shareinfo=2aeb1eb2ade86d74af03e1890585dc8c&amp;sharer_shareinfo_first=2aeb1eb2ade86d74af03e1890585dc8c#rd">资讯丨数字赋能辞书传承，沪吉携手开启朝鲜语言文化传播新征程</a>「2025年6月18日上午，第三十一届北京国际图书博览会吉林展区内，《朝鲜语大辞典》网络版发布暨入驻聚典数据开放平台启动仪式圆满举行。」注意不是面向消费者的电子辞典，而是进入「聚典数据开放平台」——这个一会儿好好展开聊聊。</p>
+<h2 id="古代汉语词典">古代汉语词典</h2>
+<p><a href="https://mp.weixin.qq.com/s?__biz=Mzg4NzEyNzIxMw==&amp;mid=2247503329&amp;idx=1&amp;sn=0b39e9ddb0653180a994e48da2aa4d49&amp;scene=21#wechat_redirect">《古汉语常用字字典》（第6版）全新升级！ 官方正版附配套APP</a>《古汉语常用字字典》第6版出版了。文章标题提到的「配套APP」并不是电子辞典，而是一个类似网课的平台，如果想用电子版，可以去新华字典 APP 购买打包合集。不过，新华字典 APP提供的是第5版，期待能早日更新到第6版。[[《古汉语常用字字典》（第6版）全新升级！ 官方正版附配套APP]]</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=Mzg4NzEyNzIxMw==&amp;mid=2247506838&amp;idx=1&amp;sn=ffc5e749372e0d4eedd433cc3e934600&amp;chksm=ce1302f8e7db4dabc7482ed0e8d5db1dd11e8aa6cf7d6c1abb4316915ea5fc213a0fa478f1c3&amp;mpshare=1&amp;scene=1&amp;srcid=0704WUYRK1Lr0pDTSxCpbeMg&amp;sharer_shareinfo=892f7c10b490a0bf370517e4294b384e&amp;sharer_shareinfo_first=892f7c10b490a0bf370517e4294b384e#rd">《古代汉语词典》编纂40年，第3版在甲骨文故乡安阳全国首发</a>  6 月 26—27 日，《古代汉语词典》（第 3 版）全国首发式在河南安阳中国文字博物馆举行，同步首发的还有《古诗文常用名句辞典》。</p>
+<h2 id="新华字典app">新华字典APP</h2>
+<p>iOS: <a href="https://apps.apple.com/cn/app/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8-%E6%96%B0%E4%B8%AD%E5%9B%BD%E6%9B%B4%E5%85%B7%E5%BD%B1%E5%93%8D%E5%8A%9B%E7%9A%84%E7%8E%B0%E4%BB%A3%E6%B1%89%E8%AF%AD%E5%AD%97%E5%85%B8/id1197209563">AppStore</a><br>
+Andriod: 未上架 Google PlayStore，可以通过<a href="https://cidian.haidii.com/swg/xhzd.html">海笛</a>提供的 APK 直接安装。</p>
+<p>40元可以单独购买《新华字典》（第12版），用（点击就送的）新用户优惠价 278 元可以直接一口气买断包括《现代汉语词典》（第7版）、《古代汉语常用字字典》（第5版）、《古代汉语词典》（第2版）等在内的24本汉语辞典，对我这样的业余文言文爱好者还是挺有诱惑力的（4月在物书堂活动剁手剁到大动脉，缓了一个月终于快缓过来了，结果又看到了这个2333</p>
+<p>按我个人的喜好给所有词典排个序：</p>
+<ul>
+<li>《古代汉语常用字字典》（第5版）（单独的 APP 版售价 98 元）</li>
+<li>《古代汉语词典》（第2版）</li>
+<li>《古代汉语名言词典》</li>
+<li>《现代汉语词典》（第7版）</li>
+<li>《新华字典》（第12版）</li>
+<li>《新华成语大词典》</li>
+<li>《现代汉语学习词典》</li>
+<li>《汉语成语小词典》</li>
+<li>《北京俏皮话词典》（增订版）</li>
+<li>《全球华语词典》</li>
+<li>《中国艺术百科辞典》</li>
+<li>《新华词典》</li>
+<li>《新华新词语词典》</li>
+<li>《新华谚语词典》</li>
+<li>《新华歇后语词典》</li>
+<li>《新华惯用语词典》</li>
+<li>《俗语词典》</li>
+<li>《商务馆中学生成语词典》</li>
+<li>《商务馆小学生字典》</li>
+<li>《商务馆小学生词典》</li>
+<li>《商务馆小学生组词造句词典》</li>
+<li>《商务馆小学生同义词近义词反义词词典》</li>
+<li>《商务馆小学生谚语歇后语惯用语词典》</li>
+<li>《商务馆小学生成语词典》</li>
+</ul>
+<p>另，APP的「拍照查词」功能很有趣：既不是网易有道和欧路词典的取词框对准后自动识别，也不是 MOJi 辞书那样直接把整个页面的识别结果都直接展示出来，而是拍照后涂抹图片上想查文字所在的区域，APP 分词后可以直接跳转查看结果。可惜的是，似乎不能手动指定词典来优化分词结果，但对外国人和小朋友来说，这个功能还是挺实用的。</p>
+<p>P.S. Apple 有提供本地识别图片的文字的API <a href="https://developer.apple.com/documentation/vision/recognizing-text-in-images">Recognizing Text in Images</a>，物书堂能跟进一下就好了<s>我什么都愿意做的.jpg</s></p>
+<h2 id="聚典数据开放平台">聚典数据开放平台</h2>
+<p>之前只注意到了<a href="https://dictionaryapi.com/">Merriam-Webster Dictionary API</a>、<a href="https://www.collinsdictionary.com/collins-api">Collins API</a>和<a href="https://dictionary.cambridge.org/ja/develop.html">Cambridge Dictionary API</a>、<a href="https://developer.oxforddictionaries.com/">Oxford Dictionaries API</a>，没想到上海辞书出版社也做了个类似的平台。</p>
+<p>接下来从后端工程师的视角，分享下我觉得平台官方披露的信息中比较有趣的内容吧：</p>
+<p><a href="https://www.jdapi.com/about/introduction">https://www.jdapi.com/about/introduction</a></p>
+<blockquote>
+<p>平台以《辞海》《汉语大词典》等为核心内容，并聚合其他优质内容资源，融合广泛的应用场景，通过技术集成创新，有效整合产业链相关方，“屏幕取词查检，释义即刻呈现”的服务方式解决了用户在线阅读即时知识查检的需求，开创了传统工具书数字化转型的新模式。</p>
+</blockquote>
+<p>「“屏幕取词查检，释义即刻呈现”的服务方式解决了用户<strong>在线阅读即时知识查检</strong>的需求」，这点和<a href="https://note.com/jisyoshowyou/n/n218a8fab10bb">【参加レポ】2023年度JACET英語辞書研究会第2回例会</a>[[【参加レポ】2023年度JACET英語辞書研究会第2回例会]] 里提到的「ユーザーが引きたい瞬間と辞書を近づける」（所想即所查）非常类似：</p>
+<blockquote>
+<p>廣瀬さんは辞書編集者から見た辞書の諸問題をまとめた上で、これからの辞書に必要なことを述べられました。特に印象に残っているのは、「ユーザーが引きたい瞬間と辞書を近づける」というお話です。具体的には、ネット記事やSNSで調べたい言葉を見つけたとき、辞書アプリにそのまま飛ぶことができるようになれば便利だよね、というようなことです。」<br>
+译：广濑先生从词典编纂者的角度总结了词典存在的诸多问题，并阐述了未来词典的发展方向。其中令我印象尤为深刻的是&quot;所想即所查&quot;的观点。具体来说，就是在看网络上的文章，或者刷社交媒体看到想查的词汇时，能快速直接在词典应用程序查到相关词条——这确实是挺方便的。</p>
+</blockquote>
+<p>查了下这里提到的「廣瀬先生」所属的「<a href="https://kotoba-jisho.shogakukan.co.jp/">株式会社 kotoba</a>」，看起来是小学馆旗下负责辞典编撰的部门，并不是技术部门。</p>
+<p>所以都快过去两年了，kotobank 和 japanknowledge 也没推出官方的浏览器插件，[[DONGRI]] 倒是有 Google Workspace 插件，但从 YouTube 的介绍视频<a href="https://youtu.be/SjJCQ8ZdvSU?si=ONms5OVh7K7lcaxT">DONGRI活用法紹介③ アドオン機能で集中力と表現力を高める</a>和我个人的实际体验来看，离真正意义上的「所想即所查」还是有一定的差距。</p>
+<p>本着抛砖引玉<s>炫技</s>的想法，动手搓了[[物书堂助手 Obsidian 插件版]]，并把其中最关键的辞典检索 [[FastMikannAPI]] 也一起开源了，希望能给同行一点参考。</p>
+<p><a href="https://github.com/NoHeartPen/fast-mikann-api">https://github.com/NoHeartPen/fast-mikann-api</a></p>
+<blockquote>
+<p>平台核心逻辑是：优选并整合权威的语词、百科等各类工具书资源，将其内容最小颗粒化精加工后形成一个系统、开放的“云上数据仓库”；</p>
+<p>通过标准化的数据接口（API），与各类数字阅读、新闻资讯、搜索引擎等应用无缝对接，用户仅需在当前阅读界面选词，释义即刻呈现，将知识查检无障碍、不中断地融入阅读和学习过程；</p>
+</blockquote>
+<p>目前日本似乎没有这样的平台，三省堂倒是针对自己家的辞典搞了一大堆 Web，但可惜实际用起来都比较一言难尽。</p>
+<p>个人觉得，比起费力不讨好地搞一大堆（难用的） APP，只提供 API 平台让开发者<s>自己折腾</s>申请调用，对出版社而言，也许是更好的选择。</p>
+<p>另外，真心建议三省堂等出版社考虑下出海：按国際交流基金公布的「<a href="https://www.jpf.go.jp/j/project/japanese/survey/result/dl/survey2021/all.pdf">2021年度 海外日本語教育機関調査</a>」，2021年全球共有近 300 万日语学习者，这个市场和日本本土市场相比，其实也不算小了。</p>
+<p>（注：2024年的调查报告还未发布，但 2018 到 2021 居然是轻微下降，所以很好奇 2021-2024 年的日语学习人数的会是什么趋势）</p>
+<blockquote>
+<p>平台利用大数据技术，搜集分析用户使用情况，不断迭代完善内容和应用产品，持续提升用户体验；</p>
+</blockquote>
+<p>作为一名业余检索工程师，对这部分的技术细节非常有兴趣，但在[[《辞书研究》]]最近几年的目录上没看到这方面的论文。不过，日本今年出版了一本[[『理想の辞書を求めて』]] ，算是沿着这个思路在搞，只可惜目前研究团队中好像还没有计科方向的专业人士（尤其是信息检索、形态素解析和机器学习方向），如果接下来继续通过录屏和问卷调查的方式来收集数据，只怕很难做出进一步的研究了。</p>
+<blockquote>
+<p>根据合作方调用次数和覆盖规模，平台实行阶梯收费。</p>
+</blockquote>
+<p>哈哈哈，这里的「阶梯收费」就是我（作为独立开发者）最感兴趣的部分了，但可惜注册这个平台需要「统一社会信用代码」，而且目前公布的合作方里似乎没有独立开发团队（西窗烛……算吗？233）</p>
+<p>另外，看到<a href="https://www.jdapi.com/partner">合作伙伴</a>提到微信阅读，我才注意到原来微信阅读的内置辞典界面一直都有「聚典平台」这 4 个字2333</p>
+<p>从官方披露的「发展历程」来看，项目目前状态（应该）还不错：</p>
+<blockquote>
+<p>2020年8月13日：“聚典数据开放平台”正式发布<br>
+2020年11月5日：聚典平台数据调用次数破1亿次<br>
+2021年8月31日：聚典平台数据调用次数破2亿次<br>
+2022年3月13日：日访问突破100万次/天<br>
+2022年7月5日：聚典平台数据调用次数破5亿次<br>
+2022年12月：聚典平台上线基于网络字体的文本加密技术；<br>
+2023年7月10日：聚典平台数据调用次数破10亿次</p>
+</blockquote>
+<p>最后，提一下<a href="https://docs.jdapi.com/">聚典开放平台文档中心</a>吧， 这个东西就只值得有兴趣的辞典开发者读读了。</p>
+<p>主要是没想到官方居然完全不提供测试用的 API，甚至连注册都有一定门槛（至于么……），只能观摩下 API 设计，管中窥豹猜猜业务场景了。</p>
+<p>之后，我也会专门从面向普通用户的角度，聊聊我接触过的网页词典和词典软件的API（或者换个更通俗的说法：URL） 的设计模式，敬请期待。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[中国に関しての辞書速報（2025年6月号）]]></title>
+        <id>https://noheartpen.github.io/post/chinese-dictionaries-news-2025-06-on-japanese/</id>
+        <link href="https://noheartpen.github.io/post/chinese-dictionaries-news-2025-06-on-japanese/">
+        </link>
+        <updated>2025-07-05T13:41:38.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="辞書の出版についての話">辞書の出版についての話</h2>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzkxNDI5MDA0NQ==&amp;mid=2247494396&amp;idx=1&amp;sn=0b02f8d7e82629d2a58c4f3a9c9cadbd&amp;chksm=c05cf0fbe67e00086f62d8ebac5184962cc22c84f8853626fd4ac890de8118bc0a8f5024e406&amp;mpshare=1&amp;scene=1&amp;srcid=0609nkF5brGY2qR005Kq2phv&amp;sharer_shareinfo=61008d5618927693110307b00143249b&amp;sharer_shareinfo_first=61008d5618927693110307b00143249b#rd">《日语口语词典》（第二版）诞生记——邦迪兰+新增344个词</a> <a href="https://chinese-dictionaries-news.hatenablog.com/entry/2025/06/07/121716">中国に関しての辞書速報（2025年5月号）</a>で紹介された『日本語口語辞典』（第二版）の翻訳者である潘鈞先生が、この辞典を翻訳するまでの歩みを共有し、中国語版の表紙デザインの考え方についても説明されています。</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=Mzg4NzEyNzIxMw==&amp;mid=2247506807&amp;idx=1&amp;sn=ffd0f1cfbc0a4350a146978b05e8e241&amp;chksm=ce8da2566bfcd28a8c3ab5d59cb38b4c3042944feb94a1179005a348e045303d29ee3ba23d09&amp;mpshare=1&amp;scene=1&amp;srcid=0626VxkMyK656DlJwLxH5JkB&amp;sharer_shareinfo=b8f5e68d75f398a6ed08d8c060f8a20e&amp;sharer_shareinfo_first=b8f5e68d75f398a6ed08d8c060f8a20e#rd">《中国大百科全书（第三版）·语言文字》纸质版在北京首发</a>  2025年6月21日、『中国大百科全書（第三版）・言語文字』巻の発行記念式典が開催されました。『中国大百科全書（第三版）』は現在<a href="https://www.zgbk.com/">こちら</a>で無料閲覧可能で、今回出版されたのはおそらく<a href="https://www.zgbk.com/ecph/subject?SiteID=1&amp;ID=44583">言語文字カテゴリー</a>に属する項目でしょう。</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=Mzg4NzEyNzIxMw==&amp;mid=2247506814&amp;idx=1&amp;sn=a806561ea13fb8f591d7a27a82a66ce8&amp;chksm=ce1afebebee0635cf74abdb9aff0ec501d0341e1952417ce92731f83e622c84e21923b24b936&amp;mpshare=1&amp;scene=1&amp;srcid=0626wGPPf9GkfrE0s6Rpsheh&amp;sharer_shareinfo=2aeb1eb2ade86d74af03e1890585dc8c&amp;sharer_shareinfo_first=2aeb1eb2ade86d74af03e1890585dc8c#rd">资讯丨数字赋能辞书传承，沪吉携手开启朝鲜语言文化传播新征程</a>　2025年6月18日午前、第31回北京国際図書博覧会吉林省の展示区内において、『朝鮮語大辞典』ネット版発表式典及び「聚典データオープンプラットフォーム」参入開始式典が盛大に開催されました。（注：「聚典データオープンプラットフォーム」についての詳細説明は後ほど展開いたします。）</p>
+<h3 id="古代漢語についての辞書">古代漢語についての辞書</h3>
+<p><a href="https://mp.weixin.qq.com/s?__biz=Mzg4NzEyNzIxMw==&amp;mid=2247503329&amp;idx=1&amp;sn=0b39e9ddb0653180a994e48da2aa4d49&amp;scene=21#wechat_redirect">《古汉语常用字字典》（第6版）全新升级！ 官方正版附配套APP</a>『古漢語常用字字典』第6版が刊行されました。記事のタイトルで言及されている「対応アプリ」は電子辞書ではなく、オンライン講座のようなプラットフォームです。電子版をお求めの場合は、新華字典アプリでパッケージ版を購入できます。ただし、新華字典アプリで提供されているのは第5版ですので、第6版への早期アップデートが待たれます。</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=Mzg4NzEyNzIxMw==&amp;mid=2247506838&amp;idx=1&amp;sn=ffc5e749372e0d4eedd433cc3e934600&amp;chksm=ce1302f8e7db4dabc7482ed0e8d5db1dd11e8aa6cf7d6c1abb4316915ea5fc213a0fa478f1c3&amp;mpshare=1&amp;scene=1&amp;srcid=0704WUYRK1Lr0pDTSxCpbeMg&amp;sharer_shareinfo=892f7c10b490a0bf370517e4294b384e&amp;sharer_shareinfo_first=892f7c10b490a0bf370517e4294b384e#rd">《古代汉语词典》编纂40年，第3版在甲骨文故乡安阳全国首发</a>  6月26日から27日にかけて、「古代漢語辞典」（第3版）の全国初発売式典が河南省安陽市の中国文字博物館で開催され、同時に「古詩文常用名句辞典」も初発売されました。</p>
+<h2 id="新華字典アプリ">新華字典アプリ</h2>
+<p>iOS: <a href="https://apps.apple.com/cn/app/%E6%96%B0%E5%8D%8E%E5%AD%97%E5%85%B8-%E6%96%B0%E4%B8%AD%E5%9B%BD%E6%9B%B4%E5%85%B7%E5%BD%B1%E5%93%8D%E5%8A%9B%E7%9A%84%E7%8E%B0%E4%BB%A3%E6%B1%89%E8%AF%AD%E5%AD%97%E5%85%B8/id1197209563">App Store</a><br>
+Android: Google Playストアには未掲載ですが、<a href="https://cidian.haidii.com/swg/xhzd.html">開発者が運営しているウェブページ</a>が提供するAPKから直接インストール可能ですが、支払い方法は中国の AliPay や WechatPay しかないようですので、ご注意ください。</p>
+<p>『新華字典』（第12版）は単体で1000円（税込）で購入可能です。8000円（税込）という破格の値段で、『現代漢語詞典』（第7版）、『古代漢語常用字字典』（第5版）など24冊もの漢語辞典セットを一括購入できます。私のような古代漢語のアマチュアには心揺さぶられるお買い得ですが、4月に物書堂のセールで散財してしまい、1ヶ月かけてようやく懐具合が回復しかけた矢先に、またこれを見つけてしまいました（涙）…</p>
+<p>以下は私個人の好みに基づく辞書のランキングです：</p>
+<ul>
+<li>《现代汉语词典》（第7版）単体アプリ版は約 2000 円</li>
+<li>《古代汉语常用字字典》（第5版）</li>
+<li>《古代汉语词典》（第2版）</li>
+<li>《古代汉语名言词典》</li>
+<li>《新华字典》（第12版）</li>
+<li>《新华成语大词典》</li>
+<li>《现代汉语学习词典》</li>
+<li>《汉语成语小词典》</li>
+<li>《北京俏皮话词典》（增订版）</li>
+<li>《全球华语词典》</li>
+<li>《中国艺术百科辞典》</li>
+<li>《新华词典》</li>
+<li>《新华新词语词典》</li>
+<li>《新华谚语词典》</li>
+<li>《新华歇后语词典》</li>
+<li>《新华惯用语词典》</li>
+<li>《俗语词典》</li>
+<li>《商务馆中学生成语词典》</li>
+<li>《商务馆小学生字典》</li>
+<li>《商务馆小学生词典》</li>
+<li>《商务馆小学生组词造句词典》</li>
+<li>《商务馆小学生同义词近义词反义词词典》</li>
+<li>《商务馆小学生谚语歇后语惯用语词典》</li>
+<li>《商务馆小学生成语词典》</li>
+</ul>
+<p>また、アプリの「写真検索」機能が面白いです。これは、NetEase Youdaoのスマホアプリような単語を枠で囲んで自動認識する方式でも、MOJi辞書のようにページ全体の認識結果を直接表示する方式でもありません。写真を撮影した後、画像上で調べたい文字の領域を塗りつぶすと、アプリがそのあたりの文字に分ち書きにして、辞書の見出しを直接表示することができます。残念ながら、手動で辞書を指定して分ち書きの解析結果を最適化することはできないようですが、外国人や子供にとっては非常に実用的な機能です。</p>
+<p>P.S. Apple はローカルで画像の文字を認識するAPI <a href="https://developer.apple.com/documentation/vision/recognizing-text-in-images">Recognizing Text in Images</a> を提供していますので、物書堂さんもこのような機能を実装してくれると良いな。</p>
+<h2 id="聚典データオープンプラットフォーム">聚典データオープンプラットフォーム</h2>
+<p>この前、<a href="https://dictionaryapi.com/">Merriam-Webster Dictionary API</a>や<a href="https://www.collinsdictionary.com/collins-api">Collins API</a>や<a href="https://dictionary.cambridge.org/ja/develop.html">Cambridge Dictionary API</a>、<a href="https://developer.oxforddictionaries.com/">Oxford Dictionaries API</a>などのだけわかりましたが、まさか上海辞書出版社も同じサービスを提供するとは。</p>
+<p>これから、バックエンドエンジニアの視点から、公式に開示された情報の中で特に興味深いと感じた内容を共有させていただきます。</p>
+<p><a href="https://www.jdapi.com/about/introduction">https://www.jdapi.com/about/introduction</a></p>
+<blockquote>
+<p>平台以《辞海》《汉语大词典》等为核心内容，并聚合其他优质内容资源，融合广泛的应用场景，通过技术集成创新，有效整合产业链相关方，“屏幕取词查检，释义即刻呈现”的服务方式解决了用户在线阅读即时知识查检的需求，开创了传统工具书数字化转型的新模式。</p>
+<p>このプラットフォームは『辞海』『漢語大詞典』などを中核コンテンツとし、他の高品質なコンテンツリソースを集約し、幅広い応用シーンと融合させています。技術の集成的なイノベーションを通じて、関連する産業チェーンの関係者を効果的に統合し、<strong>「画面からの単語検索、即座に意味表示」というサービス方式により、ユーザーが読書しながら即座に知識を検索するニーズを解決し</strong>、伝統的な参考書のデジタルトランスフォーメーションにおける新たなモデルを切り開きました。</p>
+</blockquote>
+<p>「画面からの単語検索で、意味が即座に表示される」というサービス形態は、ユーザーが読書しながら即座に知識を検索するニーズを解決するという点は、<a href="https://note.com/jisyoshowyou/n/n218a8fab10bb">【参加レポ】2023年度JACET英語辞書研究会第2回例会</a> での「ユーザーが検索したい瞬間と辞書を近づける」という考え方は同じだと思います：</p>
+<blockquote>
+<p>廣瀬さんは辞書編集者から見た辞書の諸問題をまとめた上で、これからの辞書に必要なことを述べられました。特に印象に残っているのは、「ユーザーが引きたい瞬間と辞書を近づける」というお話です。具体的には、ネット記事やSNSで調べたい言葉を見つけたとき、辞書アプリにそのまま飛ぶことができるようになれば便利だよね、というようなことです。」</p>
+</blockquote>
+<p>ここで言及されている「廣瀬さん」が所属する「<a href="https://kotoba-jisho.shogakukan.co.jp/">株式会社 kotoba</a>」について調べてみたところ、小学館傘下で辞書編纂を担当する部門のようで、開発部門ではないようです。そのため、2年近く経った今でも、kotobank と japanknowledge は公式のブラウザ拡張をリリースしていません。DONGRI には Google Workspace 用のアドオンがありますが、YouTubeの紹介動画<a href="https://youtu.be/SjJCQ8ZdvSU?si=ONms5OVh7K7lcaxT">DONGRI活用法紹介③ アドオン機能で集中力と表現力を高める</a>と実際の体験から判断すると、「ユーザーが検索したい瞬間と辞書を近づける」にはまだ一定の隔たりがあります。それで、<a href="https://github.com/NoHeartPen/obsidian-monokakido-copilot-plugin">Monokakido Copliot for Obsidian</a> を作り、その中でも特に重要な辞書検索機能の[[FastMikannAPI]] も同時に OSS 化しました。もしこの機能も実装したいと考えている方々の参考になれば幸いです。</p>
+<p><a href="https://github.com/NoHeartPen/fast-mikann-api">https://github.com/NoHeartPen/fast-mikann-api</a></p>
+<blockquote>
+<p>平台核心逻辑是：优选并整合权威的语词、百科等各类工具书资源，将其内容最小颗粒化精加工后形成一个系统、开放的“云上数据仓库”；</p>
+<p>通过标准化的数据接口（API），与各类数字阅读、新闻资讯、搜索引擎等应用无缝对接，用户仅需在当前阅读界面选词，释义即刻呈现，将知识查检无障碍、不中断地融入阅读和学习过程；</p>
+</blockquote>
+<blockquote>
+<p>プラットフォームの核心となるロジックは、権威ある語彙や百科事典などの各種参考書リソースを精選し統合し、その内容を最小単位に細かく加工して、体系的でオープンな「クラウドデータウェアハウス」を構築することです。</p>
+<p>標準化されたデータインターフェース（API）を通じて、各種デジタルリーディング、ニュース情報、検索エンジンなどのアプリケーションとシームレスに接続します。ユーザーは現在の読書画面で単語を選択するだけで、即座に意味が表示され、知識検索を障壁なく、中断することなく読書や学習プロセスに統合できます。</p>
+</blockquote>
+<p>現在のところ、日本にはこのようなプラットフォームは存在しないようです。三省堂は自社の辞書向けに多数のウェブサービスを展開していますが、実際に使ってみると残念ながらいまひとつ使い勝手が良くありません。出版社にとっては、労力をかけて（使いにくい）ウェブアプリを大量に開発するよりも、APIプラットフォームだけを提供して、ほかの開発者に申請利用してもらうほうがより良い選択肢ではないかと考えます。</p>
+<p>また、三省堂をはじめとする出版社には真剣に海外展開を検討することをお勧めします。国際交流基金が公表した「<a href="https://www.jpf.go.jp/j/project/japanese/survey/result/dl/survey2021/all.pdf">2021年度 海外日本語教育機関調査</a>」によると、2021年時点で全世界に約300万人の日本語学習者が存在します。この市場規模は日本国内市場と比較しても決して小さくありませんと思います。（注：2024年の調査報告はまだ公開されていませんが、2018年から2021年にかけてわずかながら減少傾向にあったため、2021年から2024年の日本語学習者数の推移がどうなるか非常に興味深いところですよね）</p>
+<blockquote>
+<p>平台利用大数据技术，搜集分析用户使用情况，不断迭代完善内容和应用产品，持续提升用户体验；</p>
+<p>プラットフォームはビッグデータ技術を活用し、ユーザーの利用状況を収集・分析し、コンテンツやアプリケーションプロダクトを継続的に改善することで、ユーザーエクスペリエンスを向上させています。</p>
+</blockquote>
+<p>アマチュアの検索エンジニアとして、この部分の技術的詳細に大変興味を持っていますが、『辞書研究』の最近数年の目次にはこの方面の論文が見当たりませんでした。ただし、今年『理想の辞書を求めて』が出版され、この考え方に沿って研究が進められているようです。ただ残念なことに、現在の研究チームにはコンピュータサイエンス分野（特に情報検索、形態素解析、機械学習の方向）の専門家がいないようです。今後も録画やアンケート調査でデータを収集する方法を続けるなら、さらなる研究を進めるのは難しいでしょう。</p>
+<blockquote>
+<p>根据合作方调用次数和覆盖规模，平台实行阶梯收费。</p>
+<p>協力先の利用回数とカバー範囲に応じて、プラットフォームでは段階的な料金体系を採用しています。</p>
+</blockquote>
+<p>ここでの「段階的な料金体系」は（個人開発者になりたい）私が最も興味を持っている部分です。残念ながら、このプラットフォームに登録するには法人番号（中：统一社会信用代码）が必要で、現在公開されている協力先には個人開発チームが含まれていないようです。</p>
+<p>公式に開示された「発展の歩み」によると、プロジェクトの現状は（おそらく）良好と言えるでしょう：</p>
+<blockquote>
+<p>2020年8月13日：「聚典データオープンプラットフォーム」正式リリース</p>
+<p>2020年11月5日：データ呼び出し回数が1億回を突破</p>
+<p>2021年8月31日：データ呼び出し回数が2億回を突破</p>
+<p>2022年3月13日：1日あたりのアクセス数が100万回/日を突破</p>
+<p>2022年7月5日：データ呼び出し回数が5億回を突破</p>
+<p>2022年12月：Webフォントベースのテキスト暗号化技術を導入</p>
+<p>2023年7月10日：データ呼び出し回数が10億回を突破</p>
+</blockquote>
+<p>最後に、<a href="https://docs.jdapi.com/">聚典オープンプラットフォームドキュメントセンター</a>について触れておきますが、これは興味のあるプログラマー向けの読み物に過ぎませんので、その後、一般ユーザー向けの視点から、私がこれまで使ってきた辞書アプリの API や辞書サイトの URL の設計パターンについて詳しくお話しする予定ですので、どうぞお楽しみに。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[我的自然语言处理书单]]></title>
+        <id>https://noheartpen.github.io/post/my-booklist-of-nlp/</id>
+        <link href="https://noheartpen.github.io/post/my-booklist-of-nlp/">
+        </link>
+        <updated>2025-06-29T17:50:57.000Z</updated>
+        <summary type="html"><![CDATA[<p>这篇博客和[[我的日语自然语言处理书单]]的主要区别在于：这里主要推荐中文写的自然语言处理相关的书，比较适合零基础入门 NLP 的同学作为参考。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>这篇博客和[[我的日语自然语言处理书单]]的主要区别在于：这里主要推荐中文写的自然语言处理相关的书，比较适合零基础入门 NLP 的同学作为参考。</p>
+<!-- more -->
+<h2 id="入门向">入门向</h2>
+<p>[[《NLTK基础教程：用NLTK和Python库构建机器学习应用》]]：很老的书了，用的工具也比较旧，但谈的问题都很经典。</p>
+<h2 id="实践向">实践向</h2>
+<p>[[《自然语言处理实战：从入门到项目实践》]]：必读！</p>
+<p>[[《自然语言处理入门》]]：这本书其实应该叫《自然语言处理常用算法及工程实现》……</p>
+<p>[[《spaCy 自然语言处理：从入门到进阶》]]：如果读完了 [[spaCy]] 官方教程<a href="https://course.spacy.io/zh">使用 spaCy 做进阶自然语言处理</a>，想了解下中文自然语言处理的一些细节，可以去豆瓣阅读买电子版。</p>
+<h3 id="检索">检索</h3>
+<p>我个人研究最多的方向，不过我主要是读日语书。</p>
+<p>[[《这就是搜索引擎》]]：强推！</p>
+<p>[[《Elasticsearch实战（第2版）》]] ：读此书则 [[Elasticsearch]] 观止矣。</p>
+<h2 id="进阶向">进阶向</h2>
+<h3 id="机器学习">机器学习</h3>
+<p>虽然到了2025年，提到自然语言处理都会提到 LLM，但在实际工作中，无论如何绕不开的其实是「机器学习」——这是最为核心的技术，也是实践中运用最广的技术。</p>
+<p>[[《机器学习实战》]]：看不懂，但大受震撼.jpg</p>
+<h2 id="参考">参考</h2>
+<p>[[ChatGPT对自然语言处理带来什么冲击]] 通过点评自然语言处理相关教材的方式分析了 「ChatGPT 对自然语言处理本身的冲击」 <a href="https://mp.weixin.qq.com/s?__biz=Mzg2NzI5NDU4OA==&amp;mid=2247484096&amp;idx=1&amp;sn=7f63c9921adad3967d08917e82bbe42b&amp;chksm=cebc8ed3f9cb07c5b3868763fbb0dfa16003b364124cb1a7caf50cff2b99f425baeea8360be1&amp;mpshare=1&amp;scene=1&amp;srcid=0121dsWNGjzG94xiVAPYreqI&amp;sharer_sharetime=1674272505242&amp;sharer_shareid=de16ecff8024103879896daac725a9e3#rd">https://mp.weixin.qq.com/s?__biz=Mzg2NzI5NDU4OA==&amp;mid=2247484096&amp;idx=1&amp;sn=7f63c9921adad3967d08917e82bbe42b&amp;chksm=cebc8ed3f9cb07c5b3868763fbb0dfa16003b364124cb1a7caf50cff2b99f425baeea8360be1&amp;mpshare=1&amp;scene=1&amp;srcid=0121dsWNGjzG94xiVAPYreqI&amp;sharer_sharetime=1674272505242&amp;sharer_shareid=de16ecff8024103879896daac725a9e3#rd</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[v2ex 关于赴日的相关讨论]]></title>
+        <id>https://noheartpen.github.io/post/v2ex-discussion-about-japanese-it/</id>
+        <link href="https://noheartpen.github.io/post/v2ex-discussion-about-japanese-it/">
+        </link>
+        <updated>2025-06-19T16:28:39.000Z</updated>
+        <summary type="html"><![CDATA[<p>这里整理了 v2ex 的 <a href="https://www.v2ex.com/go/ja">日本語</a> 和 <a href="https://www.v2ex.com/go/jp">日本</a> 节点下[[日本 IT]]相关的讨论。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>这里整理了 v2ex 的 <a href="https://www.v2ex.com/go/ja">日本語</a> 和 <a href="https://www.v2ex.com/go/jp">日本</a> 节点下[[日本 IT]]相关的讨论。</p>
+<!-- more -->
+<h2 id="v2ex-关于赴日的相关讨论">v2ex 关于赴日的相关讨论</h2>
+<p>小红书和知乎上的培训机构把[[日本 IT]]吹得天花乱坠，但大多数都是派遣公司写的软文。而 v2ex 作为程序员聚集的论坛，从这里可以更近距离地观察国内程序员对赴日的真实看法，所以这里专门整理了 v2ex 的 <a href="https://www.v2ex.com/go/ja">日本語</a> 和 <a href="https://www.v2ex.com/go/jp">日本</a> 节点下[[日本 IT]]相关的讨论。</p>
+<p>中年想去日本，求指点迷津 <a href="https://www.v2ex.com/t/1108789">https://www.v2ex.com/t/1108789</a></p>
+<p>被裁员后我靠副业撑到日本留学 <a href="https://www.v2ex.com/t/1125200">https://www.v2ex.com/t/1125200</a> 「不过新生活才刚开始，下一步我打算写三语博客，把案例和技术经验整理出来，拓展渠道，争取不光靠闲鱼接单。如果你对我在日本的生活感兴趣，我会继续更新。」</p>
+<p>赴日两年下一步拿永驻的阶段性总结和一些介绍 <a href="https://www.v2ex.com/t/1116665">https://www.v2ex.com/t/1116665</a></p>
+<p>谈论一些日本程序员工作相关 <a href="https://www.v2ex.com/t/946887">https://www.v2ex.com/t/946887</a></p>
+<p>[[有兄弟在日本工作的吗？给点意见]] <a href="https://www.v2ex.com/t/1049015">https://www.v2ex.com/t/1049015</a> 劝退。</p>
+<p>[[二次元肥宅的日本一年以及如何润日]] <a href="https://www.v2ex.com/t/1070801)">https://www.v2ex.com/t/1070801)</a> 很真实的分享，不过更难得的是总结了[[日本 IT]]的开发流程。</p>
+<p><a href="https://www.v2ex.com/t/1075102">二本前端应届 日语 n2 好去日本就业吗？</a> 如果你有其他选择，那就别来趟华人派遣的浑水。</p>
+<p><a href="https://www.v2ex.com/t/1049015">有兄弟在日本工作的吗？给点意见</a> ：真的想好了再来。另外，语言能力不够的话（尤其是口语），想要真正地融入日本其实没那么简单。</p>
+<p><a href="https://www.v2ex.com/t/1051047">大龄程序员在日本的一些观察</a> 中日生活相关的比较和思考。</p>
+<p><a href="https://www.v2ex.com/t/1036068">除非能进外企大厂，否则真心不要来日本做 IT 派遣</a>：「凌晨 3 点，今天喝酒喝多了，说点心里话。 日本 IT 行业真的太特么垃圾了，如果你们说国内是洼地，日本 IT 就是人类洼地。 如果不是自找苦吃或者受虐狂抖 M ，真的不要来日本搞 IT ，特别是 IT 派遣。」</p>
+<p><a href="https://www.v2ex.com/t/1021932">想赴日的 Javaer 呢～ 前路迷惘、求大师指点迷津吧</a>：「以前啊、我还想着、把日语学好、直接走华人派遣过去的、但是、自从去年开始啊、日本 IT 红海、容易待机的声音就不绝于耳、我这几天观察的几个营业发的案件啊、也是要求一个月左右入场、这肯定国内 IT 人员是无法满足条件的」</p>
+<p><a href="https://www.v2ex.com/t/432202">（一个）在日本的程序员现状分享 2018 年版（个人发展、工作机会、薪资待遇、生活成本等）</a> ：比起帖子本身，讨论区更有意思。</p>
+<h2 id="旅游-生活">旅游 &amp; 生活</h2>
+<p><a href="https://www.v2ex.com/t/1079983#reply17">来日一周的感受</a> 偏生活向的分享。</p>
+<p>有没有人评论一下日本本地人的居住水平 <a href="https://www.v2ex.com/t/1107992">https://www.v2ex.com/t/1107992</a></p>
+<p>第一次日本自由行的个人心得 <a href="https://www.v2ex.com/t/1100392">https://www.v2ex.com/t/1100392</a> 楼主详细分享了自己在 2024 年底一个人去日本旅行的经验，后续的回复和讨论也很有趣。</p>
+<h2 id="关于程序员学日语">关于程序员学日语</h2>
+<p><a href="https://www.v2ex.com/t/768598#reply62">有学习日语的群或者好点的论坛么</a></p>
+<p>[[想要学习日语，有过来人推荐一下怎么学比较好，好少走弯路吗]] <a href="https://www.v2ex.com/t/917669">https://www.v2ex.com/t/917669</a></p>
+<p>[[V2ex：没有人觉得日语的学习难度很大吗？]]  <a href="https://www.v2ex.com/t/1138764">https://www.v2ex.com/t/1138764</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[中国辞书速报（2025年5月刊）]]></title>
+        <id>https://noheartpen.github.io/post/chinese-dictionaries-news-2025-05-on-chinese/</id>
+        <link href="https://noheartpen.github.io/post/chinese-dictionaries-news-2025-05-on-chinese/">
+        </link>
+        <updated>2025-06-07T14:21:10.000Z</updated>
+        <content type="html"><![CDATA[<p>日语版 [[中国辞书速报（2025年5月刊）]] <a href="https://chinese-dictionaries-news.hatenablog.com/entry/2025/06/07/121716">https://chinese-dictionaries-news.hatenablog.com/entry/2025/06/07/121716</a></p>
+<h2 id="辞书研究2025年第3期目录公开">《辞书研究》2025年第3期目录公开</h2>
+<p>2025/05/30  <a href="http://mp.weixin.qq.com/s?__biz=MzUxMjcyNDU2Mw==&amp;mid=2247505423&amp;idx=1&amp;sn=46db0f1608293056dd85acaf0727677a&amp;chksm=f829a4099e1f05c1d65c85fb1b4e58ebfa6e6e373c348dd533c8bb56c0d9976ae0f8ddfce06a&amp;mpshare=1&amp;scene=1&amp;srcid=0603EPr8cOyE56aKP6caOBv3&amp;sharer_shareinfo=21af8b7d502a748109995528ef583ab0&amp;sharer_shareinfo_first=21af8b7d502a748109995528ef583ab0#rd">《辞书研究》2025年第3期目录</a></p>
+<pre><code class="language-md">汉语中欧美外来词汉化研究的现状与前瞻
+黄婷婷　章宜华
+摘   要  汉语外来词中数量最多的当属欧美来源的语词。关于欧美外来词的研究日益增多，但汉化机制和类型的研究却难以深入，这在某种程度上归因于对汉化性质的认识偏差，汉化机制研究未达本质。文章以综述的形式概括了外来词汉化原则、汉化机制、汉化路径的研究成果及其不足；探讨了外来词汉化研究的对策，指出需要正视外来词汉化的性质即为模因仿造，用语言接触、认知、传播理论审视外来词汉化的机制与类型，简化外来词汉化原则，提升可操作性。
+
+关键词  欧美外来词　外来词汉化性质　汉化机制　汉化类型　汉化原则
+</code></pre>
+<p>关于汉语的外来词的研究么……但我感觉大多数中国人都和我一样，连哪些词是外来词都判断不出来（笑）。</p>
+<p>值得一题的是，其中一位作者「章宜华」是辞书学界的重要人物。主要著作有《计算词典学》、《双语词典编纂系统的研发》、《二语习得与学习词典研究》、《计算词典学与新型词典》《计算词典学与新型词典》等等，另外，章老师也是《[[《词典编纂的艺术与技巧》]]》的译者。</p>
+<pre><code class="language-md">流行语特征与流行模式 
+
+ ——基于大型网络流行语数据的相关性分析及其在辞书编纂中的应用
+
+彭馨葭　吴婷婷　严文静
+
+摘 要 随着互联网的发展，网络空间涌现了大量的新词新语，成为了现代汉语新词汇的重要来源。然而，不是每一个流行语都能经得住时间的考验，长期留存在汉语词汇当中，具有被辞书收录的价值。文章探寻不同类型的网络流行语是否与不同的流行和使用模式存在相关性。通过对 2010—2019 年的 300 余个网络流行语在网络平台上的历时使用变化进行分析，我们发现，网络流行语的某些特征可能对其使用频次、存续时间有影响。文章对辞书收录新词有一定的参考意义。
+
+关键词 网络流行语　流行模式　新词收录
+</code></pre>
+<blockquote>
+<p>通过对 2010—2019 年的 300 余个网络流行语在网络平台上的历时使用变化进行分析，我们发现，网络流行语的某些特征可能对其使用频次、存续时间有影响。</p>
+</blockquote>
+<p>对日语的流行词使用频次和存续时间有影响的又会是哪些特征呢？</p>
+<pre><code class="language-md">略论融媒体辞书的众源编纂模式
+——以韩国《标准大词典》的 Urimalsaem 数字版本评介为中心
+
+刘婷婷
+摘 要 为适应新时代人们查询字词的习惯变化，辞书出版已开始在数字化转型道路上探索，如开发融媒体辞书。但目前多数数字词典还没有真正实现“融”的功能。要走出数字词典融媒体发展的困境，众源编纂是必不可少的一环。文章以韩国《标准国语大词典》为基础，通过对引入众源编纂模式开发的数字词典　Urimalsaem 的介绍和评估，提出其对国内融媒体辞书在内容发展方面和运营方面的五点启示。
+
+关键词 融媒体辞书  众源编纂  韩语在线融媒体词典评估框架 《标准大词典》　Urimalsaem
+</code></pre>
+<blockquote>
+<p>要走出数字词典融媒体发展的困境，众源编纂是必不可少的一环。文章以韩国《标准国语大词典》为基础，通过对引入众源编纂模式开发的数字词典　Urimalsaem 的介绍和评估，提出其对国内融媒体辞书在内容发展方面和运营方面的五点启示。</p>
+</blockquote>
+<p>Urimalsaem 的<a href="https://opendict.korean.go.kr/main">官网</a> 只支持韩语，借助 GPT 勉强看懂了首页的「함께 만들고 모두 누리는 우리말 사전」是「共に作り、共に楽しむ私たちの韓国語辞典」的意思。</p>
+<h2 id="英汉大词典第三版出版">《英汉大词典》第三版出版</h2>
+<p>2025/05/28 <a href="http://mp.weixin.qq.com/s?__biz=Mzg4NzEyNzIxMw==&amp;mid=2247506783&amp;idx=1&amp;sn=ec3bae6c83dd5a2304ee84f6fe96c565&amp;chksm=ceb96192e41dcfdc5f9c8d211b2620fc276f5eaf785e280373174a33b577942bb2f22c124bf5&amp;mpshare=1&amp;scene=1&amp;srcid=06034cLbJs3nCW1sCjW8fxGY&amp;sharer_shareinfo=1d81a80747e593bfc16948d19ad030c7&amp;sharer_shareinfo_first=1d81a80747e593bfc16948d19ad030c7#rd">记录时代，融通世界丨《英汉大词典》（第3版）出版</a> 词条数大概 25万左右。 2015 年的这篇<a href="https://china.huanqiu.com/article/9CaKrnJQFEJ">《英汉大词典》第三版邀读者边用边编 网络版APP版免费开放</a>文章提到「《英汉大词典》第三版计划推出微信端网络版、APP版和最终的纸质版三种产品，网络版和APP版作为编纂过程中的阶段性产物，将全部或部分向公众免费开放」，但目前只公布了纸质版，网络版和 APP 版恐怕是凶多吉少了。</p>
+<p>2025/05/28 <a href="http://mp.weixin.qq.com/s?__biz=Mzg4NzEyNzIxMw==&amp;mid=2247506783&amp;idx=2&amp;sn=25b392f484a19a85839e3a1993142dae&amp;chksm=ce84476ce5558e3279afe7dd2420550638c5879b1bddf2ff02f056eba0a6340af575fced4ee0&amp;mpshare=1&amp;scene=1&amp;srcid=0603wppNYg5hriIoYia1GKX0&amp;sharer_shareinfo=c7b66d3cc3c487cc3e6621f3696e7911&amp;sharer_shareinfo_first=c7b66d3cc3c487cc3e6621f3696e7911#rd">编舟记丨“我当主编，我选中国”</a>：《英汉大词典》第三版出版后，对编者朱绩崧的采访。标题的「编舟记」应该是致敬了以日本国语辞典《广辞苑》编撰过程为故事原型的小说《编舟记》。</p>
+<p>2016/08/02 <a href="https://m.thepaper.cn/newsDetail_forward_1507493">“老神仙”陆谷孙：“绅”之风流，“士”之风骨</a>：纪念《英汉大词典》第一版和第二版的编者陆谷孙老师的文章。</p>
+<h2 id="日语口语词典第二版出版">《日语口语词典》（第二版）出版</h2>
+<p>2025/05/29 <a href="https://mp.weixin.qq.com/s?t=pages/video_detail_new&amp;scene=1&amp;vid=wxv_4008552848261595145&amp;__biz=MzkxNDI5MDA0NQ==&amp;mid=2247494346&amp;idx=1&amp;sn=fa207fa4dce714757422129982c13219&amp;vidsn=&amp;sharer_shareinfo_first=36928e8ae33d929b08368aff9101a16a&amp;sharer_shareinfo=36928e8ae33d929b08368aff9101a16a#wechat_redirect">《日语口语词典》（第二版）出版啦</a>：『研究社 日本語口語表現辞典 第2版』的中文版出版了。译者是《日本辞书研究》的作者潘钧老师。</p>
+<p>另外，<a href="https://book.douban.com/subject/35067341/">《日语口语词典》</a>在豆瓣的评价挺不错，看得我都想剁手买一本了，这种类型的辞典真的很适合睡前翻。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[中国に関しての辞書速報（2025年5月号）]]></title>
+        <id>https://noheartpen.github.io/post/chinese-dictionaries-news-2025-05-on-japanese/</id>
+        <link href="https://noheartpen.github.io/post/chinese-dictionaries-news-2025-05-on-japanese/">
+        </link>
+        <updated>2025-06-07T09:20:24.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="辞書研究2025年第3期の目次が公開されました">『辞書研究』2025年第3期の目次が公開されました</h2>
+<p>2025/05/30  <a href="http://mp.weixin.qq.com/s?__biz=MzUxMjcyNDU2Mw==&amp;mid=2247505423&amp;idx=1&amp;sn=46db0f1608293056dd85acaf0727677a&amp;chksm=f829a4099e1f05c1d65c85fb1b4e58ebfa6e6e373c348dd533c8bb56c0d9976ae0f8ddfce06a&amp;mpshare=1&amp;scene=1&amp;srcid=0603EPr8cOyE56aKP6caOBv3&amp;sharer_shareinfo=21af8b7d502a748109995528ef583ab0&amp;sharer_shareinfo_first=21af8b7d502a748109995528ef583ab0#rd">《辞书研究》2025年第3期目录</a></p>
+<pre><code class="language-md">汉语中欧美外来词汉化研究的现状与前瞻
+黄婷婷　章宜华
+摘   要  汉语外来词中数量最多的当属欧美来源的语词。关于欧美外来词的研究日益增多，但汉化机制和类型的研究却难以深入，这在某种程度上归因于对汉化性质的认识偏差，汉化机制研究未达本质。文章以综述的形式概括了外来词汉化原则、汉化机制、汉化路径的研究成果及其不足；探讨了外来词汉化研究的对策，指出需要正视外来词汉化的性质即为模因仿造，用语言接触、认知、传播理论审视外来词汉化的机制与类型，简化外来词汉化原则，提升可操作性。
+
+关键词  欧美外来词　外来词汉化性质　汉化机制　汉化类型　汉化原则
+</code></pre>
+<p>中国語の外来語研究についてか……でも、多くの中国人は私と同じで、どの単語が外来語かさえ分からないと思うよ（笑）。</p>
+<p>特筆すべきは、共著者の一人である章宜華（ショウ イカ）氏は、中国の辞書学界の重鎮です。主な著作として『計算辞書学』（中国語原題《计算词典学》）、『二言語辞典編纂システムの研究開発』（《双语词典编纂系统的研发》）、『第二言語習得と学習辞典研究』（《二语习得与学习词典研究》）、『計算辞書学と新型辞典』（《计算词典学与新型词典》）などがあり、また、『辞書編纂の芸術と技法』（英語版原題 Dictionaries: the art and craft of lexicography）の翻訳者でもあります。</p>
+<pre><code class="language-md">流行语特征与流行模式 
+
+ ——基于大型网络流行语数据的相关性分析及其在辞书编纂中的应用
+
+彭馨葭　吴婷婷　严文静
+
+摘 要 随着互联网的发展，网络空间涌现了大量的新词新语，成为了现代汉语新词汇的重要来源。然而，不是每一个流行语都能经得住时间的考验，长期留存在汉语词汇当中，具有被辞书收录的价值。文章探寻不同类型的网络流行语是否与不同的流行和使用模式存在相关性。通过对 2010—2019 年的 300 余个网络流行语在网络平台上的历时使用变化进行分析，我们发现，网络流行语的某些特征可能对其使用频次、存续时间有影响。文章对辞书收录新词有一定的参考意义。
+
+关键词 网络流行语　流行模式　新词收录
+</code></pre>
+<blockquote>
+<p>2010年から2019年までの300以上のネット流行語がネットプラットフォームでどのように使われてきたかを時系列的に分析した結果、ネット流行語の特定の特徴がその使用頻度や存続期間に影響を与える可能性があることがわかりました。</p>
+</blockquote>
+<p>日本語の流行語がどれくらい頻繁に使われ、どのくらいの期間流行り続けるかには、どんな特徴（要因）が関係しているのでしょうかね？</p>
+<pre><code class="language-md">略论融媒体辞书的众源编纂模式
+——以韩国《标准大词典》的 Urimalsaem 数字版本评介为中心
+
+刘婷婷
+摘 要 为适应新时代人们查询字词的习惯变化，辞书出版已开始在数字化转型道路上探索，如开发融媒体辞书。但目前多数数字词典还没有真正实现“融”的功能。要走出数字词典融媒体发展的困境，众源编纂是必不可少的一环。文章以韩国《标准国语大词典》为基础，通过对引入众源编纂模式开发的数字词典　Urimalsaem 的介绍和评估，提出其对国内融媒体辞书在内容发展方面和运营方面的五点启示。
+
+关键词 融媒体辞书  众源编纂  韩语在线融媒体词典评估框架 《标准大词典》　Urimalsaem
+</code></pre>
+<blockquote>
+<p>本論文では、韓国の『標準国語大辞典』を基盤とし、クラウドソーシング編纂モデルを導入して開発されたデジタル辞書「Urimalsaem」の紹介と評価を通じて、国内のメディア融合型辞書に対して、コンテンツ発展と運営面における五つの示唆を提示する。</p>
+</blockquote>
+<p>Urimalsaem の公式サイトは<a href="https://opendict.korean.go.kr/main">こちら</a>ですが、韓国語のみ対応しています。GPTの翻訳によると、トップページのスローガン「함께 만들고 모두 누리는 우리말 사전」は「共に作り、共に楽しむ私たちの韓国語辞典」の意味ようです。</p>
+<h2 id="英漢大辞典第3版は出版されました">『英漢大辞典第3版』は出版されました</h2>
+<p>2025/05/28 <a href="http://mp.weixin.qq.com/s?__biz=Mzg4NzEyNzIxMw==&amp;mid=2247506783&amp;idx=1&amp;sn=ec3bae6c83dd5a2304ee84f6fe96c565&amp;chksm=ceb96192e41dcfdc5f9c8d211b2620fc276f5eaf785e280373174a33b577942bb2f22c124bf5&amp;mpshare=1&amp;scene=1&amp;srcid=06034cLbJs3nCW1sCjW8fxGY&amp;sharer_shareinfo=1d81a80747e593bfc16948d19ad030c7&amp;sharer_shareinfo_first=1d81a80747e593bfc16948d19ad030c7#rd">记录时代，融通世界丨《英汉大词典》（第3版）出版</a> 収録語数は約25万前後です。2015年のこの記事<a href="https://china.huanqiu.com/article/9CaKrnJQFEJ">《英汉大词典》第三版邀读者边用边编 网络版APP版免费开放</a>には「『英漢大辞典』第三版はWeChat端末ネット版、APP版と最終的な紙版の3種類の製品をリリース予定で、ネット版とAPP版は編纂過程の段階的産物として、全部または一部を公衆に無料開放する」と書かれていましたが、現時点では紙版のみが発表されており、ネット版とAPP版はおそらく望み薄でしょう。（中国語の原文：《英汉大词典》第三版计划推出微信端网络版、APP版和最终的纸质版三种产品，网络版和APP版作为编纂过程中的阶段性产物，将全部或部分向公众免费开放。）</p>
+<p>2025/05/28 <a href="http://mp.weixin.qq.com/s?__biz=Mzg4NzEyNzIxMw==&amp;mid=2247506783&amp;idx=2&amp;sn=25b392f484a19a85839e3a1993142dae&amp;chksm=ce84476ce5558e3279afe7dd2420550638c5879b1bddf2ff02f056eba0a6340af575fced4ee0&amp;mpshare=1&amp;scene=1&amp;srcid=0603wppNYg5hriIoYia1GKX0&amp;sharer_shareinfo=c7b66d3cc3c487cc3e6621f3696e7911&amp;sharer_shareinfo_first=c7b66d3cc3c487cc3e6621f3696e7911#rd">编舟记丨“我当主编，我选中国”</a>『英漢大辞典』第三版の出版を機に、編集主幹の朱績崧（シュ セキスウ）氏にインタビューを行いました。記事のタイトル「编舟记」は、例の『舟を編む』の中国語版の訳です。</p>
+<p>2016/08/02 <a href="https://m.thepaper.cn/newsDetail_forward_1507493">“老神仙”陆谷孙：“绅”之风流，“士”之风骨</a> 『英漢大辞典』初版および第二版の編集主幹を務められた陸谷孫（リク コクソン）先生を偲ぶ追悼記事です。</p>
+<h2 id="研究社-日本語口語表現辞典-第2版の中国語版は出版されました">『研究社 日本語口語表現辞典 第2版』の中国語版は出版されました</h2>
+<p>2025/05/29 <a href="https://mp.weixin.qq.com/s?t=pages/video_detail_new&amp;scene=1&amp;vid=wxv_4008552848261595145&amp;__biz=MzkxNDI5MDA0NQ==&amp;mid=2247494346&amp;idx=1&amp;sn=fa207fa4dce714757422129982c13219&amp;vidsn=&amp;sharer_shareinfo_first=36928e8ae33d929b08368aff9101a16a&amp;sharer_shareinfo=36928e8ae33d929b08368aff9101a16a#wechat_redirect">《日语口语词典》（第二版）出版啦</a></p>
+<p>待望の『研究社 日本語口語表現辞典 第2版』中国語版がついに登場。訳者は日本辞書研究の権威・潘鈞先生（『日本辞書研究』著者）が担当しました。</p>
+<p>なお、中国の書評サイトの豆瓣（トウバン）で、初版<a href="https://book.douban.com/subject/35067341/">《日语口语词典》</a>は高い評価を獲得しています。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[面向日语专业的 Python 自学&考证指北]]></title>
+        <id>https://noheartpen.github.io/post/python-learn-roadmap-for-japanese-undergraduate/</id>
+        <link href="https://noheartpen.github.io/post/python-learn-roadmap-for-japanese-undergraduate/">
+        </link>
+        <updated>2025-05-12T16:59:49.000Z</updated>
+        <summary type="html"><![CDATA[<p>摘要：针对日语专业想学编程的同学，推荐了编程语言和相应的教材以及视频课；也谈了下自己备考计算机二级（Python 方向）的一些经验；[[2025]] 还（计划）谈下怎么学习 Python Web 开发，以便毕业后来日本工作（非华人派遣）。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>摘要：针对日语专业想学编程的同学，推荐了编程语言和相应的教材以及视频课；也谈了下自己备考计算机二级（Python 方向）的一些经验；[[2025]] 还（计划）谈下怎么学习 Python Web 开发，以便毕业后来日本工作（非华人派遣）。</p>
+<!-- more -->
+<p>[[为什么日专生应该学 Python]]：进可攻，退可守，Python 真的是最适合日专生入坑的编程语言。</p>
+<p><a href="https://noheartpen.github.io/post/why-japanese-undergraduate-should-learn-python">https://noheartpen.github.io/post/why-japanese-undergraduate-should-learn-python</a></p>
+<p>[[北理工 Python 语言程序设计]]：如果让我给日语专业的学弟学妹推荐 Python 入门的视频教程和教材，那我一定会推荐嵩天老师的<a href="https://www.icourse163.org/course/bit-268001">Python语言程序设计</a>。</p>
+<p><a href="https://noheartpen.github.io/post/the-best-python-mooc-for-japanese-undergraduate">https://noheartpen.github.io/post/the-best-python-mooc-for-japanese-undergraduate</a></p>
+<p>[[计算机二级 Python 方向的备考指南]]：谈了下备考经验。</p>
+<p><a href="https://noheartpen.github.io/post/the-guide-of-ncre-for-python">https://noheartpen.github.io/post/the-guide-of-ncre-for-python</a></p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-6646657"><label class="task-list-item-label" for="task-item-6646657"> [[日专生如何学习 Python Web 开发]]：如何成为一名专业的 Python Web 开发者。[[2025]] ：在写了，在写了。</label></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[PyCon APAC 2025 参加报告会]]></title>
+        <id>https://noheartpen.github.io/post/pycon-apac-2025-pyconjp-members-report/</id>
+        <link href="https://noheartpen.github.io/post/pycon-apac-2025-pyconjp-members-report/">
+        </link>
+        <updated>2025-05-05T17:17:25.000Z</updated>
+        <summary type="html"><![CDATA[<p>一个挺有趣的活动。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>一个挺有趣的活动。</p>
+<!-- more -->
+<h2 id="活动流程">活动流程</h2>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>活动流程</th>
+<th>发表人</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>18:30</td>
+<td>開場・集合</td>
+<td></td>
+</tr>
+<tr>
+<td>19:00</td>
+<td>イベント開始・全体説明</td>
+<td></td>
+</tr>
+<tr>
+<td>19:10</td>
+<td>テキスト解析で見る PyCon APAC 2025 セッション＆スピーカートレンド分析</td>
+<td>丹野 良介</td>
+</tr>
+<tr>
+<td>19:20</td>
+<td>初めての PyCon 登壇 トークテーマの決め方と準備</td>
+<td>齊藤 優</td>
+</tr>
+<tr>
+<td>19:30</td>
+<td>海外開催 PyCon 初登壇</td>
+<td>武居 和也</td>
+</tr>
+<tr>
+<td>19:40</td>
+<td>近年の PyCon 情勢から見た PyCon APAC のまとめ</td>
+<td>寺田 学</td>
+</tr>
+<tr>
+<td>19:50</td>
+<td>PyCon 参加方法と PyCon JP 参加の薦め</td>
+<td>三池 大樹</td>
+</tr>
+<tr>
+<td>20:00</td>
+<td>休憩</td>
+<td></td>
+</tr>
+<tr>
+<td>20:10</td>
+<td>パネルディスカッション</td>
+<td></td>
+</tr>
+<tr>
+<td>20:40</td>
+<td>懇親会 ＠オンサイト</td>
+<td></td>
+</tr>
+<tr>
+<td>21:30</td>
+<td>イベント終了</td>
+<td></td>
+</tr>
+<tr>
+<td>22:00</td>
+<td>後片付け完了</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>活动本身是 PyConJP 的成员分享参加 PyCon APAC 2025 的经验，算是聊天喝茶。虽然不是很硬核的技术分享，但对 [[PyConJP]] 有兴趣，尤其是想做发表的话，还是可以听听的。</p>
+<p>另外，这次是在微软的日本总部（日本マイクロソフト株式会社）举办，借机参观了下别人家的办公室，<s>还成功白嫖了微软的一罐饮料</s>。</p>
+<h2 id="pycon-apac-时代结束pao-时代开始这对日本的-python-社区意味着什么">PyCon APAC 时代结束，PAO 时代开始，这对日本的 Python 社区意味着什么？</h2>
+<blockquote>
+<p>参加報告会の録画を YouTube にて公開しました。<br>
+https://pyconjp.blogspot.com/2025/04/pycon-apac-2025.html</p>
+</blockquote>
+<p>个人对这次活动印象最深的是「近年の PyCon 情勢から見た PyCon APAC のまとめ」这个分享提到的 PyCon APAC 了：</p>
+<blockquote>
+<p>PyCon APAC is the <strong>regional</strong> counterpart of <strong><a href="https://pretalx.com/redirect/?url=https%3A//pycon.org/%3AZbgOikHhzxHgjlVNyHodZBwfnhv2vogs14yQo2-v8gU">PyCon</a> in Asia-Pacific</strong>. It is hosted in one (1) of the following countries every year: Singapore, Malaysia, Indonesia, Philippines, Thailand, South Korea, Hong Kong, Vietnam, Japan, Taiwan, India and Bangladesh.</p>
+</blockquote>
+<p>是的，你没有看错，没有中国（大陆）（悲……</p>
+<p>但更有意思的是 PyCon APAC 今年将会更新为 PAO （Python Asia Organization），更详细的情况可以参考这篇 <a href="https://iqbalabdullah.net/en/posts/2025/03/the-final-pycon-apac/">Goodbye PyCon APAC: A New Chapter Begins</a>。</p>
+<p><a href="https://youtu.be/Zyjq5Dwj3dk?si=H3hO5Z8ezDc-9Lvr&amp;t=5489">https://youtu.be/Zyjq5Dwj3dk?si=H3hO5Z8ezDc-9Lvr&amp;t=5489</a></p>
+<blockquote>
+<p>(to寺田さん) PyCon APACが終わりPAOが始まることは、 Python の日本コミュニティにとってはどういった意味を持ちますか？</p>
+</blockquote>
+<p>（注：「寺田さん」是 PyCon JP Association 的理事）</p>
+<p>有兴趣的话，可以去听听我在 B站上传的完整翻译：</p>
+<p><a href="https://www.bilibili.com/video/BV1P6VzziEbE">https://www.bilibili.com/video/BV1P6VzziEbE</a></p>
+<p>寺田先生的回答其实用 <a href="https://iqbalabdullah.net/en/posts/2025/03/the-final-pycon-apac/">Goodbye PyCon APAC: A New Chapter Begins</a> 就能很好的总结：</p>
+<blockquote>
+<p>But let me be clear: PAO is not an umbrella organization representing all Asian Python communities. Each country and community remains independent. PAO serves as a hub to facilitate collaboration, empower community leaders, share resources, and ensure that future Python conferences in Asia no longer have to start from scratch each year.<br>
+但需要明确的是，PAO 组织并非代表所有亚洲 Python 社区的伞式机构，各国社区仍是保持独立运作。它旨在搭建协作枢纽，通过汇聚社区领袖、共享资源，确保亚洲地区未来的 Python 会议不必每年都从零起步。</p>
+</blockquote>
+<h2 id="其他小彩蛋">其他小彩蛋</h2>
+<p>会后聊天时，我说自己是一名来自中国的 Pythonista，寺田先生听到了很高兴，说希望能借 PAO 这个契机，促进和 PyCon China 的交流。<s>然而拖了一个月才写完这篇博客</s></p>
+<p>高天叔叔的<a href="https://www.bilibili.com/video/BV17wXSYgEJt/?share_source=copy_web&amp;vd_source=c968117e55645b439b5c5d2865ff0caa&amp;t=80">【PyCon是什么，为什么我玩的这么开心！】 </a> 里提到的「比如今年有个日本小哥的 talk 怎么用 Python 学日语」的发表人「鈴木たかのり」也参加了这次活动。和铃木叔叔聊天时，我还提到了这件事，说「中国的 Pythonista 里有很多对日语感兴趣<s>的二次元</s>，他们应该会喜欢这个分享，期待您来 PyCon China 来发表！」，铃木叔叔听了非常开心，<s>并表示明年一定</s>。</p>
+<p>二次会的时候和这次活动的主持人 <a href="https://www.whitphx.info/">橘 祐一郎</a> 聊天，小哥提到自己去过一次中国，参加了 2024 年 12 月 07 日 在厦门举办的 <a href="https://fequan.com/2024/">第七届 FEDAY</a> ，但我以为是参加的 PyCon China 2024，问他感觉怎么样。小哥回答说很开心，而且没想到还遇到了 Anthony Fu 老师——这后半句直接把我给宕机了，我赶紧问他是 Vue 的那个 Anthony Fu 吗，小哥说是的，就是 Vue 的那位。我：嗯？？？ Anthony Fu 老师不是 Vue 团队成员吗？自己前不久还在 [[v-tokyo Meetup 22：リアクティビィティ特集！]] 上蹭到了老师亲手送的贴纸，<s>没听到说 Vue 核心团队成员提桶跑路干 Python 后端的新闻啊（大雾）</s></p>
+<p>回来一查才发现原来是前端的活动233，还顺便看了下小哥的分享「使用 Gradio 和 Transformers 构建 Web AI应用」：</p>
+<blockquote>
+<p>从模型推理到 UI 构建，Python 拥有丰富的 AI 生态系统，而通过 WebAssembly 编译的 Python 实现 —— Pyodide 则将这个生态系统带入了前端世界。<br>
+Gradio 和 Transformers 是构建 AI 应用最有前景的 Python 框架组合之一，它们都有 Pyodide 版本：Gradio-Lite 和 Transformers.js.py，这使得开发纯前端 AI 应用成为可能。<br>
+它们为 AI 开发者开启了前端开发的新天地。<br>
+<a href="https://fequan.com/2024/#schedulesRef">https://fequan.com/2024/#schedulesRef</a></p>
+</blockquote>
+<p><s>啊，这熟悉的看不懂的感觉，东大大佬果然名不虚传</s></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Who I am sponsoring]]></title>
+        <id>https://noheartpen.github.io/post/who-i-am-sponsoring/</id>
+        <link href="https://noheartpen.github.io/post/who-i-am-sponsoring/">
+        </link>
+        <updated>2025-05-04T15:13:30.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="github">GitHub</h2>
+<p><a href="https://github.com/NoHeartPen?tab=sponsoring">https://github.com/NoHeartPen?tab=sponsoring</a></p>
+<p><a href="https://github.com/DIYgod">DIYgod</a>: Since 30 April 2024,  for his great work on <a href="https://github.com/DIYgod/RSSHub">RSSHub</a>, which made Everything RSSible.</p>
+<p><a href="https://github.com/L-M-Sherlock">Jarrett Ye</a>: Since 1 May 2024, for his work on <a href="https://github.com/open-spaced-repetition">Open Spaced Repetition</a> and <a href="https://github.com/L-M-Sherlock/thoughts-memo-translation">Thought Memo Translation</a>, both of which may change my life.</p>
+<p><a href="https://github.com/arianneorpilla">Arianne Orpilla</a>: since 16 December 2024, for her great work on <a href="https://github.com/arianneorpilla/jidoujisho">jidoujisho</a>, a full-featured mobile immersion language learning suite that is changing the way I learn foreign languages.</p>
+<h2 id="opencollective">OpenCollective</h2>
+<p><a href="https://opencollective.com/qingxuetong">https://opencollective.com/qingxuetong</a></p>
+<p><a href="https://opencollective.com/ankidroid">AnkiDroid</a>: Since December 2021, this app has changed my study.</p>
+<h2 id="other">Other</h2>
+<p><a href="https://www.patreon.com/c/shoui/">Shoui</a>: Since December 2025, He made <a href="https://learnjapanese.moe/">themoway</a> which helped me learn Japanese a lot.</p>
+]]></content>
+    </entry>
+</feed>
